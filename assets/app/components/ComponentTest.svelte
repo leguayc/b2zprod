@@ -1,0 +1,2 @@
+<p>Component Test, à retirer quand on aura mis un vrai component (il sert juste pour avoir l'architecture)</p>
+<p>Un component est un composant svelte que l'on peut réutiliser dans d'autres components, ou dans des views</p>
