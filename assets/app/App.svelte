@@ -1,5 +1,5 @@
 <script>
-    import Scene3D from  './components/scene3d.svelte';
+    import Scene3D from  './components/Scene3D.svelte';
 
     let count = 0;
     $: doubled = count * 2;
@@ -7,9 +7,11 @@
     function handleClick() {
         count += 1;
     }
+
+    console.log('hello');
 </script>
 
-<Scene3D></Scene3D>
+<Scene3D />
 
 <h1>Hello</h1>
 <button on:click={handleClick}>
