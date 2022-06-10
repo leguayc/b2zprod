@@ -32,7 +32,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 40)]
     private $lastname;
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }
