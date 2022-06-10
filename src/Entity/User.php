@@ -26,11 +26,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string')]
     private $password;
 
-    #[ORM\Column(type: 'string', length: 30)]
-    private $firstname;
-
-    #[ORM\Column(type: 'string', length: 40)]
-    private $lastname;
+    #[ORM\OneToOne(inversedBy: 'user', targetEntity: Person::class, cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private $person;
 
     public function getId(): ?string
     {
@@ -102,38 +100,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getFirstname(): ?string
+    public function getPerson(): ?Person
     {
-        return $this->firstname;
+        return $this->person;
     }
 
-    public function setFirstname(string $firstname): self
+    public function setPerson(Person $person): self
     {
-        $this->firstname = $firstname;
-
-        return $this;
-    }
-
-    public function getLastname(): ?string
-    {
-        return $this->lastname;
-    }
-
-    public function setLastname(string $lastname): self
-    {
-        $this->lastname = $lastname;
-
-        return $this;
-    }
-
-    public function getTest(): ?string
-    {
-        return $this->test;
-    }
-
-    public function setTest(string $test): self
-    {
-        $this->test = $test;
+        $this->person = $person;
 
         return $this;
     }
