@@ -24,14 +24,16 @@ class UserController extends AbstractController
     #[Route('/setadmin/{id}', name: 'app_user_setadmin', methods: ['POST'])]
     public function setAdmin(Request $request, User $user, UserRepository $userRepository): Response
     {
-        if ($this->isCsrfTokenValid('setadmin'.$user->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('setadmin'.$user->getId(), $request->request->get('_token')))
+        {
             $roles = $user->getRoles();
 
-            if (!in_array("ROLE_ADMIN", $roles)) {
+            if (!in_array("ROLE_ADMIN", $roles))
+            {
                 $roles[] = "ROLE_ADMIN";
                 $user->setRoles($roles);
             }
-            
+
             $userRepository->add($user, true);
         }
 
@@ -41,7 +43,8 @@ class UserController extends AbstractController
     #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, UserRepository $userRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token')))
+        {
             $userRepository->remove($user, true);
         }
 
