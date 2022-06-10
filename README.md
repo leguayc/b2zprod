@@ -9,7 +9,7 @@ All rights reserved to Aude Baldassari, Elise Willekens, Paul Maréchal, and Cor
 If you want to test the website and develop new features on it. Make sure to :
 - Install symfony
 - Install node
-- Run `npm install` in the repository
+- Run `npm install` and `composer install` in the repository
 
 And then, you can use either :
 - `npm run dev` to build the JS app in dev mode

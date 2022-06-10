@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<nav>
+    <h1>B2Z</h1>
+    <a href="/">Main website</a>
+    {% if app.user %}
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="/admin/user">Manage Admins</a>
+            <a href="/admin">Manage Scenarios</a>
+            <a href="/admin">Manage Projects</a>
+            <a href="/admin">Manage Persons</a>
+            <a href="/admin">Manage News</a>
+        {% endif %}
+        <a href="/admin/logout">Logout</a>
+    {% else %}
+        <a href="/admin/login">Sign in</a>
+        <a href="/admin/register">Sign up</a>
+    {% endif %}
+
+    {% block page %}{% endblock %}
+</nav>
+{% endblock %}
