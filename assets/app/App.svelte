@@ -1,5 +1,11 @@
 <script>
     import Scene3D from  './components/Scene3D.svelte';
+    import ComponentTest from './components/ComponentTest.svelte';
+    import { initLocalizationContext } from './i18n';
+    let isI18nLoaded = false;
+    initLocalizationContext(() => {
+        isI18nLoaded = true;
+    });
 
     let count = 0;
     $: doubled = count * 2;
@@ -7,15 +13,10 @@
     function handleClick() {
         count += 1;
     }
-
-    console.log('hello');
 </script>
 
 <Scene3D />
 
-<h1>Hello</h1>
-<button on:click={handleClick}>
-    Clicked {count} {count === 1 ? 'time' : 'times'}
-</button>
-
-<p>{count} doubled is {doubled}</p>
+{#if isI18nLoaded }
+    <ComponentTest />
+{/if}
