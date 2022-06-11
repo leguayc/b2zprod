@@ -10,7 +10,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/person')]
 class PersonController extends AbstractController
@@ -24,7 +23,7 @@ class PersonController extends AbstractController
     }
 
     #[Route('/new', name: 'app_person_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, PersonRepository $personRepository): Response
+    public function new(Request $request, PersonRepository $personRepository, BlobHelper $blobHelper): Response
     {
         $person = new Person();
         $form = $this->createForm(PersonType::class, $person);
@@ -34,7 +33,7 @@ class PersonController extends AbstractController
             $file = $form->get('image')->getData();
             
             if ($file) {
-                $newFilename = BlobHelper::uploadFile($file, $this->getParameter('persons_directory'), $slugger);
+                $newFilename = $blobHelper->uploadFile($file, 'persons_directory');
                 $person->setImageName($newFilename);
             }
 
@@ -58,7 +57,7 @@ class PersonController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_person_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Person $person, PersonRepository $personRepository, SluggerInterface $slugger): Response
+    public function edit(Request $request, Person $person, PersonRepository $personRepository, BlobHelper $blobHelper): Response
     {
         if ($person->getUser() != null && $person->getUser()->getId() != $this->getUser()->getId() )
         {
@@ -72,7 +71,7 @@ class PersonController extends AbstractController
             $file = $form->get('image')->getData();
             
             if ($file) {
-                $newFilename = BlobHelper::uploadFile($file, $this->getParameter('persons_directory'), $slugger);
+                $newFilename = $blobHelper->uploadFile($file, 'persons_directory');
                 $person->setImageName($newFilename);
             }
 
