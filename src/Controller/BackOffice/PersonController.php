@@ -60,6 +60,11 @@ class PersonController extends AbstractController
     #[Route('/{id}/edit', name: 'app_person_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Person $person, PersonRepository $personRepository, SluggerInterface $slugger): Response
     {
+        if ($person->getUser() != null && $person->getUser()->getId() != $this->getUser()->getId() )
+        {
+            return $this->redirectToRoute('app_person_index', [], Response::HTTP_SEE_OTHER);
+        }
+
         $form = $this->createForm(PersonType::class, $person);
         $form->handleRequest($request);
 
@@ -85,7 +90,7 @@ class PersonController extends AbstractController
     #[Route('/{id}', name: 'app_person_delete', methods: ['POST'])]
     public function delete(Request $request, Person $person, PersonRepository $personRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$person->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$person->getId(), $request->request->get('_token')) && $person->getUser() == null) {
             $personRepository->remove($person, true);
         }
 
