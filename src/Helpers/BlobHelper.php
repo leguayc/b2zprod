@@ -16,6 +16,15 @@ class BlobHelper {
         $this->slugger = $slugger;
     }
 
+    /// Example of how to use this helper
+    /*  
+        $file = $form->get('image')->getData();
+        if ($file) {
+            $newFilename = $blobHelper->uploadFile($file, 'blogposts_directory');
+            $entity->setImageName($newFilename);
+        }
+    */
+    
     public function uploadFile(UploadedFile $file, string $directoryName): string
     {
         $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
