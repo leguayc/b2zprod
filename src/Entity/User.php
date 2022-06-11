@@ -26,7 +26,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string')]
     private $password;
 
-    #[ORM\OneToOne(inversedBy: 'user', targetEntity: Person::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'user', targetEntity: Person::class, cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     private $person;
 

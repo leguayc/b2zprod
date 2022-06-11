@@ -1,0 +1,14 @@
+{% extends 'backoffice.html.twig' %}
+
+{% block page %}
+{% if app.user %}
+    {% if is_granted('ROLE_ADMIN') %}
+        <h3>Bienvenue sur le panel Admin</h3>
+        <p>Utilisez le menu de navigation pour gérer différents domaines du site.</p>
+    {% else %}
+        <p>Vous devez avoir les droits pour accéder au panel Admin. Demandez à votre administrateur de vous les accorder.</p>
+    {% endif %}
+{% else %}
+    <p>Vous devez être connecté pour accéder au panel Admin.</p>
+{% endif %}
+{% endblock %}
