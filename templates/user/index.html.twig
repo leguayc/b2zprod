@@ -20,8 +20,8 @@
             <tr>
                 <td>{{ user.email }}</td>
                 <td>{{ ("ROLE_ADMIN" in user.roles) ? "Admin" : "User" }}</td>
-                <td>{{ user.person.firstname }}</td>
-                <td>{{ user.person.lastname }}</td>
+                <td>{{ user.firstname }}</td>
+                <td>{{ user.lastname }}</td>
                 <td>
                     {% if not ("ROLE_ADMIN" in user.roles) %}
                         {{ include('user/_setadmin_form.html.twig') }}
