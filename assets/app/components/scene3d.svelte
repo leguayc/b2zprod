@@ -6,11 +6,12 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import { TWEEN } from 'three/examples/jsm/libs/tween.module.min';
-// import { gsap } from "gsap";
+import { gsap } from "gsap";
 
 // Canvas
 let canvas;
 let button1;
+let cameraMove;
 
 onMount(() => {
     /**
@@ -41,7 +42,7 @@ onMount(() => {
     /**
      * textures
      */
-    const bakedTexture = textureLoader.load('baked.jpg')
+    const bakedTexture = textureLoader.load('../static/baked.jpg')
     bakedTexture.flipY = false
 
     /**
@@ -54,12 +55,13 @@ onMount(() => {
      * Model
      */
     gltfLoader.load(
-        'cinema.glb', 
+        '../static/cinema.glb', 
         (gltf) => {
             gltf.scene.traverse((child) => {
                 child.material = bakedMaterial
             })
             console.log(gltf.scene)
+            gltf.scene.position.y = -4
             scene.add(gltf.scene)
         }
     )
@@ -92,107 +94,53 @@ onMount(() => {
      */
     // Base camera
     const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.1, 100)
-    camera.position.x = 0
-    camera.position.y = 3.2
-    camera.position.z = 60
+    camera.position.set(0, -2, 30)
     scene.add(camera)
 
-
-
-
-
-
-    // test deplacement camera - button 
-
-    var camPos = new THREE.Vector3(0, 0, 0);       // Holds current camera position
-    var targetPos = new THREE.Vector3(10, 10, -10);// Target position
-    var origin = new THREE.Vector3(0, 0, 0);       // Optional origin
-
-    function animate(){
-        // Interpolate camPos toward targetPos
-        camPos.lerp(targetPos, 0.05);
-
-        // USE GSAP
-
-        // Apply new camPos to your camera
-        camera.position.copy(camPos);
-
-        // (Optional) have camera look at the origin after it's been moved
-        camera.lookAt(origin);
-
-        // render();
-    }
-
-    // test 2
-
-    var buttonCameraSettings = {
-        button1: {
-        position: {x: 10, y: 0, z: 0},
-        rotation: {x: 0, y: Math.PI, z: 0}
-        }
-    };
-
+    // Cube for test possition
     const geometry = new THREE.BoxGeometry( 1, 1, 1 );
     const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
     const cube = new THREE.Mesh( geometry, material );
+
+    cube.position.x = -16
+    cube.position.y = -2
+    cube.position.z = -2
+
     scene.add( cube );
 
-    button1.addEventListener('click', function(ev) {
-      var buttonId = ev.target.id;
-      var cameraSettings = buttonCameraSettings[buttonId];
 
-      animate()
+    // button1.addEventListener('click', function(ev) {
+    //   var buttonId = ev.target.id;
+    //   var cameraSettings = buttonCameraSettings[buttonId];
+    // //   updateCameraTweens(cameraSettings);
+    // });
 
-    //   updateCameraTweens(cameraSettings);
+    cameraMove.addEventListener('click', function() {
+        console.log("click camera")
+        gsap.to(camera.position, {z: -1.8, duration: 10});
+        gsap.to(camera.position, {x: 1.2, duration: 10});
+        gsap.to(camera.position, {y: -1.5, duration: 2});
+        controls.target.set( -12, -2, -2);
+        camera.rotation.z = 10
     });
 
-    function updateCameraTweens(params) {
-      if (params.position) {
-        positionTween.stop();
-        positionTween.to(params.position, 1000).start();
-      }
-
-      if (params.rotation) {
-        rotationTween.stop();
-        rotationTween.to(params.rotation, 1000).start();
-      }
-    }
-
-    var quatTween = new TWEEN.Tween(camera.quaternion);
-    var toQuaternion = new THREE.Quaternion();
-    var toEuler = new THREE.Euler();
-
-    // in updateCameraTweens()
-    // toEuler.set(rotation.x, rotation.y, rotation.z);
-    // toQuaternion.setFromEuler(toEuler);
-    // quatTween.to(toQuaternion, 1000).start();
-
-
-    // fin test 
-
-
-
-
-
-
+    // GUI tests
+    gui.add(cube.position, 'x').min(-60).max(60).step(0.01).name('cube X')
+    gui.add(cube.position, 'y').min(-60).max(60).step(0.01).name('cube Y')
+    gui.add(cube.position, 'z').min(-60).max(60).step(0.01).name('cube Z')
+    gui.add(camera.position, 'x').min(-60).max(60).step(0.01).name('Camera X')
+    gui.add(camera.position, 'y').min(-60).max(60).step(0.01).name('Camera Y')
+    gui.add(camera.position, 'z').min(-60).max(60).step(0.01).name('Camera Z')
 
     // Controls
     console.log(canvas)
     const controls = new OrbitControls(camera, canvas)
-
-    controls.enableDamping = true
-    controls.dampingFactor = 0.05
-    controls.screenSpacePanning = false
-    controls.minDistance = 2
-    controls.maxDistance = 30
-
-    controls.maxPolarAngle = (Math.PI / 2) - 0.1;
-
-    gui.add(camera.position, 'x').min(-20).max(60).step(0.01).name('Camera X')
-    gui.add(camera.position, 'y').min(-20).max(60).step(0.01).name('Camera Y')
-    gui.add(camera.position, 'z').min(-20).max(60).step(0.01).name('Camera Z')
-
-    console.log(canvas)
+    // controls.enableDamping = true
+    // controls.dampingFactor = 0.05
+    // controls.screenSpacePanning = false
+    // controls.minDistance = 2
+    // controls.maxDistance = 30
+    // controls.maxPolarAngle = (Math.PI / 2) - 0.1;
 
     /**
      * Renderer
@@ -209,13 +157,13 @@ onMount(() => {
      */
     const clock = new THREE.Clock()
 
+    let t
+
     const tick = () =>
     {
         const elapsedTime = clock.getElapsedTime()
 
-        // THREE.MathUtils.lerp(scene.rotation.x, Math.cos(t / 2) / 15 + 0.25 + rotationOffset[0], 0.1);
-        // camera.position.x = THREE.MathUtils.lerp(camera.position.x, 30, 0.1);
-
+        // button1 = THREE.MathUtils.lerp(camera.position.x, 30, 0.1);
 
         // Update controls
         controls.update()
@@ -232,7 +180,8 @@ onMount(() => {
 
 </script>
 
-
+<!-- <button bind:this={button1} style="position:relative;" id="button1" class="camera-button" >Position 1</button> -->
+<button bind:this={cameraMove} style="position:relative;">Camera</button>
 <canvas bind:this={canvas} class="webgl"></canvas>
-<button bind:this={button1} style="position:relative" id="button1" class="camera-button" >Position 1</button>
+
 
