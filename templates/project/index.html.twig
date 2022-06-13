@@ -1,0 +1,47 @@
+{% extends 'backoffice.html.twig' %}
+
+{% block title %}Project index{% endblock %}
+
+{% block page %}
+    <h1>Project index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Image</th>
+                <th>Trailer</th>
+                <th>PressKit</th>
+                <th>DistributorLink</th>
+                <th>Date</th>
+                <th>FilmmakerFullName</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for project in projects %}
+
+            {{ dump(project) }}
+            <tr>
+                <td>{{ project.id }}</td>
+                <td>{{ project.image }}</td>
+                <td>{{ project.trailer }}</td>
+                <td>{{ project.pressKit }}</td>
+                <td>{{ project.distributorLink }}</td>
+                <td>{{ project.date ? project.date|date('Y-m-d') : '' }}</td>
+                <td>{{ project.filmmakerFullName }}</td>
+                <td>
+                    <a href="{{ path('app_project_show', {'id': project.id}) }}">show</a>
+                    <a href="{{ path('app_project_edit', {'id': project.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_project_new') }}">Create new</a>
+{% endblock %}

@@ -16,7 +16,7 @@ class PartnerType extends AbstractType
         $builder
             ->add('image', FileType::class, array(
                 'mapped' => false,
-                'required' => false,
+                'required' => true,
                 'constraints' => [
                     new File([
                         'maxSize' => '5120k',
