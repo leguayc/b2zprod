@@ -135,6 +135,7 @@ onMount(() => {
     // Welcome button 
     const raycaster = new THREE.Raycaster()
 
+
     const geometryPlane = new THREE.PlaneGeometry( 1, 1 );
     const materialPlane = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
     const plane = new THREE.Mesh( geometryPlane, materialPlane );
@@ -185,70 +186,75 @@ onMount(() => {
      //
      var loaderPoster = new THREE.TextureLoader();
     var materialPosterAffiche = new THREE.MeshLambertMaterial({
-    map: loaderPoster.load('https://ak.picdn.net/shutterstock/videos/30298276/thumb/12.jpg')
+    // map: loaderPoster.load('https://paulmarechal.xyz/b2z/affiche.png')
+        map: loaderPoster.load('../posters/affiche.png')
     });
     // Plane geometry for the image and preserve the image aspect ratio 
     var geometryPosterAffiche = new THREE.PlaneGeometry(1.38, 3.8*0.51);
     // Combine image geometry and material 
     var posterAffiche = new THREE.Mesh(geometryPosterAffiche, materialPosterAffiche);
 
-    posterAffiche.position.set(-5.5, -2.1, 2.37)
+    posterAffiche.position.set(-5.65, -2.1, 2.41)
     posterAffiche.rotation.y = 1.59
-
+    posterAffiche.name = "posterAffiche"
     scene.add(posterAffiche)
 
     // Salle Infos 
     var materialPosterInfos = new THREE.MeshLambertMaterial({
-    map: loaderPoster.load('https://ak.picdn.net/shutterstock/videos/30298276/thumb/12.jpg')
+    map: loaderPoster.load('../posters/infos.png')
     });
     var geometryPosterInfos = new THREE.PlaneGeometry(1.38, 3.8*0.51);
     var posterInfos = new THREE.Mesh(geometryPosterInfos, materialPosterInfos);
 
-    posterInfos.position.set(-5.5, -2.1, 0.06)
+    posterInfos.position.set(-5.65, -2.1, 0.09)
     posterInfos.rotation.y = 1.59
+    posterInfos.name = "posterInfos"
     scene.add(posterInfos)
 
     // // Salle talent
     var materialPosterTalent = new THREE.MeshLambertMaterial({
-    map: loaderPoster.load('https://ak.picdn.net/shutterstock/videos/30298276/thumb/12.jpg')
+    map: loaderPoster.load('../posters/talents.png')
     });
     var geometryPosterTalent = new THREE.PlaneGeometry(1.38, 3.8*0.51);
     var posterTalent = new THREE.Mesh(geometryPosterTalent, materialPosterTalent);
 
-    posterTalent.position.set(-5.5, -2.1, -2.17)
+    posterTalent.position.set(-5.65, -2.1, -2.17)
     posterTalent.rotation.y = 1.59
+    posterTalent.name = "posterTalent"
     scene.add(posterTalent)
 
     // Salle actus
     var materialPosterActus = new THREE.MeshLambertMaterial({
-    map: loaderPoster.load('https://ak.picdn.net/shutterstock/videos/30298276/thumb/12.jpg')
+    map: loaderPoster.load('../posters/actus1.png')
     });
     var geometryPosterActus = new THREE.PlaneGeometry(1.38, 3.8*0.51);
     var posterActus = new THREE.Mesh(geometryPosterActus, materialPosterActus);
 
-    posterActus.position.set(-5.5, -2.1, -4.39)
+    posterActus.position.set(-5.65, -2.1, -4.43)
     posterActus.rotation.y = 1.59
+    posterActus.name = "posterActus"
     scene.add(posterActus)
 
     // Salle contact
     var materialPosterContact = new THREE.MeshLambertMaterial({
-    map: loaderPoster.load('https://ak.picdn.net/shutterstock/videos/30298276/thumb/12.jpg')
+        map: loaderPoster.load('../posters/contact.png')
     });
     var geometryPosterContact = new THREE.PlaneGeometry(1.38, 3.8*0.51);
     var posterContact = new THREE.Mesh(geometryPosterContact, materialPosterContact);
 
-    posterContact.position.set(-5.5, -2.1, -6.53)
+    posterContact.position.set(-5.65, -2.1, -6.63)
     posterContact.rotation.y = 1.59
+    posterContact.name = "posterContact"
     scene.add(posterContact)
 
     const poster1 = gui.addFolder('Poster')
-    poster1.add(posterInfos.position, 'x').min(-60).max(60).step(0.01).name('position X')
-    poster1.add(posterInfos.position, 'y').min(-60).max(60).step(0.01).name('position Y')
-    poster1.add(posterInfos.position, 'z').min(-60).max(60).step(0.01).name('position Z')
+    poster1.add(posterActus.position, 'x').min(-60).max(60).step(0.01).name('position X')
+    poster1.add(posterActus.position, 'y').min(-60).max(60).step(0.01).name('position Y')
+    poster1.add(posterActus.position, 'z').min(-60).max(60).step(0.01).name('position Z')
 
-    poster1.add(posterContact.rotation, 'x').min(-60).max(60).step(0.01).name('rotation X')
-    poster1.add(posterContact.rotation, 'y').min(-60).max(60).step(0.01).name('rotation Y')
-    poster1.add(posterContact.rotation, 'z').min(-60).max(60).step(0.01).name('rotation Z')
+    poster1.add(posterContact.position, 'x').min(-60).max(60).step(0.01).name('position X')
+    poster1.add(posterContact.position, 'y').min(-60).max(60).step(0.01).name('position Y')
+    poster1.add(posterContact.position, 'z').min(-60).max(60).step(0.01).name('position Z')
 
     // Controls
     console.log(canvas)

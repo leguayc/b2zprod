@@ -2,10 +2,6 @@ import * as THREE from 'three';
 import { gsap } from "gsap";
 import * as dat from 'lil-gui';
 
-const gui = new dat.GUI({
-        width: 400
-    });
-
 
 export function filmAffiche(){
     // Black screen picture
@@ -23,16 +19,7 @@ export function filmAffiche(){
     meshTab.position.y(-1.8)
     meshTab.position.z(-2.8)
 
-    const poster1 = gui.addFolder('Poster')
-    poster1.add(meshTab.position, 'x', 0, Math.PI * 2)
-    poster1.add(meshTab.position, 'y', 0, Math.PI * 2)
-    poster1.add(meshTab.position, 'z', 0, Math.PI * 2)
-    poster1.add(meshTab.rotation, 'x', 0, Math.PI * 2)
-    poster1.add(meshTab.rotation, 'y', 0, Math.PI * 2)
-    poster1.add(meshTab.rotation, 'z', 0, Math.PI * 2)
-    poster1.open()
-
-    scene.add(meshTab)
+    return meshTab
 }
 
 export function salleInfos(){
