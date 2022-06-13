@@ -7,6 +7,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import { TWEEN } from 'three/examples/jsm/libs/tween.module.min';
 import { gsap } from "gsap";
+import {filmAffiche} from "../helpers/Poster"
 
 // Canvas
 let canvas;
@@ -167,12 +168,87 @@ onMount(() => {
 
 
     // GUI tests
-    gui.add(cube.position, 'x').min(-60).max(60).step(0.01).name('cube X')
-    gui.add(cube.position, 'y').min(-60).max(60).step(0.01).name('cube Y')
-    gui.add(cube.position, 'z').min(-60).max(60).step(0.01).name('cube Z')
-    gui.add(plane.position, 'x').min(-60).max(60).step(0.01).name('plane X')
-    gui.add(plane.position, 'y').min(-60).max(60).step(0.01).name('plane Y')
-    gui.add(plane.position, 'z').min(-60).max(60).step(0.01).name('plane Z')
+    const cubeTest = gui.addFolder('Cube')
+    cubeTest.add(cube.position, 'x').min(-60).max(60).step(0.01).name('position X')
+    cubeTest.add(cube.position, 'y').min(-60).max(60).step(0.01).name('position Y')
+    cubeTest.add(cube.position, 'z').min(-60).max(60).step(0.01).name('position Z')
+
+    const planeTest = gui.addFolder('Plane')
+    planeTest.add(plane.position, 'x').min(-60).max(60).step(0.01).name('position X')
+    planeTest.add(plane.position, 'y').min(-60).max(60).step(0.01).name('position Y')
+    planeTest.add(plane.position, 'z').min(-60).max(60).step(0.01).name('position Z')
+
+    /**
+     * Poster first room 
+     */
+    //Film a l'affiche
+     //
+     var loaderPoster = new THREE.TextureLoader();
+    var materialPosterAffiche = new THREE.MeshLambertMaterial({
+    map: loaderPoster.load('https://ak.picdn.net/shutterstock/videos/30298276/thumb/12.jpg')
+    });
+    // Plane geometry for the image and preserve the image aspect ratio 
+    var geometryPosterAffiche = new THREE.PlaneGeometry(1.38, 3.8*0.51);
+    // Combine image geometry and material 
+    var posterAffiche = new THREE.Mesh(geometryPosterAffiche, materialPosterAffiche);
+
+    posterAffiche.position.set(-5.5, -2.1, 2.37)
+    posterAffiche.rotation.y = 1.59
+
+    scene.add(posterAffiche)
+
+    // Salle Infos 
+    var materialPosterInfos = new THREE.MeshLambertMaterial({
+    map: loaderPoster.load('https://ak.picdn.net/shutterstock/videos/30298276/thumb/12.jpg')
+    });
+    var geometryPosterInfos = new THREE.PlaneGeometry(1.38, 3.8*0.51);
+    var posterInfos = new THREE.Mesh(geometryPosterInfos, materialPosterInfos);
+
+    posterInfos.position.set(-5.5, -2.1, 0.06)
+    posterInfos.rotation.y = 1.59
+    scene.add(posterInfos)
+
+    // // Salle talent
+    var materialPosterTalent = new THREE.MeshLambertMaterial({
+    map: loaderPoster.load('https://ak.picdn.net/shutterstock/videos/30298276/thumb/12.jpg')
+    });
+    var geometryPosterTalent = new THREE.PlaneGeometry(1.38, 3.8*0.51);
+    var posterTalent = new THREE.Mesh(geometryPosterTalent, materialPosterTalent);
+
+    posterTalent.position.set(-5.5, -2.1, -2.17)
+    posterTalent.rotation.y = 1.59
+    scene.add(posterTalent)
+
+    // Salle actus
+    var materialPosterActus = new THREE.MeshLambertMaterial({
+    map: loaderPoster.load('https://ak.picdn.net/shutterstock/videos/30298276/thumb/12.jpg')
+    });
+    var geometryPosterActus = new THREE.PlaneGeometry(1.38, 3.8*0.51);
+    var posterActus = new THREE.Mesh(geometryPosterActus, materialPosterActus);
+
+    posterActus.position.set(-5.5, -2.1, -4.39)
+    posterActus.rotation.y = 1.59
+    scene.add(posterActus)
+
+    // Salle contact
+    var materialPosterContact = new THREE.MeshLambertMaterial({
+    map: loaderPoster.load('https://ak.picdn.net/shutterstock/videos/30298276/thumb/12.jpg')
+    });
+    var geometryPosterContact = new THREE.PlaneGeometry(1.38, 3.8*0.51);
+    var posterContact = new THREE.Mesh(geometryPosterContact, materialPosterContact);
+
+    posterContact.position.set(-5.5, -2.1, -6.53)
+    posterContact.rotation.y = 1.59
+    scene.add(posterContact)
+
+    const poster1 = gui.addFolder('Poster')
+    poster1.add(posterInfos.position, 'x').min(-60).max(60).step(0.01).name('position X')
+    poster1.add(posterInfos.position, 'y').min(-60).max(60).step(0.01).name('position Y')
+    poster1.add(posterInfos.position, 'z').min(-60).max(60).step(0.01).name('position Z')
+
+    poster1.add(posterContact.rotation, 'x').min(-60).max(60).step(0.01).name('rotation X')
+    poster1.add(posterContact.rotation, 'y').min(-60).max(60).step(0.01).name('rotation Y')
+    poster1.add(posterContact.rotation, 'z').min(-60).max(60).step(0.01).name('rotation Z')
 
     // Controls
     console.log(canvas)
