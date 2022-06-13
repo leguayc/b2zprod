@@ -7,6 +7,7 @@ parameters:
     blogposts_directory: '%kernel.project_dir%/public/uploads/posts'
     projects_directory: '%kernel.project_dir%/public/uploads/projects'
     scenarios_directory: '%kernel.project_dir%/public/uploads/scenarios'
+    partners_directory: '%kernel.project_dir%/public/uploads/partners'
 
 services:
     # default configuration for services in *this* file

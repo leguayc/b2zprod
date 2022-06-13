@@ -2,30 +2,30 @@
 
 namespace App\Repository;
 
-use App\Entity\Person;
+use App\Entity\Partner;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Helpers\BlobHelper;
 
 /**
- * @extends ServiceEntityRepository<Person>
+ * @extends ServiceEntityRepository<Partner>
  *
- * @method Person|null find($id, $lockMode = null, $lockVersion = null)
- * @method Person|null findOneBy(array $criteria, array $orderBy = null)
- * @method Person[]    findAll()
- * @method Person[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Partner|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Partner|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Partner[]    findAll()
+ * @method Partner[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PersonRepository extends ServiceEntityRepository
+class PartnerRepository extends ServiceEntityRepository
 {
     private BlobHelper $blobHelper;
 
     public function __construct(ManagerRegistry $registry, BlobHelper $blobHelper)
     {
-        parent::__construct($registry, Person::class);
+        parent::__construct($registry, Partner::class);
         $this->blobHelper = $blobHelper;
     }
 
-    public function add(Person $entity, bool $flush = false): void
+    public function add(Partner $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -34,9 +34,9 @@ class PersonRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Person $entity, bool $flush = false): void
+    public function remove(Partner $entity, bool $flush = false): void
     {
-        $this->blobHelper->deleteFile($entity->getImageName(), 'persons_directory');
+        $this->blobHelper->deleteFile($entity->getImage(), 'partners_directory');
         $this->getEntityManager()->remove($entity);
 
         if ($flush) {
@@ -45,7 +45,7 @@ class PersonRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Person[] Returns an array of Person objects
+//     * @return Partner[] Returns an array of Partner objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -59,7 +59,7 @@ class PersonRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Person
+//    public function findOneBySomeField($value): ?Partner
 //    {
 //        return $this->createQueryBuilder('p')
 //            ->andWhere('p.exampleField = :val')
