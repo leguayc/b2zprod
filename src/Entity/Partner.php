@@ -2,10 +2,14 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\PartnerRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PartnerRepository::class)]
+#[ApiResource(collectionOperations: ['get'],
+    itemOperations: ['get']
+)]
 class Partner
 {
     #[ORM\Id]
