@@ -5,9 +5,11 @@ import { onMount } from 'svelte';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
-import { TWEEN } from 'three/examples/jsm/libs/tween.module.min';
 import { gsap } from "gsap";
-import {filmAffiche} from "../helpers/Poster"
+// import {filmAffiche} from "../helpers/Poster"
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js'
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
+import { Flow } from "three/examples/jsm/modifiers/CurveModifier.js";
 
 // Canvas
 let canvas;
@@ -29,6 +31,8 @@ onMount(() => {
     /**
      * Loaders
      */
+    // Font
+    const fontLoader = new FontLoader()
     
     // Texture loader
     const textureLoader = new THREE.TextureLoader()
@@ -217,6 +221,14 @@ onMount(() => {
         camera.rotation.z = 10
     }
 
+    function cameraMoveReturn(){
+        gsap.to(camera.position, {z: -1.8, duration: 10});
+        gsap.to(camera.position, {x: 1.2, duration: 10});
+        gsap.to(camera.position, {y: -1.5, duration: 2});
+        controls.target.set( -12, -2, -2);
+        camera.rotation.z = 10
+    }
+
     function cameraMoveCine() {
         gsap.to(camera.position, {x: 0, duration: 10});
         gsap.to(camera.position, {y: -1.5, duration: 2});
@@ -251,8 +263,15 @@ onMount(() => {
     returnButton.name = "return";
     scene.add( returnButton );
 
+    const returnButton1 = new THREE.Mesh( geometryReturn, materialReturn );
+    returnButton1.position.set(10.1, -0.07, -5.55)
+    returnButton1.rotation.y = 1.5
+    returnButton1.name = "return1";
+    scene.add( returnButton1 );
+
 
     returnButton.callback = function() { cameraMove(); }
+    returnButton1.callback = function() { cameraMoveReturn(); }
     plane.callback = function() { cameraMove();}
 
     // GUI tests
@@ -260,9 +279,6 @@ onMount(() => {
     cubeTest.add(cube.position, 'x').min(-60).max(60).step(0.01).name('position X')
     cubeTest.add(cube.position, 'y').min(-60).max(60).step(0.01).name('position Y')
     cubeTest.add(cube.position, 'z').min(-60).max(60).step(0.01).name('position Z')
-
-
-    
 
     /**
      * Movie screen (test with local video)
@@ -285,6 +301,67 @@ onMount(() => {
     planeTest.add(camera.position, 'x').min(-60).max(60).step(0.01).name('position X')
     planeTest.add(camera.position, 'y').min(-60).max(60).step(0.01).name('position Y')
     planeTest.add(camera.position, 'z').min(-60).max(60).step(0.01).name('position Z')
+
+    /**
+     * Text 
+     */
+
+    fontLoader.load(
+    '../fonts/helvetiker_regular.typeface.json',
+        (font) => {
+            const textGeometry = new TextGeometry(
+                'B2Z Production',
+                {
+                    font: font,
+                    size: 0.7,
+                    height: 0.2,
+                    curveSegments: 12,
+                    bevelEnabled: true,
+                    bevelThickness: 0.03,
+                    bevelSize: 0.02,
+                    bevelOffset: 0,
+                    bevelSegments: 5
+                }
+            )
+            
+            const matcapTexture = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true } )
+            const textMaterial = new THREE.MeshMatcapMaterial({matcap : matcapTexture})
+            const text = new THREE.Mesh(textGeometry, textMaterial)
+
+            scene.add(text)
+
+            // test disposition1 
+            text.position.set(-3.2, 1.55, 7.75)
+
+
+        
+
+
+
+
+            const textPos = gui.addFolder('return (position)')
+            textPos.add(returnButton1.position, 'x').min(-60).max(60).step(0.01).name('position X')
+            textPos.add(returnButton1.position, 'y').min(-60).max(60).step(0.01).name('position Y')
+            textPos.add(returnButton1.position, 'z').min(-60).max(60).step(0.01).name('position Z')
+
+            const cubeTestRotation = gui.addFolder('return (rotation)')
+            cubeTestRotation.add(returnButton1.rotation, 'x').min(-60).max(60).step(0.01).name('position X')
+            cubeTestRotation.add(returnButton1.rotation, 'y').min(-60).max(60).step(0.01).name('position Y')
+            cubeTestRotation.add(returnButton1.rotation, 'z').min(-60).max(60).step(0.01).name('position Z')
+        }
+    )
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     /**
