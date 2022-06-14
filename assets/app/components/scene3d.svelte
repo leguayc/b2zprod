@@ -29,8 +29,10 @@ onMount(() => {
     /**
      * Loaders
      */
+    
     // Texture loader
     const textureLoader = new THREE.TextureLoader()
+    var loaderPoster = new THREE.TextureLoader();
 
     // Draco loader
     const dracoLoader = new DRACOLoader()
@@ -115,6 +117,9 @@ onMount(() => {
 
     scene.add( cube );
 
+    /**
+     * Function cameraMove 
+     */
     function cameraMove(){
         gsap.to(camera.position, {z: -1.8, duration: 10});
         gsap.to(camera.position, {x: 1.2, duration: 10});
@@ -122,6 +127,14 @@ onMount(() => {
         controls.target.set( -12, -2, -2);
         camera.rotation.z = 10
     }
+
+    function cameraMoveCine() {
+        gsap.to(camera.position, {x: 0, duration: 10});
+        gsap.to(camera.position, {y: -1.5, duration: 2});
+        gsap.to(camera.position, {z: -7.85, duration: 10});
+        controls.target.set(0.71, -3.2, -29.02)
+    }
+
 
     // Welcome button 
     const raycaster = new THREE.Raycaster()
@@ -134,6 +147,9 @@ onMount(() => {
     plane.name = "plane";
     scene.add( plane );
 
+    /**
+     * Click functions
+     */
     window.addEventListener('click', onDocumentMouseDown, false);
 
     var mouse = new THREE.Vector2();
@@ -150,13 +166,6 @@ onMount(() => {
     }
 
     plane.callback = function() { cameraMove();}
-    // circle2.callback = function() { changeByPortal();}
-
-    // function changeByPortal(){
-    //     var selectedObject = scene.getObjectByName("cercle"); 
-    //     const darkmode =  new Darkmode();
-    //     darkmode.toggle();
-    // }
 
 
     // GUI tests
@@ -165,16 +174,10 @@ onMount(() => {
     cubeTest.add(cube.position, 'y').min(-60).max(60).step(0.01).name('position Y')
     cubeTest.add(cube.position, 'z').min(-60).max(60).step(0.01).name('position Z')
 
-    const planeTest = gui.addFolder('Plane')
-    planeTest.add(plane.position, 'x').min(-60).max(60).step(0.01).name('position X')
-    planeTest.add(plane.position, 'y').min(-60).max(60).step(0.01).name('position Y')
-    planeTest.add(plane.position, 'z').min(-60).max(60).step(0.01).name('position Z')
-
     /**
      * Poster first room 
      */
     //Film a l'affiche
-    var loaderPoster = new THREE.TextureLoader();
     var materialPosterAffiche = new THREE.MeshLambertMaterial({
     // map: loaderPoster.load('https://paulmarechal.xyz/b2z/affiche.png')
         map: loaderPoster.load('../posters/affiche.png')
@@ -189,9 +192,11 @@ onMount(() => {
     posterAffiche.name = "posterAffiche"
     scene.add(posterAffiche)
 
+    posterAffiche.callback = function() {cameraMoveCine();}
+
     // Salle Infos 
     var materialPosterInfos = new THREE.MeshLambertMaterial({
-    map: loaderPoster.load('../posters/infos.png')
+        map: loaderPoster.load('../posters/infos.png')
     });
     var geometryPosterInfos = new THREE.PlaneGeometry(1.38, 3.8*0.51);
     var posterInfos = new THREE.Mesh(geometryPosterInfos, materialPosterInfos);
@@ -203,7 +208,7 @@ onMount(() => {
 
     // // Salle talent
     var materialPosterTalent = new THREE.MeshLambertMaterial({
-    map: loaderPoster.load('../posters/talents.png')
+        map: loaderPoster.load('../posters/talents.png')
     });
     var geometryPosterTalent = new THREE.PlaneGeometry(1.38, 3.8*0.51);
     var posterTalent = new THREE.Mesh(geometryPosterTalent, materialPosterTalent);
@@ -215,7 +220,7 @@ onMount(() => {
 
     // Salle actus
     var materialPosterActus = new THREE.MeshLambertMaterial({
-    map: loaderPoster.load('../posters/actus1.png')
+        map: loaderPoster.load('../posters/actus1.png')
     });
     var geometryPosterActus = new THREE.PlaneGeometry(1.38, 3.8*0.51);
     var posterActus = new THREE.Mesh(geometryPosterActus, materialPosterActus);
@@ -227,7 +232,6 @@ onMount(() => {
 
     // Salle contact
     loaderPoster.load('../posters/contact.png', (texture) => {
-        
         console.log(texture);
         var materialPosterContact = new THREE.MeshLambertMaterial({
             map: texture
@@ -241,16 +245,32 @@ onMount(() => {
         scene.add(posterContact);
     });
 
-    // const poster1 = gui.addFolder('Poster')
-    // poster1.add(posterActus.position, 'x').min(-60).max(60).step(0.01).name('position X')
-    // poster1.add(posterActus.position, 'y').min(-60).max(60).step(0.01).name('position Y')
-    // poster1.add(posterActus.position, 'z').min(-60).max(60).step(0.01).name('position Z')
+    /**
+     * Movie screen (test with local video)
+     */
+    const video = document.getElementById('video');
+    const videoTexture = new THREE.VideoTexture(video);
+    const videoMaterial =  new THREE.MeshBasicMaterial( {map: videoTexture, side: THREE.FrontSide, toneMapped: false} );
 
-    // poster1.add(posterContact.position, 'x').min(-60).max(60).step(0.01).name('position X')
-    // poster1.add(posterContact.position, 'y').min(-60).max(60).step(0.01).name('position Y')
-    // poster1.add(posterContact.position, 'z').min(-60).max(60).step(0.01).name('position Z')
+    const screen = new THREE.PlaneGeometry(10.1, 14.05*0.51);
+    const videoScreen = new THREE.Mesh(screen, videoMaterial);
+    video.play()
 
-    // Controls
+    videoScreen.position.set(0, -2.6, -22)
+    videoScreen.name = "movieScreen"
+
+    scene.add(videoScreen);
+
+    // GUI panel 
+    const planeTest = gui.addFolder('movie screen')
+    planeTest.add(videoScreen.position, 'x').min(-60).max(60).step(0.01).name('position X')
+    planeTest.add(videoScreen.position, 'y').min(-60).max(60).step(0.01).name('position Y')
+    planeTest.add(videoScreen.position, 'z').min(-60).max(60).step(0.01).name('position Z')
+
+
+    /**
+     * Controls
+     */ 
     console.log(canvas)
     const controls = new OrbitControls(camera, canvas)
     // controls.enableDamping = true
@@ -300,6 +320,7 @@ onMount(() => {
 
 <!-- <button bind:this={button1} style="position:relative;" id="button1" class="camera-button" >Position 1</button> -->
 <!-- <button bind:this={cameraMove} style="position:relative;">Camera</button> -->
+<video id="video" playsinline webkit-playsinline muted loop autoplay width="2000" height="500"src="../posters/testFilm/test.mov" style="display: none;"></video>
 <canvas bind:this={canvas} class="webgl"></canvas>
 
 
