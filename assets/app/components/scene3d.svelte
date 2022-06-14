@@ -68,6 +68,12 @@ onMount(() => {
     )
 
     /**
+     * Lights
+     */
+    const light = new THREE.AmbientLight( 0x404040, 4 );
+    scene.add( light );
+
+    /**
      * Sizes
      */
     const sizes = {
@@ -109,21 +115,6 @@ onMount(() => {
 
     scene.add( cube );
 
-
-    // button1.addEventListener('click', function(ev) {
-    //   var buttonId = ev.target.id;
-    //   var cameraSettings = buttonCameraSettings[buttonId];
-    // //   updateCameraTweens(cameraSettings);
-    // });
-
-    // cameraMove.addEventListener('click', function() {
-    //     console.log("click camera")
-    //     gsap.to(camera.position, {z: -1.8, duration: 10});
-    //     gsap.to(camera.position, {x: 1.2, duration: 10});
-    //     gsap.to(camera.position, {y: -1.5, duration: 2});
-    //     controls.target.set( -12, -2, -2);
-    //     camera.rotation.z = 10
-    // });
     function cameraMove(){
         gsap.to(camera.position, {z: -1.8, duration: 10});
         gsap.to(camera.position, {x: 1.2, duration: 10});
@@ -183,8 +174,7 @@ onMount(() => {
      * Poster first room 
      */
     //Film a l'affiche
-     //
-     var loaderPoster = new THREE.TextureLoader();
+    var loaderPoster = new THREE.TextureLoader();
     var materialPosterAffiche = new THREE.MeshLambertMaterial({
     // map: loaderPoster.load('https://paulmarechal.xyz/b2z/affiche.png')
         map: loaderPoster.load('../posters/affiche.png')
@@ -236,25 +226,29 @@ onMount(() => {
     scene.add(posterActus)
 
     // Salle contact
-    var materialPosterContact = new THREE.MeshLambertMaterial({
-        map: loaderPoster.load('../posters/contact.png')
+    loaderPoster.load('../posters/contact.png', (texture) => {
+        
+        console.log(texture);
+        var materialPosterContact = new THREE.MeshLambertMaterial({
+            map: texture
+        }); 
+        var geometryPosterContact = new THREE.PlaneGeometry(1.38, 3.8*0.51);
+        var posterContact = new THREE.Mesh(geometryPosterContact, materialPosterContact);
+
+        posterContact.position.set(-5.65, -2.1, -6.63)
+        posterContact.rotation.y = 1.59
+        posterContact.name = "posterContact"
+        scene.add(posterContact);
     });
-    var geometryPosterContact = new THREE.PlaneGeometry(1.38, 3.8*0.51);
-    var posterContact = new THREE.Mesh(geometryPosterContact, materialPosterContact);
 
-    posterContact.position.set(-5.65, -2.1, -6.63)
-    posterContact.rotation.y = 1.59
-    posterContact.name = "posterContact"
-    scene.add(posterContact)
+    // const poster1 = gui.addFolder('Poster')
+    // poster1.add(posterActus.position, 'x').min(-60).max(60).step(0.01).name('position X')
+    // poster1.add(posterActus.position, 'y').min(-60).max(60).step(0.01).name('position Y')
+    // poster1.add(posterActus.position, 'z').min(-60).max(60).step(0.01).name('position Z')
 
-    const poster1 = gui.addFolder('Poster')
-    poster1.add(posterActus.position, 'x').min(-60).max(60).step(0.01).name('position X')
-    poster1.add(posterActus.position, 'y').min(-60).max(60).step(0.01).name('position Y')
-    poster1.add(posterActus.position, 'z').min(-60).max(60).step(0.01).name('position Z')
-
-    poster1.add(posterContact.position, 'x').min(-60).max(60).step(0.01).name('position X')
-    poster1.add(posterContact.position, 'y').min(-60).max(60).step(0.01).name('position Y')
-    poster1.add(posterContact.position, 'z').min(-60).max(60).step(0.01).name('position Z')
+    // poster1.add(posterContact.position, 'x').min(-60).max(60).step(0.01).name('position X')
+    // poster1.add(posterContact.position, 'y').min(-60).max(60).step(0.01).name('position Y')
+    // poster1.add(posterContact.position, 'z').min(-60).max(60).step(0.01).name('position Z')
 
     // Controls
     console.log(canvas)
