@@ -118,8 +118,23 @@ onMount(() => {
     scene.add( cube );
 
     /**
-     * Function cameraMove 
+     * Click function
      */
+     window.addEventListener('click', onDocumentMouseDown, false);
+
+    var mouse = new THREE.Vector2();
+    function onDocumentMouseDown( event ) {
+        mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
+        mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
+        raycaster.setFromCamera( mouse, camera );
+        var intersects = raycaster.intersectObjects( scene.children );
+        
+        if ( intersects.length > 0 ) {
+            console.log(intersects[0].object.name)
+            intersects[0].object.callback();
+        }
+    }
+
     function cameraMove(){
         gsap.to(camera.position, {z: -1.8, duration: 10});
         gsap.to(camera.position, {x: 1.2, duration: 10});
@@ -139,7 +154,6 @@ onMount(() => {
     // Welcome button 
     const raycaster = new THREE.Raycaster()
 
-
     const geometryPlane = new THREE.PlaneGeometry( 1, 1 );
     const materialPlane = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
     const plane = new THREE.Mesh( geometryPlane, materialPlane );
@@ -147,32 +161,24 @@ onMount(() => {
     plane.name = "plane";
     scene.add( plane );
 
-    /**
-     * Click functions
-     */
-    window.addEventListener('click', onDocumentMouseDown, false);
+    // Return button 
+    const geometryReturn = new THREE.PlaneGeometry( 1, 1 );
+    const materialReturn = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
+    const returnButton = new THREE.Mesh( geometryReturn, materialReturn );
+    returnButton.position.set(-3.1, -0.1, -12.5)
+    returnButton.name = "return";
+    scene.add( returnButton );
 
-    var mouse = new THREE.Vector2();
-    function onDocumentMouseDown( event ) {
-        mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
-        mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
-        raycaster.setFromCamera( mouse, camera );
-        var intersects = raycaster.intersectObjects( scene.children );
-        
-        if ( intersects.length > 0 ) {
-            console.log(intersects[0].object.name)
-            intersects[0].object.callback();
-        }
-    }
 
+    returnButton.callback = function() { cameraMove(); }
     plane.callback = function() { cameraMove();}
-
 
     // GUI tests
     const cubeTest = gui.addFolder('Cube')
-    cubeTest.add(cube.position, 'x').min(-60).max(60).step(0.01).name('position X')
-    cubeTest.add(cube.position, 'y').min(-60).max(60).step(0.01).name('position Y')
-    cubeTest.add(cube.position, 'z').min(-60).max(60).step(0.01).name('position Z')
+    cubeTest.add(returnButton.rotation, 'x').min(-60).max(60).step(0.01).name('position X')
+    cubeTest.add(returnButton.rotation, 'y').min(-60).max(60).step(0.01).name('position Y')
+    cubeTest.add(returnButton.rotation, 'z').min(-60).max(60).step(0.01).name('position Z')
+
 
     /**
      * Poster first room 
@@ -206,7 +212,7 @@ onMount(() => {
     posterInfos.name = "posterInfos"
     scene.add(posterInfos)
 
-    // // Salle talent
+    // Salle talent
     var materialPosterTalent = new THREE.MeshLambertMaterial({
         map: loaderPoster.load('../posters/talents.png')
     });
