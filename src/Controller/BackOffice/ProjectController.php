@@ -105,7 +105,7 @@ class ProjectController extends AbstractController
             $project->translate($lang)->setSection1Text($form->get('section1text')->getData());
             $project->translate($lang)->setSection2Title($form->get('section2title')->getData());
             $project->translate($lang)->setSection2Text($form->get('section2text')->getData());
-
+          
             $projectRepository->add($project, true);
 
             return $this->redirectToRoute('app_project_index', [], Response::HTTP_SEE_OTHER);
@@ -126,7 +126,6 @@ class ProjectController extends AbstractController
 
         return $this->redirectToRoute('app_project_index', [], Response::HTTP_SEE_OTHER);
     }
-
     #[Route('/{id}/addthanks', name: 'app_project_addthanks', methods: ['GET', 'POST'])]
     public function addThanks(Request $request, Project $project, ProjectThanksRepository $projectThanksRepository): Response
     {
