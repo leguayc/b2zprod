@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Scenario;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Helpers\BlobHelper;
 
 /**
  * @extends ServiceEntityRepository<Scenario>
@@ -16,9 +17,12 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ScenarioRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private BlobHelper $blobHelper;
+
+    public function __construct(ManagerRegistry $registry, BlobHelper $blobHelper)
     {
         parent::__construct($registry, Scenario::class);
+        $this->blobHelper = $blobHelper;
     }
 
     public function add(Scenario $entity, bool $flush = false): void
@@ -32,6 +36,7 @@ class ScenarioRepository extends ServiceEntityRepository
 
     public function remove(Scenario $entity, bool $flush = false): void
     {
+        $this->blobHelper->deleteFile($entity->getFile(), 'scenarios_directory');
         $this->getEntityManager()->remove($entity);
 
         if ($flush) {

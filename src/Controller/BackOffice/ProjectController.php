@@ -6,6 +6,7 @@ use App\Entity\Project;
 use App\Entity\ProjectThanks;
 use App\Form\ProjectType;
 use App\Form\ProjectThanksType;
+use App\Form\ProjectTranslationType;
 use App\Repository\ProjectRepository;
 use App\Repository\ProjectThanksRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -48,12 +49,13 @@ class ProjectController extends AbstractController
             unset($pressKit);
 
             // Traductions
-            $project->translate('fr')->setTitle($form->get('title')->getData());
-            $project->translate('fr')->setDescription($form->get('description')->getData());
-            $project->translate('fr')->setSection1Title($form->get('section1title')->getData());
-            $project->translate('fr')->setSection1Text($form->get('section1text')->getData());
-            $project->translate('fr')->setSection2Title($form->get('section2title')->getData());
-            $project->translate('fr')->setSection2Text($form->get('section2text')->getData());
+            $lang = 'fr'; 
+            $project->translate($lang)->setTitle($form->get('title')->getData());
+            $project->translate($lang)->setDescription($form->get('description')->getData());
+            $project->translate($lang)->setSection1Title($form->get('section1title')->getData());
+            $project->translate($lang)->setSection1Text($form->get('section1text')->getData());
+            $project->translate($lang)->setSection2Title($form->get('section2title')->getData());
+            $project->translate($lang)->setSection2Text($form->get('section2text')->getData());
 
             $projectRepository->add($project, true);
 
@@ -96,12 +98,13 @@ class ProjectController extends AbstractController
             unset($pressKit);
 
             // Traductions
-            $project->translate('fr')->setTitle($form->get('title')->getData());
-            $project->translate('fr')->setDescription($form->get('description')->getData());
-            $project->translate('fr')->setSection1Title($form->get('section1title')->getData());
-            $project->translate('fr')->setSection1Text($form->get('section1text')->getData());
-            $project->translate('fr')->setSection2Title($form->get('section2title')->getData());
-            $project->translate('fr')->setSection2Text($form->get('section2text')->getData());
+            $lang = 'fr'; 
+            $project->translate($lang)->setTitle($form->get('title')->getData());
+            $project->translate($lang)->setDescription($form->get('description')->getData());
+            $project->translate($lang)->setSection1Title($form->get('section1title')->getData());
+            $project->translate($lang)->setSection1Text($form->get('section1text')->getData());
+            $project->translate($lang)->setSection2Title($form->get('section2title')->getData());
+            $project->translate($lang)->setSection2Text($form->get('section2text')->getData());
 
             $projectRepository->add($project, true);
 
@@ -141,6 +144,36 @@ class ProjectController extends AbstractController
         return $this->render('project/addthanks.html.twig', [
             'project' => $project,
             'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/{id}/managetranslation', name: 'app_project_managetranslation', methods: ['GET', 'POST'])]
+    public function manageTranslation(Request $request, Project $project, ProjectRepository $projectRepository): Response
+    {
+        $form = $this->createForm(ProjectTranslationType::class, $project);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $lang = $request->request->get('lang'); 
+            $project->translate($lang)->setTitle($form->get('title')->getData());
+            $project->translate($lang)->setDescription($form->get('description')->getData());
+            $project->translate($lang)->setSection1Title($form->get('section1title')->getData());
+            $project->translate($lang)->setSection1Text($form->get('section1text')->getData());
+            $project->translate($lang)->setSection2Title($form->get('section2title')->getData());
+            $project->translate($lang)->setSection2Text($form->get('section2text')->getData());
+
+            $projectRepository->add($project, true);
+
+            return $this->redirectToRoute('app_project_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        $langsJson = file_get_contents($this->getParameter('locales_directory') . '/langs.json');
+        $allLangs = json_decode($langsJson, true)['allLangs'];
+
+        return $this->render('project/managetranslation.html.twig', [
+            'project' => $project,
+            'form' => $form->createView(),
+            'allLangs' => $allLangs
         ]);
     }
 }

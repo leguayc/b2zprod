@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Project;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Helpers\BlobHelper;
 
 /**
  * @extends ServiceEntityRepository<Project>
@@ -16,9 +17,12 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ProjectRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private BlobHelper $blobHelper;
+
+    public function __construct(ManagerRegistry $registry, BlobHelper $blobHelper)
     {
         parent::__construct($registry, Project::class);
+        $this->blobHelper = $blobHelper;
     }
 
     public function add(Project $entity, bool $flush = false): void
@@ -34,6 +38,8 @@ class ProjectRepository extends ServiceEntityRepository
 
     public function remove(Project $entity, bool $flush = false): void
     {
+        $this->blobHelper->deleteFile($entity->getImage(), 'projects_directory');
+        $this->blobHelper->deleteFile($entity->getPressKit(), 'projects_directory');
         $this->getEntityManager()->remove($entity);
 
         if ($flush) {
