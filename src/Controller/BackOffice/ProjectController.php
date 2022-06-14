@@ -3,8 +3,11 @@
 namespace App\Controller\BackOffice;
 
 use App\Entity\Project;
+use App\Entity\ProjectThanks;
 use App\Form\ProjectType;
+use App\Form\ProjectThanksType;
 use App\Repository\ProjectRepository;
+use App\Repository\ProjectThanksRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,12 +38,14 @@ class ProjectController extends AbstractController
                 $newFilename = $blobHelper->uploadFile($image, 'projects_directory');
                 $project->setImage($newFilename);
             }
+            unset($image);
 
             $pressKit = $form->get('pressKit')->getData();
             if ($pressKit) {
                 $newFilename = $blobHelper->uploadFile($pressKit, 'projects_directory');
                 $project->setPressKit($newFilename);
             }
+            unset($pressKit);
 
             // Traductions
             $project->translate('fr')->setTitle($form->get('title')->getData());
@@ -70,7 +75,7 @@ class ProjectController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_project_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Project $project, ProjectRepository $projectRepository): Response
+    public function edit(Request $request, Project $project, ProjectRepository $projectRepository, BlobHelper $blobHelper): Response
     {
         $form = $this->createForm(ProjectType::class, $project);
         $form->handleRequest($request);
@@ -81,12 +86,14 @@ class ProjectController extends AbstractController
                 $newFilename = $blobHelper->uploadFile($image, 'projects_directory');
                 $project->setImage($newFilename);
             }
+            unset($image);
 
             $pressKit = $form->get('pressKit')->getData();
             if ($pressKit) {
                 $newFilename = $blobHelper->uploadFile($pressKit, 'projects_directory');
                 $project->setPressKit($newFilename);
             }
+            unset($pressKit);
 
             // Traductions
             $project->translate('fr')->setTitle($form->get('title')->getData());
@@ -95,7 +102,7 @@ class ProjectController extends AbstractController
             $project->translate('fr')->setSection1Text($form->get('section1text')->getData());
             $project->translate('fr')->setSection2Title($form->get('section2title')->getData());
             $project->translate('fr')->setSection2Text($form->get('section2text')->getData());
-            
+
             $projectRepository->add($project, true);
 
             return $this->redirectToRoute('app_project_index', [], Response::HTTP_SEE_OTHER);
@@ -115,5 +122,25 @@ class ProjectController extends AbstractController
         }
 
         return $this->redirectToRoute('app_project_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/addthanks', name: 'app_project_addthanks', methods: ['GET', 'POST'])]
+    public function addThanks(Request $request, Project $project, ProjectThanksRepository $projectThanksRepository): Response
+    {
+        $projectThanks = new ProjectThanks();
+        $projectThanks->setProject($project);
+        $form = $this->createForm(ProjectThanksType::class, $projectThanks);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $projectThanksRepository->add($projectThanks, true);
+
+            return $this->redirectToRoute('app_project_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('project/addthanks.html.twig', [
+            'project' => $project,
+            'form' => $form->createView(),
+        ]);
     }
 }

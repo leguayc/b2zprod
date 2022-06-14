@@ -9,30 +9,25 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Image</th>
-                <th>Trailer</th>
-                <th>PressKit</th>
-                <th>DistributorLink</th>
+                <th>Title</th>
                 <th>Date</th>
                 <th>FilmmakerFullName</th>
+                <th>DistributorLink</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for project in projects %}
-
-            {{ dump(project) }}
             <tr>
                 <td>{{ project.id }}</td>
-                <td>{{ project.image }}</td>
-                <td>{{ project.trailer }}</td>
-                <td>{{ project.pressKit }}</td>
-                <td>{{ project.distributorLink }}</td>
+                <td>{{ project.translations['fr'].title }}</td>
                 <td>{{ project.date ? project.date|date('Y-m-d') : '' }}</td>
                 <td>{{ project.filmmakerFullName }}</td>
+                <td>{{ project.distributorLink }}</td>
                 <td>
                     <a href="{{ path('app_project_show', {'id': project.id}) }}">show</a>
                     <a href="{{ path('app_project_edit', {'id': project.id}) }}">edit</a>
+                    <a href="{{ path('app_project_addthanks', {'id': project.id}) }}">add thanks</a>
                 </td>
             </tr>
         {% else %}
