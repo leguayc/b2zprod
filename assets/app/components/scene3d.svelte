@@ -118,69 +118,6 @@ onMount(() => {
     scene.add( cube );
 
     /**
-     * Click function
-     */
-     window.addEventListener('click', onDocumentMouseDown, false);
-
-    var mouse = new THREE.Vector2();
-    function onDocumentMouseDown( event ) {
-        mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
-        mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
-        raycaster.setFromCamera( mouse, camera );
-        var intersects = raycaster.intersectObjects( scene.children );
-        
-        if ( intersects.length > 0 ) {
-            console.log(intersects[0].object.name)
-            intersects[0].object.callback();
-        }
-    }
-
-    function cameraMove(){
-        gsap.to(camera.position, {z: -1.8, duration: 10});
-        gsap.to(camera.position, {x: 1.2, duration: 10});
-        gsap.to(camera.position, {y: -1.5, duration: 2});
-        controls.target.set( -12, -2, -2);
-        camera.rotation.z = 10
-    }
-
-    function cameraMoveCine() {
-        gsap.to(camera.position, {x: 0, duration: 10});
-        gsap.to(camera.position, {y: -1.5, duration: 2});
-        gsap.to(camera.position, {z: -7.85, duration: 10});
-        controls.target.set(0.71, -3.2, -29.02)
-    }
-
-
-    // Welcome button 
-    const raycaster = new THREE.Raycaster()
-
-    const geometryPlane = new THREE.PlaneGeometry( 1, 1 );
-    const materialPlane = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
-    const plane = new THREE.Mesh( geometryPlane, materialPlane );
-    plane.position.set(0, -2.4, 26.5)
-    plane.name = "plane";
-    scene.add( plane );
-
-    // Return button 
-    const geometryReturn = new THREE.PlaneGeometry( 1, 1 );
-    const materialReturn = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
-    const returnButton = new THREE.Mesh( geometryReturn, materialReturn );
-    returnButton.position.set(-3.1, -0.1, -12.5)
-    returnButton.name = "return";
-    scene.add( returnButton );
-
-
-    returnButton.callback = function() { cameraMove(); }
-    plane.callback = function() { cameraMove();}
-
-    // GUI tests
-    const cubeTest = gui.addFolder('Cube')
-    cubeTest.add(returnButton.rotation, 'x').min(-60).max(60).step(0.01).name('position X')
-    cubeTest.add(returnButton.rotation, 'y').min(-60).max(60).step(0.01).name('position Y')
-    cubeTest.add(returnButton.rotation, 'z').min(-60).max(60).step(0.01).name('position Z')
-
-
-    /**
      * Poster first room 
      */
     //Film a l'affiche
@@ -237,19 +174,95 @@ onMount(() => {
     scene.add(posterActus)
 
     // Salle contact
-    loaderPoster.load('../posters/contact.png', (texture) => {
-        console.log(texture);
-        var materialPosterContact = new THREE.MeshLambertMaterial({
-            map: texture
-        }); 
-        var geometryPosterContact = new THREE.PlaneGeometry(1.38, 3.8*0.51);
-        var posterContact = new THREE.Mesh(geometryPosterContact, materialPosterContact);
-
-        posterContact.position.set(-5.65, -2.1, -6.63)
-        posterContact.rotation.y = 1.59
-        posterContact.name = "posterContact"
-        scene.add(posterContact);
+    var materialPosterContact = new THREE.MeshLambertMaterial({
+        map: loaderPoster.load('../posters/contact.png')
     });
+    var geometryPosterContact = new THREE.PlaneGeometry(1.38, 3.8*0.51);
+    var posterContact = new THREE.Mesh(geometryPosterContact, materialPosterContact);
+
+    posterContact.position.set(-5.65, -2.1, -6.63)
+    posterContact.rotation.y = 1.59
+    posterContact.name = "posterContact"
+    scene.add(posterContact);
+    
+
+    posterContact.callback = function() {cameraMoveContact();}
+
+
+
+
+    /**
+     * Click function
+     */
+     window.addEventListener('click', onDocumentMouseDown, false);
+
+    var mouse = new THREE.Vector2();
+    function onDocumentMouseDown( event ) {
+        mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
+        mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
+        raycaster.setFromCamera( mouse, camera );
+        var intersects = raycaster.intersectObjects( scene.children );
+        
+        if ( intersects.length > 0 ) {
+            console.log(intersects[0].object.name)
+            intersects[0].object.callback();
+        }
+    }
+
+    function cameraMove(){
+        gsap.to(camera.position, {z: -1.8, duration: 10});
+        gsap.to(camera.position, {x: 1.2, duration: 10});
+        gsap.to(camera.position, {y: -1.5, duration: 2});
+        controls.target.set( -12, -2, -2);
+        camera.rotation.z = 10
+    }
+
+    function cameraMoveCine() {
+        gsap.to(camera.position, {x: 0, duration: 10});
+        gsap.to(camera.position, {y: -1.5, duration: 2});
+        gsap.to(camera.position, {z: -7.85, duration: 10});
+        controls.target.set(0.71, -3.2, -29.02)
+    }
+
+    function cameraMoveContact() {
+        gsap.to(camera.position, {x: 5.4, duration: 10});
+        gsap.to(camera.position, {y: -2, duration: 2});
+        gsap.to(camera.position, {z: -3.2, duration: 10});
+        gsap.to(camera.rotation, {z: 10, duration: 5});
+        controls.target.set(18.5, -2, -3.2)
+    }
+
+
+    // Welcome button 
+    const raycaster = new THREE.Raycaster()
+
+    const geometryPlane = new THREE.PlaneGeometry( 1, 1 );
+    const materialPlane = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
+    const plane = new THREE.Mesh( geometryPlane, materialPlane );
+    plane.position.set(0, -2.4, 26.5)
+    plane.name = "plane";
+    scene.add( plane );
+
+    // Return button 
+    const geometryReturn = new THREE.PlaneGeometry( 1, 1 );
+    const materialReturn = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
+    const returnButton = new THREE.Mesh( geometryReturn, materialReturn );
+    returnButton.position.set(-3.1, -0.1, -12.5)
+    returnButton.name = "return";
+    scene.add( returnButton );
+
+
+    returnButton.callback = function() { cameraMove(); }
+    plane.callback = function() { cameraMove();}
+
+    // GUI tests
+    const cubeTest = gui.addFolder('Cube (origin point)')
+    cubeTest.add(cube.position, 'x').min(-60).max(60).step(0.01).name('position X')
+    cubeTest.add(cube.position, 'y').min(-60).max(60).step(0.01).name('position Y')
+    cubeTest.add(cube.position, 'z').min(-60).max(60).step(0.01).name('position Z')
+
+
+    
 
     /**
      * Movie screen (test with local video)
@@ -268,10 +281,10 @@ onMount(() => {
     scene.add(videoScreen);
 
     // GUI panel 
-    const planeTest = gui.addFolder('movie screen')
-    planeTest.add(videoScreen.position, 'x').min(-60).max(60).step(0.01).name('position X')
-    planeTest.add(videoScreen.position, 'y').min(-60).max(60).step(0.01).name('position Y')
-    planeTest.add(videoScreen.position, 'z').min(-60).max(60).step(0.01).name('position Z')
+    const planeTest = gui.addFolder('camera')
+    planeTest.add(camera.position, 'x').min(-60).max(60).step(0.01).name('position X')
+    planeTest.add(camera.position, 'y').min(-60).max(60).step(0.01).name('position Y')
+    planeTest.add(camera.position, 'z').min(-60).max(60).step(0.01).name('position Z')
 
 
     /**
