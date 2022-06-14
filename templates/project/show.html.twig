@@ -12,8 +12,24 @@
                 <td>{{ project.id }}</td>
             </tr>
             <tr>
+                <th>Title</th>
+                <td>{{ project.translations['fr'].title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ project.translations['fr'].description }}</td>
+            </tr>
+            <tr>
+                <th>{{ project.translations['fr'].section1title }}</th>
+                <td>{{ project.translations['fr'].section1text }}</td>
+            </tr>
+            <tr>
+                <th>{{ project.translations['fr'].section2title }}</th>
+                <td>{{ project.translations['fr'].section2text }}</td>
+            </tr>
+            <tr>
                 <th>Image</th>
-                <td>{{ project.image }}</td>
+                <td><img src="/uploads/projects/{{ project.image }}" alt="Poster of movie" width="300" /></td>
             </tr>
             <tr>
                 <th>Trailer</th>
@@ -21,7 +37,7 @@
             </tr>
             <tr>
                 <th>PressKit</th>
-                <td>{{ project.pressKit }}</td>
+                <td><a href="/uploads/projects/{{ project.pressKit }}" download>Download</a></td>
             </tr>
             <tr>
                 <th>DistributorLink</th>
@@ -35,12 +51,28 @@
                 <th>FilmmakerFullName</th>
                 <td>{{ project.filmmakerFullName }}</td>
             </tr>
+            {% if project.projectThanks|length > 0 %}
+            <tr>
+                <th>Thanks list</th>
+                <td>
+                    <ul>
+                    {% for thanks in project.projectThanks %}
+                        <li>{{ thanks.name }}</li>
+                    {% endfor %}
+                    <ul>
+                </td>
+            </tr>
+            {% endif %}
         </tbody>
     </table>
 
     <a href="{{ path('app_project_index') }}">back to list</a>
 
     <a href="{{ path('app_project_edit', {'id': project.id}) }}">edit</a>
+    
+    <a href="{{ path('app_project_addthanks', {'id': project.id}) }}">add thanks</a>
+    
+    <a href="{{ path('app_project_managetranslation', {'id': project.id}) }}">manage translation</a>
 
     {{ include('project/_delete_form.html.twig') }}
 {% endblock %}
