@@ -31,8 +31,6 @@
             section1text = document.getElementById('project_translation_section1text');
             section2title = document.getElementById('project_translation_section2title');
             section2text = document.getElementById('project_translation_section2text');
-            
-            console.log(translations);
 
             select.onchange = () => {
                 let lang = select.value;
@@ -55,7 +53,7 @@
     <h1>Manage Project Translation</h1>
 
     {{ form_start(form) }}
-        <select name="lang" id="langs-select" data-translations="{{ project.translations.toArray|json_encode()|e('html_attr') }}">
+        <select name="lang" id="langs-select">
             {% for lang in allLangs %}
                 <option value="{{ lang }}">{{ lang }}</option>
             {% endfor %}

@@ -6,6 +6,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ScenarioRepository;
 use Doctrine\ORM\Mapping as ORM;
 use App\Controller\ScenarioApiController;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ScenarioRepository::class)]
 #[ApiResource(collectionOperations: [
@@ -57,10 +58,15 @@ class Scenario
     #[ORM\Column(type: 'integer')]
     private $id;
 
+    #[Assert\Email(
+        message: 'The email {{ value }} is not a valid email.',
+    )]
     #[ORM\Column(type: 'string', length: 255)]
     private $email;
 
     #[ORM\Column(type: 'string', length: 20)]
+    #[Assert\Regex(pattern: "/^[0-9]*$/", message: "Phone number is only made up of numbers")]
+    #[Assert\Length(min: 8, max: 20, minMessage: "Phone number needs at least 8 characters", maxMessage: "Phone number has maximum 20 characters")]
     private $phoneNumber;
 
     #[ORM\Column(type: 'string', length: 30)]
