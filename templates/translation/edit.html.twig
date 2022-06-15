@@ -1,0 +1,37 @@
+{% extends 'backoffice.html.twig' %}
+
+{% block title %}Manage Translations{% endblock %}
+
+{% block page %}
+    <h1>Edit {{ locale|upper }} Translation</h1>
+
+    <form method="POST">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Keys</th>
+                    {% for key, translation in translations %}
+                        <th>{{ key|upper }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+            {% for key, value in translations['fr'] %}
+                <tr>
+                    <td>{{ key }}</td>
+                    {% for loc, translation in translations %}
+                        {% if loc == locale %}
+                            <td><textarea name="{{key}}">{{ translation[key] }}</textarea></td>
+                        {% else %}
+                            <td>{{ translation[key] }}</td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <button class="btn">Edit {{ locale|upper }}</button>
+    </form>
+
+    <a href="{{ path('app_translation_index') }}">back to list</a>
+{% endblock %}

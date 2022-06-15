@@ -1,0 +1,35 @@
+{% extends 'backoffice.html.twig' %}
+
+{% block title %}Manage Translations{% endblock %}
+
+{% block page %}
+    <h1>Add new Translation</h1>
+
+    <form method="POST">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Keys</th>
+                    <th>FR</th>
+                    <th>
+                        <select name="newLang" id="newLang-select">
+                            <option value="test">test</option>
+                        </select>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for key, value in translations['fr'] %}
+                <tr>
+                    <td>{{ key }}</td>
+                    <td>{{ value }}</td>
+                    <td><textarea name="{{key}}"></textarea></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <button class="btn">Save</button>
+    </form>
+
+    <a href="{{ path('app_translation_index') }}">back to list</a>
+{% endblock %}

@@ -2,7 +2,7 @@
 
 {% block body %}
 <nav>
-    <h1>B2Z</h1>
+    <a href="/admin"><h1>B2Z</h1></a>
     <a href="/">Main website</a>
     {% if app.user %}
         {% if is_granted('ROLE_ADMIN') %}
@@ -11,6 +11,7 @@
             <a href="/admin/project">Manage Projects</a>
             <a href="/admin/partner">Manage Partners</a>
             <a href="/admin/blogpost">Manage News</a>
+            <a href="/admin/translation">Manage Translations</a>
         {% endif %}
         <a href="/admin/logout">Logout</a>
     {% else %}
