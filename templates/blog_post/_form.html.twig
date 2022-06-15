@@ -1,0 +1,9 @@
+{{ form_start(form) }}
+    <select name="lang" id="langs-select">
+        {% for lang in allLangs %}
+            <option value="{{ lang }}">{{ lang }}</option>
+        {% endfor %}
+    </select>
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

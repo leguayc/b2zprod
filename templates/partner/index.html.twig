@@ -9,7 +9,6 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Image</th>
                 <th>Name</th>
                 <th>actions</th>
             </tr>
@@ -18,7 +17,6 @@
         {% for partner in partners %}
             <tr>
                 <td>{{ partner.id }}</td>
-                <td>{{ partner.image }}</td>
                 <td>{{ partner.name }}</td>
                 <td>
                     <a href="{{ path('app_partner_show', {'id': partner.id}) }}">show</a>
