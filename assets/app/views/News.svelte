@@ -1,6 +1,20 @@
 <script>
     import Nav from '../components/Nav.svelte';
     import Header from '../components/Header.svelte';
+
+    import axios from 'axios';
+
+    import { onMount } from 'svelte';
+
+    onMount(async () => {
+        axios.get('/api/blogpost/1').then( (response) => {
+            response.data
+        }).catch((error) => {
+            console.log("error");
+        });
+    });
+
+
 </script>
 
 <Nav/>
