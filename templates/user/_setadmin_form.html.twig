@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('app_user_setadmin', {'id': user.id}) }}">
+    <input type="hidden" name="_token" value="{{ csrf_token('setadmin' ~ user.id) }}">
+    <button class="btn">Set admin</button>
+</form>

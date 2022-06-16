@@ -1,0 +1,73 @@
+{% extends 'backoffice.html.twig' %}
+
+{% block title %}Manage Project Translation{% endblock %}
+
+{% block javascripts %}
+    <script>
+        let select;
+        let title;
+        let description;
+        let section1title;
+        let section1text;
+        let section2title;
+        let section2text;
+        const translations = [];
+        {% for key,translation in project.translations %}
+            translations["{{ key }}"] = {
+                "title" : "{{ translation.title|e('js') }}",
+                "description" : "{{ translation.description|e('js') }}",
+                "section1title" : "{{ translation.section1title|e('js') }}",
+                "section1text" : "{{ translation.section1text|e('js') }}",
+                "section2title" : "{{ translation.section2title|e('js') }}",
+                "section2text" : "{{ translation.section2text|e('js') }}",
+            };
+        {% endfor %}
+
+        window.onload = () => {
+            select = document.getElementById('langs-select');
+            title = document.getElementById('project_translation_title');
+            description = document.getElementById('project_translation_description');
+            section1title = document.getElementById('project_translation_section1title');
+            section1text = document.getElementById('project_translation_section1text');
+            section2title = document.getElementById('project_translation_section2title');
+            section2text = document.getElementById('project_translation_section2text');
+
+            select.onchange = () => {
+                let lang = select.value;
+                
+                if (translations[lang])
+                {
+                    title.value = translations[lang].title;
+                    description.value = translations[lang].description;
+                    section1title.value = translations[lang].section1title;
+                    section1text.value = translations[lang].section1text;
+                    section2title.value = translations[lang].section2title;
+                    section2text.value = translations[lang].section2text;
+                }
+            }
+        }
+    </script>
+{% endblock %}
+
+{% block page %}
+    <h1>Manage Project Translation</h1>
+
+    {{ form_start(form) }}
+        <select name="lang" id="langs-select">
+            {% for lang in allLangs %}
+                <option value="{{ lang }}">{{ lang }}</option>
+            {% endfor %}
+        </select>
+        {{ form_row(form._token) }}
+        {{ form_row(form.title, {value : project.translations['fr'].title}) }}
+        {{ form_row(form.description, {value : project.translations['fr'].description}) }}
+        {{ form_row(form.section1title, {value : project.translations['fr'].section1title}) }}
+        {{ form_row(form.section1text, {value : project.translations['fr'].section1text}) }}
+        {{ form_row(form.section2title, {value : project.translations['fr'].section2title}) }}
+        {{ form_row(form.section2text, {value : project.translations['fr'].section2text}) }}
+
+        <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_end(form, {'render_rest': false}) }}
+
+    <a href="{{ path('app_project_index') }}">back to list</a>
+{% endblock %}
