@@ -13,7 +13,9 @@
                     <th>FR</th>
                     <th>
                         <select name="newLang" id="newLang-select">
-                            <option value="test">test</option>
+                            {% for key, value in langs %}
+                                <option value="{{ key }}">{{ value }}</option>
+                            {% endfor %}
                         </select>
                     </th>
                 </tr>

@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Intl\Languages;
 
 #[Route('/translation')]
 class TranslationController extends AbstractController
@@ -65,9 +66,29 @@ class TranslationController extends AbstractController
             $json = file_get_contents($this->getParameter('locales_directory') . '/' . $v . '/translation.json');
             $langsTranslation[$v] = json_decode($json, true);
         }
+
+        $langsToAdd = [];
+        foreach(Languages::getNames('fr') as $k => $v)
+        {
+            $isLangValid = true;
+            foreach($allLangs as $k2 => $v2)
+            {
+                if (strtolower($k) == strtolower($v2))
+                {
+                    $isLangValid = false;
+                    break;
+                }
+            }
+
+            if ($isLangValid)
+            {
+                $langsToAdd[$k] = $v;
+            }
+        }
         
         return $this->render('translation/new.html.twig', [
-            'translations' => $langsTranslation
+            'translations' => $langsTranslation,
+            'langs' => $langsToAdd
         ]);
     }
 
