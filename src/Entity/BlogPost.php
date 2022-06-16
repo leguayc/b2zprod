@@ -8,7 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: BlogPostRepository::class)]
 #[ApiResource(collectionOperations: ['get'],
-    itemOperations: ['get']
+    itemOperations: ['get'],
+    order: ["creationdate" => "DESC"]
 )]
 class BlogPost
 {
