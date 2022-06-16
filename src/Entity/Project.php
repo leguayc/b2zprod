@@ -13,7 +13,8 @@ use Knp\DoctrineBehaviors\Contract\Entity\TranslationInterface;
 
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
 #[ApiResource(collectionOperations: ['get'],
-    itemOperations: ['get']
+    itemOperations: ['get'],
+    order: ["date" => "DESC"]
 )]
 class Project implements TranslatableInterface
 {
