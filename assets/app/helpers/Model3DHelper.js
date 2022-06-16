@@ -15,14 +15,14 @@ export function createTestCube(scene)
     scene.add( cube );
 }
 
-export function createPoster(scene, imagePath, position, rotationY, name, callback, size = {width: 1.38, height: 3.8*0.51})
+export function createPoster(scene, imagePath, position, rotationY, name, callback, size = {width: 1.38, height: 3.8})
 {
     var material = new THREE.MeshLambertMaterial({
         map: SceneHelper.loaderPoster.load(imagePath)
     });
     
     // Plane geometry for the image and preserve the image aspect ratio 
-    var geometry = new THREE.PlaneGeometry(size.width, size.height);
+    var geometry = new THREE.PlaneGeometry(size.width, size.height * 0.51);
     // Combine image geometry and material 
     var mesh = new THREE.Mesh(geometry, material);
     

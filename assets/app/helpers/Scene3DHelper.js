@@ -30,7 +30,69 @@ export let camera;
 export function createSceneBase() {
     // Scene
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color( "#fff" );
+    scene.background = new THREE.Color( "#03224c" );
+
+    scene.fog = new THREE.FogExp2( '#03224c' , 0.02 ); 
+
+    // Floor 
+    const geometryFloor = new THREE.PlaneGeometry( 55, 35 );
+    const materialFloor = new THREE.MeshBasicMaterial( {color: 0x323739, side: THREE.DoubleSide} );
+    const floor = new THREE.Mesh( geometryFloor, materialFloor );
+    scene.add( floor );
+    floor.position.set(0.71, -4.3, 9.31)
+    floor.rotation.x = -1.57
+
+    /**
+     * Stars
+     */
+    const objectsDistance = 4
+    const particlesCount = 700
+    const positions = new Float32Array(particlesCount * 3 )
+
+    for( let i = 0; i < particlesCount; i++){
+        positions[i * 3 + 0 ] = (Math.random() - 0.5) * 60
+        positions[i * 3 + 1 ] = objectsDistance * 0.5 - Math.random() * objectsDistance * 30
+        positions[i * 3 + 2 ] = (Math.random() - 0.5) * 40
+    }
+
+    function createCircleTexture(color, size) {
+        var matCanvas = document.createElement('canvas');
+        matCanvas.width = matCanvas.height = size;
+        var matContext = matCanvas.getContext('2d');
+        // create texture object from canvas.
+        var texture = new THREE.Texture(matCanvas);
+        // Draw a circle
+        var center = size / 2;
+        matContext.beginPath();
+        matContext.arc(center, center, size/2, 0, 2 * Math.PI, false);
+        matContext.closePath();
+        matContext.fillStyle = color;
+        matContext.fill();
+        // need to set needsUpdate
+        texture.needsUpdate = true;
+        // return a texture made from the canvas
+        return texture;
+    }
+
+    const particlesGeometry = new THREE.BufferGeometry()
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+
+    const particlesMaterial = new THREE.PointsMaterial({
+        // color: parameters.materialColor, 
+        // color: 0x000000,
+        sizeAttenuation: true, 
+        // size: 0.04
+        map: createCircleTexture('#ffffff', 256),
+        size: 0.08,
+        transparent: true,
+        depthWrite: false
+    })
+
+    // Points
+    const particles = new THREE.Points(particlesGeometry, particlesMaterial)
+
+    particles.position.set(0, 35, -2)
+    scene.add(particles)
 
     createBaseModel(scene);
 
