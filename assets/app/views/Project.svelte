@@ -1,6 +1,8 @@
 <script>
     import Nav from '../components/Nav.svelte';
     import Header from '../components/Header.svelte';
+    import { getLocalization } from '../i18n';
+    const { t, currentLanguage } = getLocalization();
 </script>
 
 <Nav/>
@@ -17,12 +19,12 @@
         <img class="image" src="./assets/images/a_fleur_de_peau.png" alt="a fleur de peau">
         <div class="content bg-black">
             <div>
-                <p class="title">scénario</p>
+                <p class="title">{$t('Project.Script.Title')}</p>
                 <ul>
                     <li>Walid Ben Mabrouk</li>
                     <li>Hakim Soudjay</li>
                 </ul>
-                <p class="title">casting</p>
+                <p class="title">{$t('Project.Casting.Title')}</p>
                 <ul>
                     <li>Jordan Anefalos</li>
                     <li>Baya Belal</li>
@@ -30,7 +32,7 @@
                     <li>Liliane Rovère</li>
                 </ul>
             </div>
-            <div class="btn btn-orange"><span class="text">Dossier presse</span></div>
+            <div class="btn btn-orange"><span class="text">{$t('Presse.Title')}</span></div>
         </div>
         
     </section>
@@ -44,8 +46,8 @@
 
     <section class="bg-movie">
         <div class="contain-xs bg-black">
-            <h3 class="title">Où trouver le film ?</h3>
-            <div class="btn btn-orange"><span class="text">Le distributeur</span></div>
+            <h3 class="title">{$t('Project.Distributor.Title')}</h3>
+            <div class="btn btn-orange"><span class="text">{$t('Project.Distributor.Text')}</span></div>
         </div>
     </section>
 
@@ -75,8 +77,8 @@
 
     <section class="contain">
         <div class="contain-xs bg-black">
-            <h3 class="title">Vous souhaitez plus d'informations ?</h3>
-            <a href="mailto:test@gmail.com" class="btn btn-orange"><span class="text">Contactez-nous</span></a>
+            <h3 class="title">{$t('Contact.External.Title')}</h3>
+            <a href="mailto:test@gmail.com" class="btn btn-orange"><span class="text">{$t('Contact.External.Text')}</span></a>
         </div>
     </section>
 

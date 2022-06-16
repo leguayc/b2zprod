@@ -406,6 +406,7 @@ section{
     display: flex;
     align-items: stretch;
     gap: 60px;
+    grid-column-start: span 2;
 }
 
 .news-emphase .image{

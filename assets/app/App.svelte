@@ -1,7 +1,14 @@
 <script>
-    import Scene3D from  './components/Scene3D.svelte';
-    import ComponentTest from './components/ComponentTest.svelte';
+   
     import { initLocalizationContext } from './i18n';
+
+    import Contact from './views/Contact.svelte';
+    import About from './views/About.svelte';
+    import Talent from './views/Talent.svelte';
+    import Project from './views/Project.svelte';
+    import News from './views/News.svelte';
+    import ListNews from './views/ListNews.svelte';
+    
     let isI18nLoaded = false;
     initLocalizationContext(() => {
         isI18nLoaded = true;
@@ -15,8 +22,11 @@
     }
 </script>
 
-<Scene3D />
-
 {#if isI18nLoaded }
-    <ComponentTest />
+
+    <Contact/>
+
 {/if}
+
+
+

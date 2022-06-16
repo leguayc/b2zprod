@@ -1,3 +1,47 @@
 {
-    "Hello" : "Bonjour i18next"
+    "ListNews.Title" : "Salle des actualités",
+    "ListNews.Subtitle" : "B2Z Production",
+
+    "News.More.Title" : "Découvrir d'autres actualités :",
+    "News.External.Button" : "Lire la suite",
+    
+    "About.External.Title" : "Qui sont B2Z Production ?",
+    "About.External.Button" : "En savoir plus",
+    "About.Title" : "Salle des infos",
+    "About.SubTitle" : "B2Z Production",
+    "About.Content.Title" : "Qui sommes-nous ?",
+    "About.Content.Text" : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates repellendus ipsam minima quo ea sint corporis itaque esse, provident beatae?",
+    "About.Content.Button" : "Voir nos films",
+
+    "Presse.Title" : "Catalogue",
+    "Presse.Button" : "Dossier de presse",
+
+
+    "Project.Script.Title" : "scénario",
+    "Project.Casting.Title" : "Casting",
+    "Project.Distributor.Title" : "Où trouver le film ?",
+    "Project.Distributor.Text" : "Le distributeur",
+
+    "Project.External.Title": "Voir les films à l'affiche",
+    "Project.External.Button" : "En savoir plus",
+    "Project.External.Button.Title" : "En savoir plus",
+
+    "Partners.Title" : "Nos partnaires :",
+
+    "Contact.Title" : "Salle des contacts",
+    "Contact.SubTitle" : "B2Z Production",
+    "Contact.Content.Title": "Titre d'une partie",
+    "Contact.Content.Text" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+    "Contact.Phone.Title": "Téléphone",
+    "Contact.Phone.Text" : "0000000000",
+    "Contact.Mail.Title" : "Mail",
+    "Contact.Mail.Text" : "contact@b2z.com",
+    "Contact.Address.Title": "Adresse",
+    "Contact.Address.Text" : "8 Promenade Edouard Toulouse 94800 Villejuif",
+    "Contact.External.Title" : "Vous souhaitez plus d'informations ?",
+    "Contact.External.Text" : "Contactez-nous",
+
+    "SocialMedia.Title" : "Suivez-nous sur les réseaux"
+
+
 }
