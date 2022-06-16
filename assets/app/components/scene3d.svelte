@@ -49,7 +49,7 @@ onMount(() => {
     /**
      * textures
      */
-    const bakedTexture = textureLoader.load('../static/baked.jpg')
+    const bakedTexture = textureLoader.load('../static/bakedFinal.jpg')
     bakedTexture.flipY = false
 
     /**
@@ -62,7 +62,7 @@ onMount(() => {
      * Model
      */
     gltfLoader.load(
-        '../static/cinema.glb', 
+        '../static/cinemaFinal.glb', 
         (gltf) => {
             gltf.scene.traverse((child) => {
                 child.material = bakedMaterial
@@ -134,7 +134,7 @@ onMount(() => {
     // Combine image geometry and material 
     var posterAffiche = new THREE.Mesh(geometryPosterAffiche, materialPosterAffiche);
 
-    posterAffiche.position.set(-5.65, -2.1, 2.41)
+    posterAffiche.position.set(-5.6, -2.08, 2.41)
     posterAffiche.rotation.y = 1.59
     posterAffiche.name = "posterAffiche"
     scene.add(posterAffiche)
@@ -148,7 +148,7 @@ onMount(() => {
     var geometryPosterInfos = new THREE.PlaneGeometry(1.38, 3.8*0.51);
     var posterInfos = new THREE.Mesh(geometryPosterInfos, materialPosterInfos);
 
-    posterInfos.position.set(-5.65, -2.1, 0.09)
+    posterInfos.position.set(-5.6, -2.08, 0.11)
     posterInfos.rotation.y = 1.59
     posterInfos.name = "posterInfos"
     scene.add(posterInfos)
@@ -160,7 +160,7 @@ onMount(() => {
     var geometryPosterTalent = new THREE.PlaneGeometry(1.38, 3.8*0.51);
     var posterTalent = new THREE.Mesh(geometryPosterTalent, materialPosterTalent);
 
-    posterTalent.position.set(-5.65, -2.1, -2.17)
+    posterTalent.position.set(-5.6, -2.08, -2.16)
     posterTalent.rotation.y = 1.59
     posterTalent.name = "posterTalent"
     scene.add(posterTalent)
@@ -172,7 +172,7 @@ onMount(() => {
     var geometryPosterActus = new THREE.PlaneGeometry(1.38, 3.8*0.51);
     var posterActus = new THREE.Mesh(geometryPosterActus, materialPosterActus);
 
-    posterActus.position.set(-5.65, -2.1, -4.43)
+    posterActus.position.set(-5.6, -2.08, -4.41)
     posterActus.rotation.y = 1.59
     posterActus.name = "posterActus"
     scene.add(posterActus)
@@ -184,7 +184,7 @@ onMount(() => {
     var geometryPosterContact = new THREE.PlaneGeometry(1.38, 3.8*0.51);
     var posterContact = new THREE.Mesh(geometryPosterContact, materialPosterContact);
 
-    posterContact.position.set(-5.65, -2.1, -6.63)
+    posterContact.position.set(-5.6, -2.08, -6.63)
     posterContact.rotation.y = 1.59
     posterContact.name = "posterContact"
     scene.add(posterContact);
@@ -275,10 +275,10 @@ onMount(() => {
     plane.callback = function() { cameraMove();}
 
     // GUI tests
-    const cubeTest = gui.addFolder('Cube (origin point)')
-    cubeTest.add(cube.position, 'x').min(-60).max(60).step(0.01).name('position X')
-    cubeTest.add(cube.position, 'y').min(-60).max(60).step(0.01).name('position Y')
-    cubeTest.add(cube.position, 'z').min(-60).max(60).step(0.01).name('position Z')
+    const cubeTest = gui.addFolder('posterAffiche ')
+    cubeTest.add(posterTalent.position, 'x').min(-60).max(60).step(0.01).name('position X')
+    cubeTest.add(posterTalent.position, 'y').min(-60).max(60).step(0.01).name('position Y')
+    cubeTest.add(posterTalent.position, 'z').min(-60).max(60).step(0.01).name('position Z')
 
     /**
      * Movie screen (test with local video)
