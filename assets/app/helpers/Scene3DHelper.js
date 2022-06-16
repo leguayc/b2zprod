@@ -188,6 +188,8 @@ export function createControls(canvas)
 {
     const controls = new OrbitControls(camera, canvas);
     // controls.enableDamping = true
+    controls.enabled = false
+    controls.enableRotate = false
     // controls.dampingFactor = 0.05
     // controls.screenSpacePanning = false
     // controls.minDistance = 2
