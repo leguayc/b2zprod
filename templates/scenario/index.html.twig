@@ -5,40 +5,45 @@
 {% block page %}
     <h1>Scenario index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>PhoneNumber</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>File</th>
-                <th>Summary</th>
-                <th>StuffToAdd</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for scenario in scenarios %}
-            <tr>
-                <td>{{ scenario.id }}</td>
-                <td>{{ scenario.email }}</td>
-                <td>{{ scenario.phoneNumber }}</td>
-                <td>{{ scenario.firstname }}</td>
-                <td>{{ scenario.lastname }}</td>
-                <td><a href="/uploads/scenarios/{{ scenario.file }}" download>Download</a></td>
-                <td>{{ scenario.summary }}</td>
-                <td>{{ scenario.stuffToAdd }}</td>
-                <td>
-                    <a href="{{ path('app_scenario_show', {'id': scenario.id}) }}">show</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="9">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="table-contain">
+        <div class="table-scroll">
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Email</th>
+                        <th>PhoneNumber</th>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>File</th>
+                        <th>Summary</th>
+                        <th>StuffToAdd</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for scenario in scenarios %}
+                    <tr>
+                        <td>{{ scenario.id }}</td>
+                        <td>{{ scenario.email }}</td>
+                        <td>{{ scenario.phoneNumber }}</td>
+                        <td>{{ scenario.firstname }}</td>
+                        <td>{{ scenario.lastname }}</td>
+                        <td><a href="/uploads/scenarios/{{ scenario.file }}" download>Download</a></td>
+                        <td>{{ scenario.summary }}</td>
+                        <td>{{ scenario.stuffToAdd }}</td>
+                        <td>
+                            <a href="{{ path('app_scenario_show', {'id': scenario.id}) }}">show</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="9">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock %}

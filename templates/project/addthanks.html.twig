@@ -10,6 +10,7 @@
         <button class="btn">{{ button_label|default('Save') }}</button>
     {{ form_end(form) }}
 
-
-    <a href="{{ path('app_project_index') }}">back to list</a>
+    <div class="contain-button">
+        <a href="{{ path('app_project_index') }}">back to list</a>
+    </div>
 {% endblock %}

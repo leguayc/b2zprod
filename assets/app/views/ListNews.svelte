@@ -32,11 +32,11 @@
             {#each news as { id, title, text, creationdate, image}, i} 
                 {#if i === 0}
                     <li class="news-emphase">
-                        <img src="" alt="article image" class="image">
+                        <img src="./uploads/posts/{image}" alt="article image" class="image">
                         <div class="home-news">
                             <p class="date">{creationdate}</p>
                             <p class="title">{title}</p>
-                            <p>{text}</p>
+                            <p>{text.substring(0,250)}</p>
                             <div class="btn btn-orange"><span class="text">{$t('News.External.Button')}</span></div>
                         </div>
                     </li> 
@@ -44,7 +44,7 @@
                     <li class="home-news">
                         <p class="date">{creationdate}</p>
                         <p class="title">{title}</p>
-                        <p>{text}</p>
+                        <p>{text.substring(0,250)}</p>
                         <div class="btn btn-orange"><span class="text">{$t('News.External.Button')}</span></div>
                     </li>
                 {/if}

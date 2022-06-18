@@ -3,32 +3,34 @@
     import Header from '../components/Header.svelte';
     import axios from 'axios';
     import { onMount } from 'svelte';
+
     import { getLocalization } from '../i18n';
     const { t, currentLanguage } = getLocalization();
 
     let news = {
-        title : "",
-        image : "",
-        text: "",
-        creationdate : null,
-    }
 
-    let otherNews;
+        title : "",
+        text : "",
+        creationdate: null,
+        image : null,
+    };
+    
+    let otherNews = [];
 
     onMount(async () => {
         axios.get('/api/blog_posts/1').then( (response) => {
             news = response.data;
+            console.log("news", news);
+        }).catch((error) => {
+            console.log("error");
+        });
+        
+        axios.get('/api/blog_posts').then( (response) => {
+            otherNews = response.data['hydra:member'];
         }).catch((error) => {
             console.log("error");
         });
 
-        axios.get('/api/blog_posts').then( (response) => {
-            otherNews = response.data;
-            otherNews.slice(0,2);
-            console.log(otherNews);
-        }).catch((error) => {
-            console.log("error");
-        });
     });
 
 </script>
@@ -53,7 +55,7 @@
     </section>
 
 
-    {#if otherNews}
+    {#if otherNews[0]}
     <section class="contain-films">
         <h2 class="title">{$t('News.More.Title')}</h2>
         <ul class="grid-2">
@@ -61,7 +63,7 @@
             <li class="home-news">
                 <p class="date">{creationdate}</p>
                 <p class="title">{title}</p>
-                <p>{text}</p>
+                <p>{text.substring(0,250)}..</p>
                 <div class="btn btn-orange"><span class="text">{$t('Project.External.Button.Title')}</span></div>
             </li>
             {/each}

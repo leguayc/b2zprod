@@ -69,7 +69,6 @@ nav{
     position: fixed;
     width: 100%;
     display: flex;
-    justify-content: space-between;
     align-items: flex-start;
     padding: 20px 40px;
     z-index: 10;
@@ -81,6 +80,10 @@ nav .logo{
 
 nav .menu{
     height: 80px;
+}
+
+nav .contain-menu{
+    margin-left: auto;
 }
 
 main{
@@ -412,6 +415,7 @@ section{
 .news-emphase .image{
     width: 30%;
     min-width: 400px;
+    object-fit: cover;
 }
 
 /* about */
