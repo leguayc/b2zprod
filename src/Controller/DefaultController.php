@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController
 {
-    #[Route('/', name: 'app_default')]
+    #[Route('/{svelte_routing?}/{svelte_params?}', name: 'app_default', priority: -1)]
     public function index(): Response
     {
         return $this->render('default/index.html.twig');

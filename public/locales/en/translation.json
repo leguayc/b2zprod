@@ -1,5 +1,5 @@
 {
-    "ListNews.Title" : "Newsroom",
+    "ListNews.Title" : "News room",
     "ListNews.Subtitle" : "B2Z Production",
 
     "News.More.Title" : "Discover more news :",
@@ -7,20 +7,23 @@
     
     "About.External.Title": "Who are B2Z Production?",
     "About.External.Button" : "Learn more",
-    "About.Title" : "Newsroom",
+    "About.Title" : "About room",
     "About.SubTitle" : "B2Z Production",
     "About.Content.Title" : "About us",
     "About.Content.Text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates repellendus ipsam minima quo ea sint corporis itaque esse, provident beatae?",
     "About.Content.Button": "See our films",
 
-    "Press.Title": "Catalogue",
-    "Press.Button": "Press kit",
+    "Presse.Title": "Catalogue",
+    "Presse.Button": "Press kit",
 
 
     "Project.Script.Title": "script",
     "Project.Casting.Title": "Casting",
     "Project.Distributor.Title": "Where to find the film",
     "Project.Distributor.Text": "The distributor",
+    "Project.Producer": "produced by",
+    "Project.Thanks": "The partners and thanks",
+    "Project.OtherMovies": "Look at our other productions",
 
     "Project.External.Title": "See the films being shown",
     "Project.External.Button": "Learn more",
