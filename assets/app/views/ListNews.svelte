@@ -34,7 +34,7 @@
                     <li class="news-emphase">
                         <img src="./uploads/posts/{image}" alt="article" class="image" />
                         <div class="home-news">
-                            <p class="date">{creationdate}</p>
+                            <p class="date">{creationdate.split('T')[0]}</p>
                             <p class="title">{title}</p>
                             <p>{text.substring(0,250)}</p>
                             <a href="/news/{id}" class="btn btn-orange"><span class="text">{$t('News.External.Button')}</span></a>
@@ -42,7 +42,7 @@
                     </li> 
                 {:else}
                     <li class="home-news">
-                        <p class="date">{creationdate}</p>
+                        <p class="date">{creationdate.split('T')[0]}</p>
                         <p class="title">{title}</p>
                         <p>{text.substring(0,250)}</p>
                         <a href="/news/{id}" class="btn btn-orange"><span class="text">{$t('News.External.Button')}</span></a>

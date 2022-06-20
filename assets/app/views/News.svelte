@@ -23,6 +23,8 @@
         axios.get('/api/blog_posts/' + id).then( (response) => {
             news = response.data;
             news.creationdate = news.creationdate.split('T')[0];
+
+            console.log(news);
         }).catch((error) => {
             console.log("error");
         });
@@ -44,9 +46,14 @@
     <Header title="{news.title}" subtitle="{news.creationdate}"/>
 
     <section class="contain-article">
-            <h2 class="title">{news.title}</h2>
-            <p class="text">{news.text}</p>
-            <img src="/uploads/posts/{news.image}" alt="article" class="image" />
+        <h2 class="title">{news.title}</h2>
+        <p class="text">{news.text}</p>
+        <img src="/uploads/posts/{news.image}" alt="article" class="image" />
+        {#if news.formLink}
+            <div class="googleform-container">
+                <iframe title="Google Form" src={news.formLink}></iframe>
+            </div>
+        {/if}
     </section>
 
     <section class="bg-movie">
@@ -63,10 +70,10 @@
         <ul class="grid-2">
             {#each otherNews as {id, creationdate, title, text}}
             <li class="home-news">
-                <p class="date">{creationdate}</p>
+                <p class="date">{creationdate.split('T')[0]}</p>
                 <p class="title">{title}</p>
                 <p>{text.substring(0,250)}..</p>
-                <a href="news/{id}" class="btn btn-orange"><span class="text">{$t('Project.External.Button.Title')}</span></a>
+                <a href="/news/{id}" class="btn btn-orange"><span class="text">{$t('Project.External.Button.Title')}</span></a>
             </li>
             {/each}
         </ul>
