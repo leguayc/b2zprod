@@ -123,13 +123,13 @@ export function createSceneBase() {
      * Stars
      */
     const objectsDistance = 4
-    const particlesCount = 700
+    const particlesCount = 200
     const positions = new Float32Array(particlesCount * 3 )
 
     for( let i = 0; i < particlesCount; i++){
         positions[i * 3 + 0 ] = (Math.random() - 0.5) * 60
-        positions[i * 3 + 1 ] = objectsDistance * 0.5 - Math.random() * objectsDistance * 30
-        positions[i * 3 + 2 ] = (Math.random() - 0.5) * 40
+        positions[i * 3 + 1 ] = objectsDistance * 0.5 - Math.random() * objectsDistance * 5
+        positions[i * 3 + 2 ] = (Math.random() - 0.5) * 20
     }
 
     function createCircleTexture(color, size) {
@@ -160,7 +160,7 @@ export function createSceneBase() {
         sizeAttenuation: true, 
         // size: 0.04
         map: createCircleTexture('#ffffff', 256),
-        size: 0.08,
+        size: 0.2,
         transparent: true,
         depthWrite: false
     })
@@ -168,7 +168,7 @@ export function createSceneBase() {
     // Points
     const particles = new THREE.Points(particlesGeometry, particlesMaterial)
 
-    particles.position.set(0, 35, -2)
+    particles.position.set(0, 24.96, -8.68)
     scene.add(particles)
 
     createBaseModel(scene);
