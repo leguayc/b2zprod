@@ -32,7 +32,8 @@ export class I18nService {
                 escapeValue: true,
             },
             backend: {
-                loadPath: '/locales/{{lng}}/{{ns}}.json'
+                loadPath: '/locales/{{lng}}/{{ns}}.json',
+                reloadInterval: false
             }
         });
     }
