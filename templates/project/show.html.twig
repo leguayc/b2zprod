@@ -5,74 +5,83 @@
 {% block page %}
     <h1>Project</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ project.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ project.translations['fr'].title }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ project.translations['fr'].description }}</td>
-            </tr>
-            <tr>
-                <th>{{ project.translations['fr'].section1title }}</th>
-                <td>{{ project.translations['fr'].section1text }}</td>
-            </tr>
-            <tr>
-                <th>{{ project.translations['fr'].section2title }}</th>
-                <td>{{ project.translations['fr'].section2text }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td><img src="/uploads/projects/{{ project.image }}" alt="Poster of movie" width="300" /></td>
-            </tr>
-            <tr>
-                <th>Trailer</th>
-                <td>{{ project.trailer }}</td>
-            </tr>
-            <tr>
-                <th>PressKit</th>
-                <td><a href="/uploads/projects/{{ project.pressKit }}" download>Download</a></td>
-            </tr>
-            <tr>
-                <th>DistributorLink</th>
-                <td>{{ project.distributorLink }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ project.date ? project.date|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>FilmmakerFullName</th>
-                <td>{{ project.filmmakerFullName }}</td>
-            </tr>
-            {% if project.projectThanks|length > 0 %}
-            <tr>
-                <th>Thanks list</th>
-                <td>
-                    <ul>
-                    {% for thanks in project.projectThanks %}
-                        <li>{{ thanks.name }}</li>
-                    {% endfor %}
-                    <ul>
-                </td>
-            </tr>
-            {% endif %}
-        </tbody>
-    </table>
+    <div class="table-contain">
+        <div class="table-scroll">
 
-    <a href="{{ path('app_project_index') }}">back to list</a>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ project.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Title</th>
+                        <td>{{ project.translations['fr'].title }}</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>{{ project.translations['fr'].description }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ project.translations['fr'].section1title }}</th>
+                        <td>{{ project.translations['fr'].section1text }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ project.translations['fr'].section2title }}</th>
+                        <td>{{ project.translations['fr'].section2text }}</td>
+                    </tr>
+                    <tr>
+                        <th>Image</th>
+                        <td><img src="/uploads/projects/{{ project.image }}" alt="Poster of movie" width="300" /></td>
+                    </tr>
+                    <tr>
+                        <th>Trailer</th>
+                        <td>{{ project.trailer }}</td>
+                    </tr>
+                    <tr>
+                        <th>PressKit</th>
+                        <td><a href="/uploads/projects/{{ project.pressKit }}" download>Download</a></td>
+                    </tr>
+                    <tr>
+                        <th>DistributorLink</th>
+                        <td>{{ project.distributorLink }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date</th>
+                        <td>{{ project.date ? project.date|date('Y-m-d') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>FilmmakerFullName</th>
+                        <td>{{ project.filmmakerFullName }}</td>
+                    </tr>
+                    {% if project.projectThanks|length > 0 %}
+                    <tr>
+                        <th>Thanks list</th>
+                        <td>
+                            <ul>
+                            {% for thanks in project.projectThanks %}
+                                <li>{{ thanks.name }}</li>
+                            {% endfor %}
+                            <ul>
+                        </td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-    <a href="{{ path('app_project_edit', {'id': project.id}) }}">edit</a>
-    
-    <a href="{{ path('app_project_addthanks', {'id': project.id}) }}">add thanks</a>
-    
-    <a href="{{ path('app_project_managetranslation', {'id': project.id}) }}">manage translation</a>
+    <div class="contain-button">
 
-    {{ include('project/_delete_form.html.twig') }}
+        <a href="{{ path('app_project_index') }}">back to list</a>
+
+        <a href="{{ path('app_project_edit', {'id': project.id}) }}">edit</a>
+        
+        <a href="{{ path('app_project_addthanks', {'id': project.id}) }}">add thanks</a>
+        
+        <a href="{{ path('app_project_managetranslation', {'id': project.id}) }}">manage translation</a>
+
+        {{ include('project/_delete_form.html.twig') }}
+
+    </div>
 {% endblock %}

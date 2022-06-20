@@ -1,6 +1,56 @@
 <script>
     import Nav from '../components/Nav.svelte';
     import Header from '../components/Header.svelte';
+   
+    import axios from 'axios';
+    import { onMount } from 'svelte';
+
+    import { getLocalization } from '../i18n';
+    const { t, currentLanguage } = getLocalization();
+
+    currentLanguage.update(current => current === 'en' ? 'en' : 'fr')
+
+    let projects = {
+
+    };
+
+    let otherProjects = [];
+
+
+    onMount(async () => {
+        axios.get('/api/projects/1').then( (response) => {
+            projects = response.data;
+
+            let link;
+
+            if($currentLanguage === 'fr'){
+                link = response.data.translations.fr;
+            }else{
+                link = response.data.translations.en;
+            }
+
+            projects.title = link.title;
+            projects.text = link.description;
+            projects.section1Text = link.section1Text;
+            projects.section1Title = link.section1Title;
+            projects.section2Text = link.section2Text;
+            projects.section2Title = link.section2Title;
+
+
+        }).catch((error) => {
+            console.log("error");
+        });
+        
+        axios.get('/api/projects').then( (response) => {
+            otherProjects = response.data['hydra:member'];
+            console.log('otherProjects', otherProjects);
+        }).catch((error) => {
+            console.log("error");
+        });
+
+    });
+
+
 </script>
 
 <Nav/>
@@ -11,18 +61,18 @@
         <iframe class="video" width="560" height="315" src="https://www.youtube.com/embed/LXb3EKWsInQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </section>
 
-    <Header title="Nom du projet" subtitle="11/06/2021 - réalisé par Jordan Anefalos"/>
+    <Header title="Nom du projet" subtitle="11/06/2021 - {$t('Project.Producer')} Jordan Anefalos"/>
 
     <section class="contain-emphase">
         <img class="image" src="./assets/images/a_fleur_de_peau.png" alt="a fleur de peau">
         <div class="content bg-black">
             <div>
-                <p class="title">scénario</p>
+                <p class="title">{$t('Project.Script.Title')}</p>
                 <ul>
                     <li>Walid Ben Mabrouk</li>
                     <li>Hakim Soudjay</li>
                 </ul>
-                <p class="title">casting</p>
+                <p class="title">{$t('Project.Casting.Title')}</p>
                 <ul>
                     <li>Jordan Anefalos</li>
                     <li>Baya Belal</li>
@@ -30,22 +80,24 @@
                     <li>Liliane Rovère</li>
                 </ul>
             </div>
-            <div class="btn btn-orange"><span class="text">Dossier presse</span></div>
+            <div class="btn btn-orange"><span class="text">{$t('Presse.Title')}</span></div>
         </div>
         
     </section>
 
     <section class="contain">
        <div class="contain-text">
-            <h3 class="title">Titre d'une partie</h3>
-            <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+            <h3 class="title">{projects.section1Title}</h3>
+            <p class="text">{projects.section1Text}</p>         
+            <h3 class="title">{projects.section2Title}</h3>
+            <p class="text">{projects.section2Text}</p>            
        </div>
     </section>
 
     <section class="bg-movie">
         <div class="contain-xs bg-black">
-            <h3 class="title">Où trouver le film ?</h3>
-            <div class="btn btn-orange"><span class="text">Le distributeur</span></div>
+            <h3 class="title">{$t('Project.Distributor.Title')}</h3>
+            <div class="btn btn-orange"><span class="text">{$t('Project.Distributor.Text')}</span></div>
         </div>
     </section>
 
@@ -75,8 +127,8 @@
 
     <section class="contain">
         <div class="contain-xs bg-black">
-            <h3 class="title">Vous souhaitez plus d'informations ?</h3>
-            <a href="mailto:test@gmail.com" class="btn btn-orange"><span class="text">Contactez-nous</span></a>
+            <h3 class="title">{$t('Contact.External.Title')}</h3>
+            <a href="mailto:test@gmail.com" class="btn btn-orange"><span class="text">{$t('Contact.External.Text')}</span></a>
         </div>
     </section>
 
@@ -109,7 +161,7 @@
                     </div>
                 </div>
             </li>
-            <li class="home-film">
+            <li class="home-film" >
                 <div class="image-contain">
                     <img class="image" src="./assets/images/a_fleur_de_peau.png" alt="a fleur de peau">
                 </div>
@@ -121,6 +173,7 @@
                         </svg>
                     </div>
                 </div>
+                <button>Ouvrir</button>
             </li>
         </ul>
     </section>

@@ -3,11 +3,16 @@
 {% block title %}Register{% endblock %}
 
 {% block page %}
-    <h1>Register</h1>
+
+<section class="section-login section-register">
+
+    <h1 class="title">Register</h1>
 
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm._token) }}
-        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.email, {
+            class: 'form-item'
+        }) }}
         {{ form_row(registrationForm.firstname) }}
         {{ form_row(registrationForm.lastname) }}
         {{ form_row(registrationForm.plainPassword, {
@@ -15,6 +20,9 @@
         }) }}
         {{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn">Register</button>
+        <button type="submit" class="btn btn-orange">Register</button>
     {{ form_end(registrationForm, {'render_rest': false}) }}
+
+</section>
+
 {% endblock %}
