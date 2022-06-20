@@ -38,13 +38,30 @@ export function createPoster(scene, imagePath, position, rotationY, name, callba
 
 export function createButton(scene, imagePath, rotationY, position, name, callback)
 {
-    const geometry = new THREE.PlaneGeometry(1, 1);
-    const material = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
+    const geometry = new THREE.PlaneGeometry(1, 0.5);
+    // const material = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
+    // var material = new THREE.MeshLambertMaterial({
+    //     map: SceneHelper.loaderPoster.load("../assets/images3D/menu.png"), 
+    //     alphaTest: 0.5,
+    //     transparent: true,
+    //     side: THREE.DoubleSide,
+    // });
+
+    const material = new THREE.MeshPhongMaterial({
+        color: '#fff',
+        map: SceneHelper.loaderPoster.load("../assets/images3D/menu.png"), 
+        alphaTest: 0.5,
+        transparent: true,
+        side: THREE.DoubleSide,
+
+    });
     const mesh = new THREE.Mesh( geometry, material );
     mesh.position.set(position.x, position.y, position.z);
+    mesh.visibility = false
     mesh.rotation.y = rotationY;
     mesh.name = name;
     scene.add(mesh);
+
 
     mesh.callback = callback;
 

@@ -56,15 +56,15 @@ onMount(() => {
     window.addEventListener('click', onDocumentMouseDown, false);
 
     // Return buttons 
-    ModelHelper.createButton(scene, "", 0, {x: 0, y: -2.4, z: 26.5}, "plane", cameraMoveReturn);
-    ModelHelper.createButton(scene, "", 0, {x: -3.1, y: -0.1, z: -12.5}, "return", cameraMoveReturn);
-    const returnButton1 = ModelHelper.createButton(scene, "", 1.5, {x: 11.1, y: -0.07, z: -5.55}, "return1", cameraMoveReturn);
+    ModelHelper.createButton(scene, "../assets/images/menu.png", 0, {x: 0, y: -2.4, z: 26.5}, "plane", cameraMoveReturn, {width: 0.68, height: 2.85});
+    ModelHelper.createButton(scene, "../assets/images/menu.png", 0, {x: -2.7, y: -0.5, z: -12.5}, "return", cameraMoveReturn, {width: 0.68, height: 2.85});
+    const returnButton1 = ModelHelper.createButton(scene, "../assets/images/menu.png", -1.5, {x: 11.1, y: -0.07, z: -5.55}, "return1", cameraMoveReturn, {width: 0.68, height: 2.85});
 
-    // GUI tests
+    // // GUI tests
     // const cubeTest = SceneHelper.gui.addFolder('posterAffiche ');
-    // cubeTest.add(posterTalent.position, 'x').min(-60).max(60).step(0.01).name('position X');
-    // cubeTest.add(posterTalent.position, 'y').min(-60).max(60).step(0.01).name('position Y');
-    // cubeTest.add(posterTalent.position, 'z').min(-60).max(60).step(0.01).name('position Z');
+    // cubeTest.add(returnButton1.position, 'x').min(-60).max(60).step(0.01).name('position X');
+    // cubeTest.add(returnButton1.rotation, 'y').min(-60).max(60).step(0.01).name('position Y');
+    // cubeTest.add(returnButton1.position, 'z').min(-60).max(60).step(0.01).name('position Z');
 
     /**
      * Movie screen (test with local video)
