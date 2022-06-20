@@ -1,6 +1,6 @@
 {% extends 'backoffice.html.twig' %}
 
-{% block title %}Manage Project Translation{% endblock %}
+{% block title %}Traductions{% endblock %}
 
 {% block javascripts %}
     <script>
@@ -50,7 +50,7 @@
 {% endblock %}
 
 {% block page %}
-    <h1>Manage Project Translation</h1>
+    <h1>Traductions</h1>
 
     {{ form_start(form) }}
         <select name="lang" id="langs-select">
@@ -66,8 +66,8 @@
         {{ form_row(form.section2title, {value : project.translations['fr'].section2title}) }}
         {{ form_row(form.section2text, {value : project.translations['fr'].section2text}) }}
 
-        <button class="btn">{{ button_label|default('Save') }}</button>
+        <button class="btn">{{ button_label|default('Sauvegarder') }}</button>
     {{ form_end(form, {'render_rest': false}) }}
 
-    <a href="{{ path('app_project_index') }}">back to list</a>
+    <a href="{{ path('app_project_index') }}">Retour</a>
 {% endblock %}

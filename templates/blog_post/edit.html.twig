@@ -1,15 +1,15 @@
 {% extends 'backoffice.html.twig' %}
 
-{% block title %}Edit BlogPost{% endblock %}
+{% block title %}Modifier l'actualité{% endblock %}
 
 {% block page %}
-    <h1>Edit BlogPost</h1>
+    <h1>Modifier l'actualité</h1>
 
     {{ include('blog_post/_form.html.twig', {'button_label': 'Update'}) }}
 
     <div class="contain-button">
         
-        <a href="{{ path('app_blog_post_index') }}">back to list</a>
+        <a href="{{ path('app_blog_post_index') }}">Retour</a>
 
         {{ include('blog_post/_delete_form.html.twig') }}
 

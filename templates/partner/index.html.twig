@@ -1,9 +1,9 @@
 {% extends 'backoffice.html.twig' %}
 
-{% block title %}Partner index{% endblock %}
+{% block title %}Les partenaires{% endblock %}
 
 {% block page %}
-    <h1>Partner index</h1>
+    <h1>Les partenaires</h1>
 
     <div class="table-contain">
         <div class="table-scroll">
@@ -11,8 +11,8 @@
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Name</th>
-                        <th>actions</th>
+                        <th>Nom</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -21,13 +21,13 @@
                         <td>{{ partner.id }}</td>
                         <td>{{ partner.name }}</td>
                         <td>
-                            <a href="{{ path('app_partner_show', {'id': partner.id}) }}">show</a>
-                            <a href="{{ path('app_partner_edit', {'id': partner.id}) }}">edit</a>
+                            <a href="{{ path('app_partner_show', {'id': partner.id}) }}">Afficher</a>
+                            <a href="{{ path('app_partner_edit', {'id': partner.id}) }}">Modifier</a>
                         </td>
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="4">no records found</td>
+                        <td colspan="4">Pas de résultat</td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -36,7 +36,7 @@
     </div>
     <div class="contain-button">
 
-        <a href="{{ path('app_partner_new') }}">Create new</a>
+        <a href="{{ path('app_partner_new') }}">Ajouter un partenaire</a>
 
     </div>
 {% endblock %}

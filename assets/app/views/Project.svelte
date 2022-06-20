@@ -50,6 +50,8 @@
 
     });
 
+    
+
 
 </script>
 
@@ -87,10 +89,8 @@
 
     <section class="contain">
        <div class="contain-text">
-            <h3 class="title">{projects.section1Title}</h3>
-            <p class="text">{projects.section1Text}</p>         
-            <h3 class="title">{projects.section2Title}</h3>
-            <p class="text">{projects.section2Text}</p>            
+            <h3 class="title">{projects.title}</h3>
+            <p class="text">{projects.description}</p>        
        </div>
     </section>
 
@@ -102,7 +102,7 @@
     </section>
 
     <section class="contain-partners">
-        <h2 class="title">Les partenaires et remerciement :</h2>
+        <h2 class="title">Les partenaires et remerciements :</h2>
         <ul class="partners">
             <li>entreprise</li>
             <li>nom prénom</li>

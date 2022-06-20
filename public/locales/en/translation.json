@@ -13,8 +13,10 @@
     "About.Content.Text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates repellendus ipsam minima quo ea sint corporis itaque esse, provident beatae?",
     "About.Content.Button": "See our films",
 
-    "Press.Title": "Catalogue",
-    "Press.Button": "Press kit",
+    "Presse.Title": "Catalogue",
+    "Presse.Button": "Press kit",
+
+    "Project.Producer" : "produced by",
 
 
     "Project.Script.Title": "script",

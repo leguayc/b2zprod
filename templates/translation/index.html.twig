@@ -1,14 +1,14 @@
 {% extends 'backoffice.html.twig' %}
 
-{% block title %}Manage Translations{% endblock %}
+{% block title %}Les Traductions{% endblock %}
 
 {% block page %}
-    <h1>Manage Translations</h1>
+    <h1>Les Traductions</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Keys</th>
+                <th>Langue</th>
                 {% for locale, translation in translations %}
                     <th>{{ locale|upper }}</th>
                 {% endfor %}
@@ -26,11 +26,11 @@
             <tr>
                 <td>X</td>
                 {% for locale, translation in translations %}
-                    <td><a href="{{ path('app_translation_edit', {'locale': locale}) }}">Edit {{ locale|upper }}</a></td>
+                    <td><a href="{{ path('app_translation_edit', {'locale': locale}) }}">Modifier {{ locale|upper }}</a></td>
                 {% endfor %}
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_translation_new') }}">Add new locale</a>
+    <a href="{{ path('app_translation_new') }}">Ajouter une langue</a>
 {% endblock %}
