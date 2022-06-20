@@ -44,7 +44,19 @@
     "Contact.External.Title" : "Vous souhaitez plus d'informations ?",
     "Contact.External.Text" : "Contactez-nous",
 
-    "SocialMedia.Title" : "Suivez-nous sur les réseaux"
+    "SocialMedia.Title" : "Suivez-nous sur les réseaux",
 
-
+    "Talent.Title" : "Salle des talents",
+    "Talent.Content.Title": "Titre d'une partie",
+    "Talent.Content.Text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+    "Talent.Send": "Envoyez votre scénario",
+    "Talent.Form.Firstname": "Prénom",
+    "Talent.Form.Lastname": "Nom",
+    "Talent.Form.Email": "Email",
+    "Talent.Form.Phone": "Téléphone",
+    "Talent.Form.Scenario": "Ajouter votre scénario",
+    "Talent.Form.Pitch": "Présentez votre scénario",
+    "Talent.Form.Pitch.Placeholder": "Pitchez votre projet en quelques phrases...",
+    "Talent.Form.Message": "Message",
+    "Talent.Form.Message.Placeholder": "Quelque chose à ajouter..."
 }
