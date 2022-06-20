@@ -17,7 +17,7 @@
 
     <section class="form-script">
         <h3 class="title">Envoyez votre scénario</h3>
-        <form action="#" class="form-group">
+        <form method="POST" class="form-group">
             <div class="form-item">
                 <label for="prenom">Prénom</label>
                 <input type="text" name="prenom" placeholder="Prénom*" required>

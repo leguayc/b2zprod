@@ -11,7 +11,7 @@
         title : "Nom du film"
     }
 
-    let partners;
+    let partners = [];
 
     onMount(async () => {
 
@@ -37,7 +37,7 @@
 
 <main class="bg-texture">
 
-    <Header title="Salle des infos" subtitle=""/>
+    <Header title="{$t('About.Title')}" subtitle=""/>
 
     <section class="about-emphase">
         <div class="contain-image">
@@ -50,23 +50,23 @@
                 <h3 class="title">{$t('About.Content.Title')}</h3>
                 <p class="text">{$t('About.Content.Text')}</p>
             </div>
-            <div class="btn btn-orange"><span class="text">{$t('About.Content.Button')}</span></div>
+            <a href="/" class="btn btn-orange"><span class="text">{$t('About.Content.Button')}</span></a>
         </div>
     </section>
 
     <section class="about-people">
 
       <ul class="about-nav">
-        <li class="active"><img src="./assets/images/avatar.png" alt=""></li>
-        <li><img src="./assets/images/avatar.png" alt=""></li>
-        <li><img src="./assets/images/avatar.png" alt=""></li>
-        <li><img src="./assets/images/avatar.png" alt=""></li>
-        <li><img src="./assets/images/avatar.png" alt=""></li>
-        <li><img src="./assets/images/avatar.png" alt=""></li>
+        <li class="active"><img src="/assets/images/avatar.png" alt=""></li>
+        <li><img src="/assets/images/avatar.png" alt=""></li>
+        <li><img src="/assets/images/avatar.png" alt=""></li>
+        <li><img src="/assets/images/avatar.png" alt=""></li>
+        <li><img src="/assets/images/avatar.png" alt=""></li>
+        <li><img src="/assets/images/avatar.png" alt=""></li>
       </ul>
 
       <div class="content">
-        <img src="./assets/images/model3d.png" alt="">
+        <img src="/assets/images/model3d.png" alt="">
         <div class="info">
             <h3 class="title">Nom prenom</h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam dignissimos dolor officiis in iure libero nam ab omnis earum commodi.</p> 
@@ -83,7 +83,7 @@
             {#each partners as {image, name}}
                 <li>
                     {#if image}
-                    <img src="./uploads/partners/{image}" alt="{name}">
+                    <img src="/uploads/partners/{image}" alt="{name}">
                     {:else}
                         <h3>{name}</h3>
                     {/if}
@@ -100,11 +100,11 @@
             {#each projects as {title, pressKit, image, id}}
             <li class="home-film">
                 <div class="image-contain">
-                    {#if image}<img class="image" src="./uploads/projects/{image}" alt="{title}">{/if}
+                    {#if image}<img class="image" src="/uploads/projects/{image}" alt="{title}">{/if}
                 </div>
                 <div class="content content-center">
                     <span class="text">{title}</span>
-                    <a href={pressKit} target="_blank" class="btn btn-orange"><span class="text">{$t('Presse.Button')}</span></a>
+                    <a href="/uploads/projects/{pressKit}" target="_blank" class="btn btn-orange"><span class="text">{$t('Presse.Button')}</span></a>
                 </div>
             </li>
             {/each}

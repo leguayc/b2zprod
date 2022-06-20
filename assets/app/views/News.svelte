@@ -14,13 +14,15 @@
         creationdate: null,
         image : null,
     };
+
+    export let id;
     
     let otherNews = [];
 
     onMount(async () => {
-        axios.get('/api/blog_posts/1').then( (response) => {
+        axios.get('/api/blog_posts/' + id).then( (response) => {
             news = response.data;
-            console.log("news", news);
+            news.creationdate = news.creationdate.split('T')[0];
         }).catch((error) => {
             console.log("error");
         });
@@ -44,13 +46,13 @@
     <section class="contain-article">
             <h2 class="title">{news.title}</h2>
             <p class="text">{news.text}</p>
-            <img src="./uploads/posts/{news.image}" alt="image article" class="image">
+            <img src="/uploads/posts/{news.image}" alt="article" class="image" />
     </section>
 
     <section class="bg-movie">
         <div class="contain-xs bg-black">
             <h3 class="title">{$t('Project.External.Title')}</h3>
-            <div class="btn btn-orange"><span class="text">{$t('Project.External.Button')}</span></div>
+            <a href="/" class="btn btn-orange"><span class="text">{$t('Project.External.Button')}</span></a>
         </div>
     </section>
 
@@ -59,12 +61,12 @@
     <section class="contain-films">
         <h2 class="title">{$t('News.More.Title')}</h2>
         <ul class="grid-2">
-            {#each otherNews as {creationdate, title, text}}
+            {#each otherNews as {id, creationdate, title, text}}
             <li class="home-news">
                 <p class="date">{creationdate}</p>
                 <p class="title">{title}</p>
                 <p>{text.substring(0,250)}..</p>
-                <div class="btn btn-orange"><span class="text">{$t('Project.External.Button.Title')}</span></div>
+                <a href="news/{id}" class="btn btn-orange"><span class="text">{$t('Project.External.Button.Title')}</span></a>
             </li>
             {/each}
         </ul>

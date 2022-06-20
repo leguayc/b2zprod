@@ -5,7 +5,7 @@
 </script>
 
 <nav>
-    <div><img src="./assets/images/logo.svg" alt="b2z production logo" class="logo"></div>
-    <div class="contain-menu"><img src="./assets/images/menu.png" alt="menu" class="menu"></div>
+    <a href="/"><img src="/assets/images/logo.svg" alt="b2z production logo" class="logo"></a>
+    <a href="/" class="contain-menu"><img src="/assets/images/menu.png" alt="menu" class="menu"></a>
     <button on:click={() => { currentLanguage.update(current => current === 'en' ? 'fr' : 'en') }}>{$currentLanguage}</button>
 </nav>

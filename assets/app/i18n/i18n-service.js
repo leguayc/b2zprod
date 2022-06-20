@@ -26,13 +26,13 @@ export class I18nService {
             load: 'languageOnly',
             preload: langs.allLangs,
             saveMissing: true,
-            fallbackLng: 'en',
+            fallbackLng: 'fr',
             debug: false,
             interpolation: {
                 escapeValue: true,
             },
             backend: {
-                loadPath: 'locales/{{lng}}/{{ns}}.json'
+                loadPath: '/locales/{{lng}}/{{ns}}.json'
             }
         });
     }
