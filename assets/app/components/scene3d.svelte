@@ -5,12 +5,26 @@ import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 import * as SceneHelper from "../helpers/Scene3DHelper.js";
 import * as ModelHelper from "../helpers/Model3DHelper.js";
 import { onDocumentMouseDown, cameraMoveReturn, cameraMoveCine, cameraMoveContact, setupNavigation } from "../helpers/Navigation3DHelper.js";
+// import { log } from 'console';
 
 // Canvas
 let canvas;
 
 onMount(() => {
+
     const scene = SceneHelper.createSceneBase();
+
+    scene.add(SceneHelper.overlayT.mesh)
+
+    console.log(SceneHelper.loadingManager);
+
+    // SceneHelper.loadingBarElement.style.transform = `scaleX(${progressRatio})`
+
+    //     const cubeTestRotation = SceneHelper.gui.addFolder('overlay ')
+    //     cubeTestRotation.add(overlay.position, 'x').min(-60).max(60).step(0.01).name('position X')
+    //     cubeTestRotation.add(overlay.position, 'y').min(-60).max(60).step(0.01).name('position Y')
+    //     cubeTestRotation.add(overlay.position, 'z').min(-60).max(60).step(0.01).name('position Z')
+
     const sizes = SceneHelper.setResize();
     const camera = SceneHelper.addCamera(scene);
     SceneHelper.addLights(scene);
@@ -56,15 +70,15 @@ onMount(() => {
     window.addEventListener('click', onDocumentMouseDown, false);
 
     // Return buttons 
-    ModelHelper.createButton(scene, "../assets/images/menu.png", 0, {x: 0, y: -2.4, z: 26.5}, "plane", cameraMoveReturn, {width: 0.68, height: 2.85});
+    const returnButton1 = ModelHelper.createButton(scene, "../assets/images/menu.png", 0, {x: 0, y: -2.4, z: 26.5}, "enterMenu", cameraMoveReturn, {width: 0.68, height: 2.85});
     ModelHelper.createButton(scene, "../assets/images/menu.png", 0, {x: -2.7, y: -0.5, z: -12.5}, "return", cameraMoveReturn, {width: 0.68, height: 2.85});
-    const returnButton1 = ModelHelper.createButton(scene, "../assets/images/menu.png", -1.5, {x: 11.1, y: -0.07, z: -5.55}, "return1", cameraMoveReturn, {width: 0.68, height: 2.85});
+    ModelHelper.createButton(scene, "../assets/images/menu.png", -1.5, {x: 11.1, y: -0.07, z: -5.55}, "return1", cameraMoveReturn, {width: 0.68, height: 2.85});
 
     // // GUI tests
-    // const cubeTest = SceneHelper.gui.addFolder('posterAffiche ');
-    // cubeTest.add(returnButton1.position, 'x').min(-60).max(60).step(0.01).name('position X');
-    // cubeTest.add(returnButton1.rotation, 'y').min(-60).max(60).step(0.01).name('position Y');
-    // cubeTest.add(returnButton1.position, 'z').min(-60).max(60).step(0.01).name('position Z');
+    const cubeTest = SceneHelper.gui.addFolder('posterAffiche ');
+    cubeTest.add(returnButton1.position, 'x').min(-60).max(60).step(0.01).name('position X');
+    cubeTest.add(returnButton1.position, 'y').min(-60).max(60).step(0.01).name('position Y');
+    cubeTest.add(returnButton1.position, 'z').min(-60).max(60).step(0.01).name('position Z');
 
     /**
      * Movie screen (test with local video)
@@ -162,10 +176,36 @@ onMount(() => {
 });
 
 </script>
+<style>
 
+    .webgl{
+        position: fixed;
+        top: 0;
+        left: 0;
+        outline: none; 
+    }
+
+    /* .loading-bar{
+        position: absolute; 
+        top: 50%;
+        width: 100%;
+        height: 2px;
+        background: #fff;
+        transform: scaleX(0.5);
+        transform-origin: top left;
+        transition: transform 0.5s;
+    }
+
+    .loading-bar.ended{
+        transform: scaleX(0);
+        transform-origin: top right;
+        transition: transform 1.5s ease-in-out;
+    } */
+</style>
 <!-- <button bind:this={button1} style="position:relative;" id="button1" class="camera-button" >Position 1</button> -->
 <!-- <button bind:this={cameraMove} style="position:relative;">Camera</button> -->
 <video id="video" playsinline webkit-playsinline muted loop autoplay width="2000" height="500"src="../posters/testFilm/test.mov" style="display: none;"></video>
 <canvas bind:this={canvas} class="webgl"></canvas>
+<!-- <div class="loading-bar"></div> -->
 
 
