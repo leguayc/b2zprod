@@ -5,6 +5,15 @@ import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 import * as SceneHelper from "../helpers/Scene3DHelper.js";
 import * as ModelHelper from "../helpers/Model3DHelper.js";
 import { onDocumentMouseDown, cameraMoveReturn, cameraMoveCine, cameraMoveContact, setupNavigation, cameraMoveNews, cameraMoveAbout, cameraMoveTalent } from "../helpers/Navigation3DHelper.js";
+import ThreeMeshUI from '../helpers/three-mesh-ui.js';
+import FontJson from '../helpers/fonts/Roboto-msdf.json';
+import FontImage from '../helpers/fonts/Roboto-msdf.png';
+
+import { VRButton } from 'three/examples/jsm/webxr/VRButton.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { BoxLineGeometry } from 'three/examples/jsm/geometries/BoxLineGeometry.js';
+
+
 // import { log } from 'console';
 
 // Canvas
@@ -24,6 +33,8 @@ onMount(() => {
         onclick="document.location.href='/news';'"
     // $("a#news").click(function(){})
     }
+
+    makeTextPanel();
 
     ModelHelper.createPoster(scene, '../posters/affiche.png', {x: -5.6, y: -2.08, z: 2.41}, 1.59, "posterAffiche", cameraMoveCine);
     ModelHelper.createPoster(scene, '../posters/infos.png', {x: -5.6, y: -2.08, z: 0.11}, 1.59, "posterInfos", cameraMoveAbout);
@@ -85,16 +96,9 @@ onMount(() => {
 
     scene.add(videoScreen);
 
-    // GUI panel 
-    // const planeTest = SceneHelper.gui.addFolder('camera');
-    // planeTest.add(camera.position, 'x').min(-60).max(60).step(0.01).name('position X');
-    // planeTest.add(camera.position, 'y').min(-60).max(60).step(0.01).name('position Y');
-    // planeTest.add(camera.position, 'z').min(-60).max(60).step(0.01).name('position Z');
-
     /**
      * Text 
      */
-
     SceneHelper.fontLoader.load('../fonts/helvetiker_regular.typeface.json', (font) => {
         const textGeometry = new TextGeometry('B2Z Production',
             {
@@ -136,6 +140,44 @@ onMount(() => {
     const controls = SceneHelper.createControls(canvas);
 
     /**
+     * Text onn 3D scene
+     */
+     function makeTextPanel() {
+        const container = new ThreeMeshUI.Block( {
+            width: 5,
+            height: 0.4,
+            padding: 0.05,
+            justifyContent: 'center',
+            textAlign: 'left',
+            fontFamily: FontJson,
+            fontTexture: FontImage
+        } );
+        container.position.set( -4.77, -0.4, -1.64 );
+        container.rotation.y = 1.53;
+        scene.add( container );
+
+        //     // GUI panel 
+        // const planeTest = SceneHelper.gui.addFolder('camera');
+        // planeTest.add(container.rotation, 'x').min(-60).max(60).step(0.01).name('position X');
+        // planeTest.add(container.rotation, 'y').min(-60).max(60).step(0.01).name('position Y');
+        // planeTest.add(container.rotation, 'z').min(-60).max(60).step(0.01).name('position Z');
+        // planeTest.add(container.position, 'x').min(-60).max(60).step(0.01).name('position x');
+        // planeTest.add(container.position, 'y').min(-60).max(60).step(0.01).name('position y');
+        // planeTest.add(container.position, 'z').min(-60).max(60).step(0.01).name('position z');
+        //
+        container.add(
+            new ThreeMeshUI.Text( {
+                content: 'Click on the posters to move through the rooms',
+                fontSize: 0.15
+            }),
+            // new ThreeMeshUI.Text( {
+            //     content: '\nCliquez sur menu pour revenir en arriere',
+            //     fontSize: 0.09
+            // })
+        );
+    }
+
+    /**
      * Renderer
      */
     const renderer = SceneHelper.createRenderer(canvas, sizes);
@@ -150,6 +192,8 @@ onMount(() => {
     const tick = () =>
     {
         const elapsedTime = clock.getElapsedTime();
+
+        ThreeMeshUI.update()
 
         // Update controls
         controls.update();
