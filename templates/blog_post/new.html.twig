@@ -1,14 +1,14 @@
 {% extends 'backoffice.html.twig' %}
 
-{% block title %}New BlogPost{% endblock %}
+{% block title %}Créer une actualité{% endblock %}
 
 {% block page %}
-    <h1>Create new BlogPost</h1>
+    <h1>Créer une actualité</h1>
 
     {{ include('blog_post/_form.html.twig') }}
 
     <div class="contain-button">
-        <a href="{{ path('app_blog_post_index') }}">back to list</a>
+        <a href="{{ path('app_blog_post_index') }}">Retour</a>
     </div>
     
 {% endblock %}

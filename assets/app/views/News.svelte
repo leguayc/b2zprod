@@ -1,6 +1,7 @@
 <script>
     import Nav from '../components/Nav.svelte';
     import Header from '../components/Header.svelte';
+    import Footer from '../components/Footer.svelte';
     import axios from 'axios';
     import { onMount } from 'svelte';
 
@@ -8,7 +9,6 @@
     const { t, currentLanguage } = getLocalization();
 
     let news = {
-
         title : "",
         text : "",
         creationdate: null,
@@ -18,7 +18,12 @@
     export let id;
     
     let otherNews = [];
+    let googleForm;
 
+    let resizeIframe = () =>{
+        if(googleForm) resizeIFrameToFitContent( googleForm );
+    }
+        
     onMount(async () => {
         axios.get('/api/blog_posts/' + id).then( (response) => {
             news = response.data;
@@ -34,9 +39,9 @@
         }).catch((error) => {
             console.log("error");
         });
-
     });
 
+   
 </script>
 
 <Nav/>
@@ -49,12 +54,14 @@
         <h2 class="title">{news.title}</h2>
         <p class="text">{news.text}</p>
         <img src="/uploads/posts/{news.image}" alt="article" class="image" />
+
         {#if news.formLink}
             <div class="googleform-container">
                 <iframe title="Google Form" src={news.formLink}></iframe>
             </div>
         {/if}
     </section>
+
 
     <section class="bg-movie">
         <div class="contain-xs bg-black">
@@ -70,9 +77,11 @@
         <ul class="grid-2">
             {#each otherNews as {id, creationdate, title, text}}
             <li class="home-news">
-                <p class="date">{creationdate.split('T')[0]}</p>
-                <p class="title">{title}</p>
-                <p>{text.substring(0,250)}..</p>
+                <div>
+                    <p class="date">{creationdate.split('T')[0]}</p>
+                    <p class="title">{title}</p>
+                    <p>{text.substring(0,250)}..</p>
+                </div>
                 <a href="/news/{id}" class="btn btn-orange"><span class="text">{$t('Project.External.Button.Title')}</span></a>
             </li>
             {/each}
@@ -80,5 +89,6 @@
     </section>
     {/if}
 
-
 </main>
+
+<Footer/>

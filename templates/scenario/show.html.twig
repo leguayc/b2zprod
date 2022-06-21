@@ -1,9 +1,9 @@
 {% extends 'backoffice.html.twig' %}
 
-{% block title %}Scenario{% endblock %}
+{% block title %}Scénario{% endblock %}
 
 {% block page %}
-    <h1>Scenario</h1>
+    <h1>Scénario</h1>
     <div class="table-contain">
         <div class="table-scroll">
 
@@ -18,27 +18,27 @@
                         <td>{{ scenario.email }}</td>
                     </tr>
                     <tr>
-                        <th>PhoneNumber</th>
+                        <th>Téléphone</th>
                         <td>{{ scenario.phoneNumber }}</td>
                     </tr>
                     <tr>
-                        <th>Firstname</th>
+                        <th>Prénom</th>
                         <td>{{ scenario.firstname }}</td>
                     </tr>
                     <tr>
-                        <th>Lastname</th>
+                        <th>Nom</th>
                         <td>{{ scenario.lastname }}</td>
                     </tr>
                     <tr>
-                        <th>File</th>
-                        <td><a href="/uploads/scenarios/{{ scenario.file }}" download>Download</a></td>
+                        <th>Fichier</th>
+                        <td><a href="/uploads/scenarios/{{ scenario.file }}" download>Télécharger</a></td>
                     </tr>
                     <tr>
-                        <th>Summary</th>
+                        <th>Résumé</th>
                         <td>{{ scenario.summary }}</td>
                     </tr>
                     <tr>
-                        <th>StuffToAdd</th>
+                        <th>Message</th>
                         <td>{{ scenario.stuffToAdd }}</td>
                     </tr>
                 </tbody>
@@ -47,7 +47,7 @@
     </div>
     <div class="contain-button">
 
-        <a href="{{ path('app_scenario_index') }}">back to list</a>
+        <a href="{{ path('app_scenario_index') }}">Retour</a>
 
         {{ include('scenario/_delete_form.html.twig') }}
 

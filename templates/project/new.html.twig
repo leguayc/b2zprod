@@ -1,15 +1,15 @@
 {% extends 'backoffice.html.twig' %}
 
-{% block title %}New Project{% endblock %}
+{% block title %}Nouveau film{% endblock %}
 
 {% block page %}
-    <h1>Create new Project</h1>
+    <h1>Ajouter un Film</h1>
 
     {{ include('project/_form.html.twig') }}
 
     <div class="contain-button">
 
-        <a href="{{ path('app_project_index') }}">back to list</a>
+        <a href="{{ path('app_project_index') }}">Retour</a>
 
     </div>
 {% endblock %}

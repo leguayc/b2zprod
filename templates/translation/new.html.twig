@@ -1,15 +1,15 @@
 {% extends 'backoffice.html.twig' %}
 
-{% block title %}Manage Translations{% endblock %}
+{% block title %}Traductions{% endblock %}
 
 {% block page %}
-    <h1>Add new Translation</h1>
+    <h1>Ajouter une langue</h1>
 
     <form method="POST">
         <table class="table">
             <thead>
                 <tr>
-                    <th>Keys</th>
+                    <th>Langues</th>
                     <th>FR</th>
                     <th>
                         <select name="newLang" id="newLang-select">
@@ -30,8 +30,8 @@
             {% endfor %}
             </tbody>
         </table>
-        <button class="btn">Save</button>
+        <button class="btn">Sauvegarder</button>
     </form>
 
-    <a href="{{ path('app_translation_index') }}">back to list</a>
+    <a href="{{ path('app_translation_index') }}">Retour</a>
 {% endblock %}

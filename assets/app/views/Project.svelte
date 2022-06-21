@@ -1,13 +1,17 @@
 <script>
     import Nav from '../components/Nav.svelte';
     import Header from '../components/Header.svelte';
-   
+    import Footer from '../components/Footer.svelte';
+    
+    //import { gsap } from "gsap";
+    //import { ScrollTrigger } from "gsap/ScrollTrigger";
+    //import { ScrollSmoother } from "gsap/ScrollSmoother";
+
     import axios from 'axios';
     import { onMount } from 'svelte';
 
     import { getLocalization } from '../i18n';
     const { t, currentLanguage } = getLocalization();
-
     let projects = { };
 
     let otherProjects = [];
@@ -45,6 +49,7 @@
             }
         });
     });
+
 
     const translateProject = (translation) => {
         projects.title = translation.title;
@@ -102,7 +107,7 @@
              <p class="text">{projects.description}</p>        
         </div>
      </section>
-
+  
     <section class="bg-movie">
         <div class="contain-xs bg-black">
             <h3 class="title">{$t('Project.Distributor.Title')}</h3>
@@ -112,7 +117,9 @@
 
     {#if projects.projectThanks && projects.projectThanks.length > 0}
     <section class="contain-partners">
+
         <h2 class="title">{$t('Project.Thanks')} :</h2>
+
         <ul class="partners">
             {#each projects.projectThanks as {name}}
             <li>{name}</li>
@@ -151,3 +158,5 @@
 
 
 </main>
+
+<Footer/>

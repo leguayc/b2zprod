@@ -1,13 +1,13 @@
 {% extends 'backoffice.html.twig' %}
 
-{% block title %}New Partner{% endblock %}
+{% block title %}Nouveau Partenaire{% endblock %}
 
 {% block page %}
-    <h1>Create new Partner</h1>
+    <h1>Créer un nouveau partenaire</h1>
 
     {{ include('partner/_form.html.twig') }}
 
     <div class="contain-button">
-        <a href="{{ path('app_partner_index') }}">back to list</a>
+        <a href="{{ path('app_partner_index') }}">Retour</a>
     </div>
 {% endblock %}

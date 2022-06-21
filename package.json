@@ -16,8 +16,8 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "gsap": "^3.10.4",
         "axios": "^0.27.2",
+        "gsap": "^3.10.4",
         "i18next": "^21.8.9",
         "i18next-browser-languagedetector": "^6.1.4",
         "i18next-http-backend": "^1.4.1",
