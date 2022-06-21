@@ -51,7 +51,7 @@
                 <h3 class="title">{$t('About.Content.Title')}</h3>
                 <p class="text">{$t('About.Content.Text')}</p>
             </div>
-            <a href="/" class="btn btn-orange"><span class="text">{$t('About.Content.Button')}</span></a>
+            <a href="/?r=projects" class="btn btn-orange"><span class="text">{$t('About.Content.Button')}</span></a>
         </div>
     </section>
 

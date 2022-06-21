@@ -57,7 +57,7 @@
     <section class="bg-movie">
         <div class="contain-xs bg-black">
             <h3 class="title">{$t('About.External.Title')}</h3>
-            <div class="btn btn-orange"><span class="text">{$t('About.External.Button')}</span></div>
+            <a href="/about" class="btn btn-orange"><span class="text">{$t('About.External.Button')}</span></a>
         </div>
     </section>
 

@@ -97,7 +97,7 @@
                 </ul>
                 {/if}
             </div>
-            <div class="btn btn-orange"><span class="text">{$t('Presse.Title')}</span></div>
+            <a href="/?r=projects" class="btn btn-orange"><span class="text">{$t('Presse.Title')}</span></a>
         </div>
     </section>
 

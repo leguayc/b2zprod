@@ -17,6 +17,6 @@
 
 <nav>
     <a href="/"><img src="/assets/images/logo.svg" alt="b2z production logo" class="logo"></a>
-    <a href="/" class="contain-menu"><img src="/assets/images/menu.png" alt="menu" class="menu"></a>
+    <a href="/?r=menu" class="contain-menu"><img src="/assets/images/menu.png" alt="menu" class="menu"></a>
     <button on:click={changeLang}>{($currentLanguage).toUpperCase()}</button>
 </nav>
