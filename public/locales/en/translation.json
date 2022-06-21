@@ -1,5 +1,5 @@
 {
-    "ListNews.Title" : "Newsroom",
+    "ListNews.Title" : "News room",
     "ListNews.Subtitle" : "B2Z Production",
 
     "News.More.Title" : "Discover more news :",
@@ -7,7 +7,7 @@
     
     "About.External.Title": "Who are B2Z Production?",
     "About.External.Button" : "Learn more",
-    "About.Title" : "Newsroom",
+    "About.Title" : "About room",
     "About.SubTitle" : "B2Z Production",
     "About.Content.Title" : "About us",
     "About.Content.Text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates repellendus ipsam minima quo ea sint corporis itaque esse, provident beatae?",
@@ -16,13 +16,13 @@
     "Presse.Title": "Catalogue",
     "Presse.Button": "Press kit",
 
-    "Project.Producer" : "produced by",
-
-
     "Project.Script.Title": "script",
     "Project.Casting.Title": "Casting",
     "Project.Distributor.Title": "Where to find the film",
     "Project.Distributor.Text": "The distributor",
+    "Project.Producer": "produced by",
+    "Project.Thanks": "The partners and thanks",
+    "Project.OtherMovies": "Look at our other productions",
 
     "Project.External.Title": "See the films being shown",
     "Project.External.Button": "Learn more",
@@ -43,5 +43,19 @@
     "Contact.External.Title": "Would you like more information?",
     "Contact.External.Text" : "Contact us",
 
-    "SocialMedia.Title" : "Follow us on the networks"
+    "SocialMedia.Title" : "Follow us on the networks",
+
+    "Talent.Title" : "Talents room",
+    "Talent.Content.Title": "Title of a section",
+    "Talent.Content.Text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+    "Talent.Send": "Send your scenario",
+    "Talent.Form.Firstname": "Firstname",
+    "Talent.Form.Lastname": "Lastname",
+    "Talent.Form.Email": "Email",
+    "Talent.Form.Phone": "Phone",
+    "Talent.Form.Scenario": "Add your scenario",
+    "Talent.Form.Pitch": "Present your scenario",
+    "Talent.Form.Pitch.Placeholder": "Summarize your project in a few sentences...",
+    "Talent.Form.Message": "Message",
+    "Talent.Form.Message.Placeholder": "Something to add..."
 }

@@ -14,6 +14,8 @@
         creationdate: null,
         image : null,
     };
+
+    export let id;
     
     let otherNews = [];
     let googleForm;
@@ -23,9 +25,11 @@
     }
         
     onMount(async () => {
-        axios.get('/api/blog_posts/1').then( (response) => {
+        axios.get('/api/blog_posts/' + id).then( (response) => {
             news = response.data;
-            console.log("news", news);
+            news.creationdate = news.creationdate.split('T')[0];
+
+            console.log(news);
         }).catch((error) => {
             console.log("error");
         });
@@ -50,13 +54,14 @@
         <h2 class="title">{news.title}</h2>
         <p class="text">{news.text}</p>
         <img src="/uploads/posts/{news.image}" alt="article" class="image" />
+
+        {#if news.formLink}
+            <div class="googleform-container">
+                <iframe title="Google Form" src={news.formLink}></iframe>
+            </div>
+        {/if}
     </section>
 
-    {#if news.formLink}
-        <section class="googleform-container">
-            <iframe title="Google Form" src={news.formLink} bind:this={googleForm} on:load={resizeIframe}></iframe>
-        </section>
-    {/if}
 
     <section class="bg-movie">
         <div class="contain-xs bg-black">
