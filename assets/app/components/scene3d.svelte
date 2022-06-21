@@ -4,7 +4,7 @@ import { onMount } from 'svelte';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 import * as SceneHelper from "../helpers/Scene3DHelper.js";
 import * as ModelHelper from "../helpers/Model3DHelper.js";
-import { onDocumentMouseDown, cameraMoveReturn, cameraMoveCine, cameraMoveContact, setupNavigation } from "../helpers/Navigation3DHelper.js";
+import { onDocumentMouseDown, cameraMoveReturn, cameraMoveCine, cameraMoveContact, setupNavigation, cameraMoveNews, cameraMoveAbout, cameraMoveTalent } from "../helpers/Navigation3DHelper.js";
 // import { log } from 'console';
 
 // Canvas
@@ -20,13 +20,19 @@ onMount(() => {
     const camera = SceneHelper.addCamera(scene);
     SceneHelper.addLights(scene);
 
+    function cameraMoveNewsT(){
+        onclick="document.location.href='/news';'"
+    // $("a#news").click(function(){})
+    }
+
     ModelHelper.createPoster(scene, '../posters/affiche.png', {x: -5.6, y: -2.08, z: 2.41}, 1.59, "posterAffiche", cameraMoveCine);
-    ModelHelper.createPoster(scene, '../posters/infos.png', {x: -5.6, y: -2.08, z: 0.11}, 1.59, "posterInfos", cameraMoveCine);
-    ModelHelper.createPoster(scene, '../posters/talents.png', {x: -5.6, y: -2.08, z: -2.16}, 1.59, "posterTalent", cameraMoveCine);
-    ModelHelper.createPoster(scene, '../posters/actus1.png', {x: -5.6, y: -2.08, z: -4.41}, 1.59, "posterActus", cameraMoveCine);
+    ModelHelper.createPoster(scene, '../posters/infos.png', {x: -5.6, y: -2.08, z: 0.11}, 1.59, "posterInfos", cameraMoveAbout);
+    ModelHelper.createPoster(scene, '../posters/talents.png', {x: -5.6, y: -2.08, z: -2.16}, 1.59, "posterTalent", cameraMoveTalent);
+    ModelHelper.createPoster(scene, '../posters/actus1.png', {x: -5.6, y: -2.08, z: -4.41}, 1.59, "posterActus", cameraMoveNews);
     ModelHelper.createPoster(scene, '../posters/contact.png', {x: -5.6, y: -2.08, z: -6.63}, 1.59, "posterContact", cameraMoveContact);
 
-    ModelHelper.createPoster(scene, '../posters/contact.png', {x: 13.2, y: -1.4, z: -5.74}, -1.575, "posterContact", cameraMoveContact, {width: 1.18, height: 3.35});
+    
+    ModelHelper.createPoster(scene, '../posters/contactRoom/annie.jpg', {x: 13.2, y: -1.4, z: -5.74}, -1.575, "posterContact", cameraMoveContact, {width: 1.18, height: 3.35});
     ModelHelper.createPoster(scene, '../posters/contactRoom/hakim.png', {x: 13.2, y: -1.96, z: -1.96}, -1.575, "posterContact", cameraMoveContact, {width: 1.18, height: 3.2});
     ModelHelper.createPoster(scene, '../posters/contactRoom/gaetan.png', {x: 13.2, y: -0.04, z: -4.05}, -1.575, "posterContact", cameraMoveContact, {width: 1.18, height: 3.35});
     const poster3 = ModelHelper.createPoster(scene, '../posters/contactRoom/walid.png', {x: 13.2, y: -0.26, z: -2.28}, -1.58, "posterContact", cameraMoveContact, {width: 1.6, height: 2.3});
