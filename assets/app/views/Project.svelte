@@ -1,17 +1,14 @@
 <script>
     import Nav from '../components/Nav.svelte';
     import Header from '../components/Header.svelte';
-    import Footer from '../components/Footer.svelte';
-    
-    //import { gsap } from "gsap";
-    //import { ScrollTrigger } from "gsap/ScrollTrigger";
-    //import { ScrollSmoother } from "gsap/ScrollSmoother";
-
+    import Footer from "../components/Footer.svelte";
+   
     import axios from 'axios';
     import { onMount } from 'svelte';
 
     import { getLocalization } from '../i18n';
     const { t, currentLanguage } = getLocalization();
+
     let projects = { };
 
     let otherProjects = [];
@@ -50,7 +47,6 @@
         });
     });
 
-
     const translateProject = (translation) => {
         projects.title = translation.title;
         projects.text = translation.description;
@@ -71,88 +67,120 @@
 <main class="bg-texture">
 
     <section class="contain-video">
-        <iframe class="video" width="560" height="315" src={projects.trailer} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe class="video" width="560" height="315" src="https://www.youtube.com/embed/LXb3EKWsInQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </section>
 
-    <Header title={projects.title} subtitle="{projects.date} - {$t('Project.Producer')} {projects.filmmakerFullName}"/>
+    <Header title="Nom du projet" subtitle="11/06/2021 - réalisé par Jordan Anefalos"/>
 
     <section class="contain-emphase">
-        <img class="image" src="/uploads/projects/{projects.image}" alt="a fleur de peau">
+        <img class="image" src="./assets/images/a_fleur_de_peau.png" alt="a fleur de peau">
         <div class="content bg-black">
             <div>
-                {#if projects.section1Title && projects.section1Text}
-                <p class="title">{projects.section1Title}</p>
+                <p class="title">scénario</p>
                 <ul>
-                    {#each projects.section1Text.split("\n") as text}
-                    <li>{text}</li>
-                    {/each}
+                    <li>Walid Ben Mabrouk</li>
+                    <li>Hakim Soudjay</li>
                 </ul>
-                {/if}
-                {#if projects.section2Title && projects.section2Text}
-                <p class="title">{projects.section2Title}</p>
+                <p class="title">casting</p>
                 <ul>
-                    {#each projects.section2Text.split("\n") as text}
-                    <li>{text}</li>
-                    {/each}
+                    <li>Jordan Anefalos</li>
+                    <li>Baya Belal</li>
+                    <li>Walid Ben Mabrouk</li>
+                    <li>Liliane Rovère</li>
                 </ul>
-                {/if}
             </div>
-            <div class="btn btn-orange"><span class="text">{$t('Presse.Title')}</span></div>
+            <div class="btn btn-orange"><span class="text">Dossier presse</span></div>
         </div>
+        
     </section>
 
     <section class="contain">
-        <div class="contain-text">
-             <h3 class="title">{projects.title}</h3>
-             <p class="text">{projects.description}</p>        
-        </div>
-     </section>
-  
+       <div class="contain-text">
+            <h3 class="title">Titre d'une partie</h3>
+            <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+       </div>
+    </section>
+
     <section class="bg-movie">
         <div class="contain-xs bg-black">
-            <h3 class="title">{$t('Project.Distributor.Title')}</h3>
-            <div class="btn btn-orange"><a href={projects.distributorLink}><span class="text">{$t('Project.Distributor.Text')}</span></a></div>
+            <h3 class="title">Où trouver le film ?</h3>
+            <div class="btn btn-orange"><span class="text">Le distributeur</span></div>
         </div>
     </section>
 
-    {#if projects.projectThanks && projects.projectThanks.length > 0}
     <section class="contain-partners">
-
-        <h2 class="title">{$t('Project.Thanks')} :</h2>
-
+        <h2 class="title">Les partenaires et remerciement :</h2>
         <ul class="partners">
-            {#each projects.projectThanks as {name}}
-            <li>{name}</li>
-            {/each}
+            <li>entreprise</li>
+            <li>nom prénom</li>
+            <li>entreprise</li>
+            <li>nom prénom</li>
+            <li>entreprise</li>
+            <li>nom prénom</li>
+            <li>entreprise</li>
+            <li>nom prénom</li>
+            <li>entreprise</li>
+            <li>nom prénom</li>
+            <li>entreprise</li>
+            <li>nom prénom</li>
+            <li>entreprise</li>
+            <li>nom prénom</li>
+            <li>entreprise</li>
+            <li>nom prénom</li>
+            <li>entreprise</li>
+            <li>nom prénom</li>
         </ul>
     </section>
-    {/if}
 
     <section class="contain">
         <div class="contain-xs bg-black">
-            <h3 class="title">{$t('Contact.External.Title')}</h3>
-            <a href="mailto:test@gmail.com" class="btn btn-orange"><span class="text">{$t('Contact.External.Text')}</span></a>
+            <h3 class="title">Vous souhaitez plus d'informations ?</h3>
+            <a href="mailto:test@gmail.com" class="btn btn-orange"><span class="text">Contactez-nous</span></a>
         </div>
     </section>
 
     <section class="contain-films">
-        <h2 class="title">{$t('Project.OtherMovies')} :</h2>
+        <h2 class="title">Découvrir d'autres réalisations :</h2>
         <ul class="grid-3">
-            {#each otherProjects as {id, image, translations}}
             <li class="home-film">
                 <div class="image-contain">
-                    <img class="image" src="/uploads/projects/{image}" alt="{getCurrentTrad(translations, 'title')}">
+                    <img class="image" src="./assets/images/a_fleur_de_peau.png" alt="a fleur de peau">
                 </div>
                 <div class="content">
-                    <span class="text">{getCurrentTrad(translations, 'title')}</span>
-                    <a href="/project/{id}" class="btn-xs btn-orange">
+                    <span class="text">A fleur de peau</span>
+                    <div class="btn-xs btn-orange">
                         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" class="icon">
                             <path id="add2" d="M11,4.976H6.024V0H4.976V4.976H0V6.024H4.976V11H6.024V6.024H11Z" transform="translate(0.5 0.5)" stroke-width="1"/>
                         </svg>
-                    </a>
+                    </div>
                 </div>
             </li>
-            {/each}
+            <li class="home-film">
+                <div class="image-contain">
+                    <img class="image" src="./assets/images/a_fleur_de_peau.png" alt="a fleur de peau">
+                </div>
+                <div class="content">
+                    <span class="text">A fleur de peau</span>
+                    <div class="btn-xs btn-orange">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" class="icon">
+                            <path id="add2" d="M11,4.976H6.024V0H4.976V4.976H0V6.024H4.976V11H6.024V6.024H11Z" transform="translate(0.5 0.5)" stroke-width="1"/>
+                        </svg>
+                    </div>
+                </div>
+            </li>
+            <li class="home-film">
+                <div class="image-contain">
+                    <img class="image" src="./assets/images/a_fleur_de_peau.png" alt="a fleur de peau">
+                </div>
+                <div class="content">
+                    <span class="text">A fleur de peau</span>
+                    <div class="btn-xs btn-orange">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" class="icon">
+                            <path id="add2" d="M11,4.976H6.024V0H4.976V4.976H0V6.024H4.976V11H6.024V6.024H11Z" transform="translate(0.5 0.5)" stroke-width="1"/>
+                        </svg>
+                    </div>
+                </div>
+            </li>
         </ul>
     </section>
 
