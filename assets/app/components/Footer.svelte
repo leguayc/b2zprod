@@ -8,14 +8,14 @@
     <div class="contain-footer">
         <div>
             <ul>
-                <li><a href="">Accueil</a></li>
-                <li><a href="">Salle des infos</a></li>
-                <li><a href="">Films à l'affiche</a></li>
-                <li><a href="">Salle des actualités</a></li>
+                <li><a href="/">Accueil</a></li>
+                <li><a href="/about">Salle des infos</a></li>
+                <li><a href="/projects">Films à l'affiche</a></li>
+                <li><a href="/news">Salle des actualités</a></li>
                 <li><a href="">Salle de presse</a></li>
-                <li><a href="">Salle des talents</a></li>
-                <li><a href="">Salle de contact</a></li>
-                <li><a href="">Salle des trophets</a></li>
+                <li><a href="/talent">Salle des talents</a></li>
+                <li><a href="/contact">Salle de contact</a></li>
+                <li><a href="/trophee">Salle des trophets</a></li>
             </ul>
         </div>
         <div><img src="./assets/images/logo.svg" alt="b2z production logo" class="logo"></div>
