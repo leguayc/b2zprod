@@ -50,45 +50,45 @@
 
 <main class="bg-texture">
 
-    <Header title="Salle des talents" subtitle="B2Z Production"/>
+    <Header title="{$t('Talent.Title')}" subtitle="B2Z Production"/>
 
     <section class="contain">
-        <h3 class="title">Titre d'une partie</h3>
-        <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+        <h3 class="title">{$t('Talent.Content.Title')}</h3>
+        <p class="text">{$t('Talent.Content.Text')}</p>
     </section>
 
     <section class="form-script">
-        <h3 class="title">Envoyez votre scénario</h3>
+        <h3 class="title">{$t('Talent.Send')}</h3>
         <form action="#" class="form-group">
             <div class="form-item">
-                <label for="prenom">Prénom</label>
-                <input type="text" name="prenom" placeholder="Prénom*" required>
+                <label for="prenom">{$t('Talent.Form.Firstname')}</label>
+                <input type="text" name="prenom" placeholder="{$t('Talent.Form.Firstname')}*" required>
             </div>
             <div class="form-item">
-                <label for="email">Nom</label>
-                <input type="text" name="email" placeholder="Nom*" required>
+                <label for="email">{$t('Talent.Form.LastName')}</label>
+                <input type="text" name="email" placeholder="{$t('Talent.Form.Lastname')}*" required>
             </div>
             <div class="form-item">
-                <label for="mail">Email</label>
+                <label for="mail">{$t('Talent.Form.Email')}</label>
                 <input type="mail" name="mail" placeholder="Email*">
             </div>
             <div class="form-item">
-                <label for="phone">Email</label>
-                <input type="tel" name="phone" placeholder="Téléphone">
+                <label for="phone">{$t('Talent.Form.Phone')}</label>
+                <input type="tel" name="phone" placeholder="{$t('Talent.Form.Phone')}">
             </div>
             <div class="form-item form-item--100">
-                <label for="file">Ajouter votre scénario (pdf)</label>
-                <input type="file" accept=".pdf" name="file" placeholder="Téléphone">
+                <label for="file">{$t('Talent.Form.Scenario')}</label>
+                <input type="file" accept=".pdf" name="file">
             </div>
             <div class="form-item form-item--100">
-                <label for="pitch">Présentez votre scénario</label>
-                <textarea name="pitch" cols="20" rows="10" placeholder="Pitchez votre projet en quelques phrases….*"></textarea>
+                <label for="pitch">{$t('Talent.Form.Pitch')}</label>
+                <textarea name="pitch" cols="20" rows="10" placeholder="{$t('Talent.Form.Pitch.Placeholder')}"></textarea>
             </div>
             <div class="form-item form-item--100">
-                <label for="message">Message</label>
-                <textarea name="message" cols="30" rows="10" placeholder="Quelques chose à ajouter..."></textarea>
+                <label for="message">{$t('Talent.Form.Message')}</label>
+                <textarea name="message" cols="30" rows="10" placeholder="{$t('Talent.Form.Message.Placeholder')}"></textarea>
             </div>
-            <button type="submit" class="btn btn-orange">Envoyer le scénario</button>
+            <button type="submit" class="btn btn-orange">{$t('Talent.Send')}</button>
         </form>
     </section>
 

@@ -124,8 +124,6 @@
           </div>
           {/if}
         </div>
-        
-  
       </section>
   
 
