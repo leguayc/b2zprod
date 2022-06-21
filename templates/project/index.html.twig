@@ -5,39 +5,47 @@
 {% block page %}
     <h1>Project index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Date</th>
-                <th>FilmmakerFullName</th>
-                <th>DistributorLink</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for project in projects %}
-            <tr>
-                <td>{{ project.id }}</td>
-                <td>{{ project.translations['fr'].title }}</td>
-                <td>{{ project.date ? project.date|date('Y-m-d') : '' }}</td>
-                <td>{{ project.filmmakerFullName }}</td>
-                <td>{{ project.distributorLink }}</td>
-                <td>
-                    <a href="{{ path('app_project_show', {'id': project.id}) }}">show</a>
-                    <a href="{{ path('app_project_edit', {'id': project.id}) }}">edit</a>
-                    <a href="{{ path('app_project_addthanks', {'id': project.id}) }}">add thanks</a>
-                    <a href="{{ path('app_project_managetranslation', {'id': project.id}) }}">manage translation</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="table-contain">
+        <div class="table-scroll">
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Date</th>
+                        <th>FilmmakerFullName</th>
+                        <th>DistributorLink</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for project in projects %}
+                    <tr>
+                        <td>{{ project.id }}</td>
+                        <td>{{ project.translations['fr'].title }}</td>
+                        <td>{{ project.date ? project.date|date('Y-m-d') : '' }}</td>
+                        <td>{{ project.filmmakerFullName }}</td>
+                        <td>{{ project.distributorLink }}</td>
+                        <td>
+                            <a href="{{ path('app_project_show', {'id': project.id}) }}">show</a>
+                            <a href="{{ path('app_project_edit', {'id': project.id}) }}">edit</a>
+                            <a href="{{ path('app_project_addthanks', {'id': project.id}) }}">add thanks</a>
+                            <a href="{{ path('app_project_managetranslation', {'id': project.id}) }}">manage translation</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="8">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="contain-button">
 
     <a href="{{ path('app_project_new') }}">Create new</a>
+    </div>
 {% endblock %}

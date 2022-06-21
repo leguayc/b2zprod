@@ -1,0 +1,326 @@
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap');
+:root{
+    --orange : #FF4707 ;
+    --grey : #151515;
+    --black : #000;
+}
+
+*, *::before, *::after { box-sizing: border-box; padding: 0; border: 0; border-radius: 0; margin: 0; background: none; text-align: inherit; text-decoration: none; font: inherit; color: inherit; list-style: none; outline: none;} input, button, select, textarea { -webkit-appearance: none; -moz-appearance: none;} a, button { overflow: visible; cursor: pointer;}
+
+body{
+    color: var(--grey);
+    font-family: 'Libre Franklin', sans-serif;
+}
+
+header{
+    display: flex;
+    align-items: center;
+    padding: 20px 20px 10px 20px;
+    background-color: #efefef;
+    gap: 16px;
+    height: 70px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+nav{
+    display: flex;
+    flex-direction: column;
+    background-color: #efefef;
+    position: sticky;
+    top: 70px;
+    min-height: calc(100vh - 70px);
+}
+
+nav > a {
+    padding: 16px;
+}
+
+nav > a:hover{
+    background-color: #fa8b66;
+    color: #fff;
+}
+
+header .left{
+    margin-left: auto;
+}
+
+.logo{
+    width: 130px;
+    height: auto;
+}
+
+.logo path,
+.logo text{
+    fill: #FF4707;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 100px);
+}
+
+main.main-nav{
+    display: flex;
+    width: 100%;
+    justify-content: normal;
+    min-height: calc(100vh - 75px);
+    align-items: flex-start;
+}
+
+.btn{
+    padding: 8px 16px;
+    border-radius: 2px;
+}
+
+.btn-orange{
+    background-color: #FF4707;
+    color: #fff;
+}
+
+.btn-orange:hover{
+    background-color: #fa8b66;
+    color: #fff;
+}
+
+.content-main{
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px 0 60px;
+}
+
+.section-main{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    overflow: auto;
+}
+
+h1{
+    font: 600 30px Courier Prime;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* table */
+
+.table-contain{
+    position: relative;
+}
+
+.table-scroll{
+    overflow-x: auto;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-contain {
+    position:relative;
+}
+.table-scroll {
+    overflow-x:auto;  
+    margin-top:20px;
+}
+
+.table-scroll table {
+    width:100%;
+}
+
+td, th{
+    padding: 8px 16px;
+}
+
+thead tr{
+    background-color: var(--orange);
+    color: #fff;
+}
+
+tbody tr:nth-child(2n+1){
+    background-color: #efefef;
+}
+
+tbody tr td:last-of-type{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.content-main a,
+.content-main button{
+    padding: 8px;
+    background-color: #fa8b66;
+    color: white;
+}
+
+.content-main a:hover,
+.content-main button:hover{
+    padding: 8px;
+    background-color: #FF4707;
+    color: white;
+}
+
+/* form */
+
+.form-group{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    gap: 20px;
+}
+
+.form-item{
+    width: calc(50% - 10px);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.form-item--100{
+    width: 100%;
+}
+
+form input{
+    border: 1px solid #151515;
+    padding: 8px 15px;
+    width: 100%;
+    border-radius: 8px;
+}
+
+.section-register input{
+    margin-top: 8px;
+}
+
+form textarea{
+    border: 1px solid #151515;
+    padding: 8px 15px;
+    border-radius: 8px;
+    resize: vertical;
+}
+
+.section-register .title,
+.form-group .title{
+    text-align: center;
+    width: 100%;
+    font: 600 30px Courier Prime;
+    margin-bottom: 20px;
+}
+
+.form-group .btn{
+    margin: 20px auto;
+}
+
+/* login */
+
+.section-login{
+    width: 45%;
+    min-width: 500px;
+    margin: 60px auto;
+}
+
+/* register */
+
+.section-register > form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    justify-content: center;
+}
+
+.section-register form div:last-of-type{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;    
+}
+
+.section-register div input[type="checkbox"]{
+    width: 16px;
+    height: 16px;
+    border-radius: 0;
+    padding: 0;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.section-register div input[type="checkbox"]:checked::before{
+    content: "";
+    width: 70%;
+    height: 70%;
+    background-color: #FF4707;
+    position: absolute;
+}
+
+
+.section-register .btn{
+    align-self: center;
+}
+
+.section-main > form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    justify-content: center;
+}
+
+.section-main form div{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;    
+}
+
+.content-main > a{
+    margin: 20px 0;
+}
+
+.contain-button{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+    margin-top: 20px;
+}
+
+form > a{
+    margin-top: 16px;
+}
+
+#project_date{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+}
+
+#project_date select{
+    padding: 5px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    text-align: center;
+    position: relative;
+}
+
+form > button{
+    margin-top: 20px;
+}
+
+.contain-button form > button, 
+table form > button{
+    margin-top: 0;
+}
+
+.content-main > p{
+    margin-top: 20px;
+}

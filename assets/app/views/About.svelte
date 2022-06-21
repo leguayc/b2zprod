@@ -1,13 +1,43 @@
 <script>
     import Nav from '../components/Nav.svelte';
     import Header from '../components/Header.svelte';
+
+    import axios from 'axios';
+    import { onMount } from 'svelte';
+    import { getLocalization } from '../i18n';
+    const { t, currentLanguage } = getLocalization();
+
+    let projects = {
+        title : "Nom du film"
+    }
+
+    let partners = [];
+
+    onMount(async () => {
+
+        axios.get('/api/projects').then( (response) => {
+            projects = response.data['hydra:member'];
+            console.log("projects", projects);
+        }).catch((error) => {
+            console.log("error");
+        });
+
+        axios.get('/api/partners').then( (response) => {
+            partners = response.data['hydra:member'];
+            console.log("parters", partners)
+        }).catch((error) => {
+            console.log("error");
+        });
+
+    });
+
 </script>
 
 <Nav/>
 
 <main class="bg-texture">
 
-    <Header title="Salle des infos" subtitle="B2Z Production"/>
+    <Header title="{$t('About.Title')}" subtitle=""/>
 
     <section class="about-emphase">
         <div class="contain-image">
@@ -17,26 +47,26 @@
         
         <div class="content bg-black">
             <div>
-                <h3 class="title">Qui sommes-nous ?</h3>
-                <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates repellendus ipsam minima quo ea sint corporis itaque esse, provident beatae?</p>
+                <h3 class="title">{$t('About.Content.Title')}</h3>
+                <p class="text">{$t('About.Content.Text')}</p>
             </div>
-            <div class="btn btn-orange"><span class="text">Voir nos films</span></div>
+            <a href="/" class="btn btn-orange"><span class="text">{$t('About.Content.Button')}</span></a>
         </div>
     </section>
 
     <section class="about-people">
 
       <ul class="about-nav">
-        <li class="active"><img src="./assets/images/avatar.png" alt=""></li>
-        <li><img src="./assets/images/avatar.png" alt=""></li>
-        <li><img src="./assets/images/avatar.png" alt=""></li>
-        <li><img src="./assets/images/avatar.png" alt=""></li>
-        <li><img src="./assets/images/avatar.png" alt=""></li>
-        <li><img src="./assets/images/avatar.png" alt=""></li>
+        <li class="active"><img src="/assets/images/avatar.png" alt=""></li>
+        <li><img src="/assets/images/avatar.png" alt=""></li>
+        <li><img src="/assets/images/avatar.png" alt=""></li>
+        <li><img src="/assets/images/avatar.png" alt=""></li>
+        <li><img src="/assets/images/avatar.png" alt=""></li>
+        <li><img src="/assets/images/avatar.png" alt=""></li>
       </ul>
 
       <div class="content">
-        <img src="./assets/images/model3d.png" alt="">
+        <img src="/assets/images/model3d.png" alt="">
         <div class="info">
             <h3 class="title">Nom prenom</h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam dignissimos dolor officiis in iure libero nam ab omnis earum commodi.</p> 
@@ -46,104 +76,41 @@
 
     </section>
 
+    {#if partners[0]}
     <section class="about-partners">
-        <h2 class="title">Nos partenaires :</h2>
+        <h2 class="title">{$t('Partners.Title')}</h2>
         <ul class="grid-4">
-            <li><img src="./assets/images/paris.png" alt="paris"></li>
-            <li><img src="./assets/images/cnc.png" alt="paris"></li>
-            <li><img src="./assets/images/paris.png" alt="paris"></li>
-            <li><img src="./assets/images/tryptik.png" alt="paris"></li>
-            <li><img src="./assets/images/paris.png" alt="paris"></li>
-            <li><img src="./assets/images/cnc.png" alt="paris"></li>
-            <li><img src="./assets/images/paris.png" alt="paris"></li>
-            <li><img src="./assets/images/tryptik.png" alt="paris"></li>
+            {#each partners as {image, name}}
+                <li>
+                    {#if image}
+                    <img src="/uploads/partners/{image}" alt="{name}">
+                    {:else}
+                        <h3>{name}</h3>
+                    {/if}
+                </li>
+            {/each}
         </ul>
     </section>
+    {/if }
 
+    {#if projects[0]}
     <section class="contain">
-        <h2 class="title">Catalogue</h2>
+        <h2 class="title">{$t('Presse.Title')}</h2>
         <ul class="grid-3">
+            {#each projects as {title, pressKit, image, id}}
             <li class="home-film">
                 <div class="image-contain">
-                    <img class="image" src="./assets/images/a_fleur_de_peau.png" alt="a fleur de peau">
+                    {#if image}<img class="image" src="/uploads/projects/{image}" alt="{title}">{/if}
                 </div>
                 <div class="content content-center">
-                    <span class="text">A fleur de peau</span>
-                    <div class="btn btn-orange"><span class="text">Dossier de press</span></div>
+                    <span class="text">{title}</span>
+                    <a href="/uploads/projects/{pressKit}" target="_blank" class="btn btn-orange"><span class="text">{$t('Presse.Button')}</span></a>
                 </div>
             </li>
-            <li class="home-film">
-                <div class="image-contain">
-                    <img class="image" src="./assets/images/a_fleur_de_peau.png" alt="a fleur de peau">
-                </div>
-                <div class="content content-center">
-                    <span class="text">A fleur de peau</span>
-                    <div class="btn btn-orange"><span class="text">Dossier de press</span></div>
-                </div>
-            </li>
-            <li class="home-film">
-                <div class="image-contain">
-                    <img class="image" src="./assets/images/a_fleur_de_peau.png" alt="a fleur de peau">
-                </div>
-                <div class="content content-center">
-                    <span class="text">A fleur de peau</span>
-                    <div class="btn btn-orange"><span class="text">Dossier de press</span></div>
-                </div>
-            </li>
-            <li class="home-film">
-                <div class="image-contain">
-                    <img class="image" src="./assets/images/a_fleur_de_peau.png" alt="a fleur de peau">
-                </div>
-                <div class="content content-center">
-                    <span class="text">A fleur de peau</span>
-                    <div class="btn btn-orange"><span class="text">Dossier de press</span></div>
-                </div>
-            </li>
-            <li class="home-film">
-                <div class="image-contain">
-                    <img class="image" src="./assets/images/a_fleur_de_peau.png" alt="a fleur de peau">
-                </div>
-                <div class="content content-center">
-                    <span class="text">A fleur de peau</span>
-                    <div class="btn btn-orange"><span class="text">Dossier de press</span></div>
-                </div>
-            </li> <li class="home-film">
-                <div class="image-contain">
-                    <img class="image" src="./assets/images/a_fleur_de_peau.png" alt="a fleur de peau">
-                </div>
-                <div class="content content-center">
-                    <span class="text">A fleur de peau</span>
-                    <div class="btn btn-orange"><span class="text">Dossier de press</span></div>
-                </div>
-            </li>
-            <li class="home-film">
-                <div class="image-contain">
-                    <img class="image" src="./assets/images/a_fleur_de_peau.png" alt="a fleur de peau">
-                </div>
-                <div class="content content-center">
-                    <span class="text">A fleur de peau</span>
-                    <div class="btn btn-orange"><span class="text">Dossier de press</span></div>
-                </div>
-            </li> <li class="home-film">
-                <div class="image-contain">
-                    <img class="image" src="./assets/images/a_fleur_de_peau.png" alt="a fleur de peau">
-                </div>
-                <div class="content content-center">
-                    <span class="text">A fleur de peau</span>
-                    <div class="btn btn-orange"><span class="text">Dossier de press</span></div>
-                </div>
-            </li>
-            <li class="home-film">
-                <div class="image-contain">
-                    <img class="image" src="./assets/images/a_fleur_de_peau.png" alt="a fleur de peau">
-                </div>
-                <div class="content content-center">
-                    <span class="text">A fleur de peau</span>
-                    <div class="btn btn-orange"><span class="text">Dossier de press</span></div>
-                </div>
-            </li>
+            {/each}
         </ul>
     </section>
+    {/if }
 
 
 </main>
