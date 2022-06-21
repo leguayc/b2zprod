@@ -2,7 +2,10 @@
     import Nav from '../components/Nav.svelte';
     import Header from '../components/Header.svelte';
     import Footer from "../components/Footer.svelte";
-   
+
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
     import axios from 'axios';
     import { onMount } from 'svelte';
 
@@ -14,6 +17,12 @@
     let otherProjects = [];
 
     export let id;
+
+    let gsap = document.getElementsByClassName('.gsap-reveal');
+
+    
+
+
 
     onMount(async () => {
         axios.get('/api/projects/' + id).then( (response) => {
@@ -60,6 +69,7 @@
         return translations[$currentLanguage] ? translations[$currentLanguage][propertyName] : translations['fr'][propertyName]
     }
 
+
 </script>
 
 <Nav/>
@@ -72,7 +82,7 @@
 
     <Header title="Nom du projet" subtitle="11/06/2021 - réalisé par Jordan Anefalos"/>
 
-    <section class="contain-emphase">
+    <section class="contain-emphase gs_reveal gs_reveal_fromLeft">
         <img class="image" src="./assets/images/a_fleur_de_peau.png" alt="a fleur de peau">
         <div class="content bg-black">
             <div>
