@@ -24,7 +24,7 @@
 
 {#if isI18nLoaded }
 
-    <Project/>
+    <News/>
 
 {/if}
 

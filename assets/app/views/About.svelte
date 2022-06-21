@@ -1,6 +1,7 @@
 <script>
     import Nav from '../components/Nav.svelte';
     import Header from '../components/Header.svelte';
+    import Footer from '../components/Footer.svelte';
 
     import axios from 'axios';
     import { onMount } from 'svelte';
@@ -114,3 +115,5 @@
 
 
 </main>
+
+<Footer/>

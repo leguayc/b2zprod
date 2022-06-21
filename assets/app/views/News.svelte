@@ -1,6 +1,7 @@
 <script>
     import Nav from '../components/Nav.svelte';
     import Header from '../components/Header.svelte';
+    import Footer from '../components/Footer.svelte';
     import axios from 'axios';
     import { onMount } from 'svelte';
 
@@ -8,7 +9,6 @@
     const { t, currentLanguage } = getLocalization();
 
     let news = {
-
         title : "",
         text : "",
         creationdate: null,
@@ -16,7 +16,12 @@
     };
     
     let otherNews = [];
+    let googleForm;
 
+    let resizeIframe = () =>{
+        if(googleForm) resizeIFrameToFitContent( googleForm );
+    }
+        
     onMount(async () => {
         axios.get('/api/blog_posts/1').then( (response) => {
             news = response.data;
@@ -30,9 +35,9 @@
         }).catch((error) => {
             console.log("error");
         });
-
     });
 
+   
 </script>
 
 <Nav/>
@@ -42,15 +47,21 @@
     <Header title="{news.title}" subtitle="{news.creationdate}"/>
 
     <section class="contain-article">
-            <h2 class="title">{news.title}</h2>
-            <p class="text">{news.text}</p>
-            <img src="./uploads/posts/{news.image}" alt="image article" class="image">
+        <h2 class="title">{news.title}</h2>
+        <p class="text">{news.text}</p>
+        <img src="/uploads/posts/{news.image}" alt="article" class="image" />
     </section>
+
+    {#if news.formLink}
+        <section class="googleform-container">
+            <iframe title="Google Form" src={news.formLink} bind:this={googleForm} on:load={resizeIframe}></iframe>
+        </section>
+    {/if}
 
     <section class="bg-movie">
         <div class="contain-xs bg-black">
             <h3 class="title">{$t('Project.External.Title')}</h3>
-            <div class="btn btn-orange"><span class="text">{$t('Project.External.Button')}</span></div>
+            <a href="/" class="btn btn-orange"><span class="text">{$t('Project.External.Button')}</span></a>
         </div>
     </section>
 
@@ -59,17 +70,20 @@
     <section class="contain-films">
         <h2 class="title">{$t('News.More.Title')}</h2>
         <ul class="grid-2">
-            {#each otherNews as {creationdate, title, text}}
+            {#each otherNews as {id, creationdate, title, text}}
             <li class="home-news">
-                <p class="date">{creationdate}</p>
-                <p class="title">{title}</p>
-                <p>{text.substring(0,250)}..</p>
-                <div class="btn btn-orange"><span class="text">{$t('Project.External.Button.Title')}</span></div>
+                <div>
+                    <p class="date">{creationdate.split('T')[0]}</p>
+                    <p class="title">{title}</p>
+                    <p>{text.substring(0,250)}..</p>
+                </div>
+                <a href="/news/{id}" class="btn btn-orange"><span class="text">{$t('Project.External.Button.Title')}</span></a>
             </li>
             {/each}
         </ul>
     </section>
     {/if}
 
-
 </main>
+
+<Footer/>

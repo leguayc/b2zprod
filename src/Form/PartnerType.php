@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class PartnerType extends AbstractType
 {
@@ -25,11 +26,14 @@ class PartnerType extends AbstractType
                             'image/jpg',
                             'image/jpeg'
                         ],
-                        'mimeTypesMessage' => 'Please upload a valid Image',
+                        'mimeTypesMessage' => 'Veuillez télécharger une image valide',
                     ])
                 ],
             ))
-            ->add('name')
+            ->add('name', TextType::class, array(
+                'mapped' => false,
+                'label' => 'Nom'
+            ))
         ;
     }
 
