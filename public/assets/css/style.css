@@ -157,6 +157,55 @@ section{
     margin-bottom: 20px;
 }
 
+.options{
+    border-radius: 20px;
+    padding: 20px;
+    border: 1px solid var(--orange);
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: #fff;
+}
+
+#cursor{
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    position: absolute;
+    z-index: 15;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    -webkit-transition-property: width, height, -webkit-transform;
+    transition-property: width, height, -webkit-transform;
+    transition-property: transform, width, height;
+    transition-property: transform, width, height, -webkit-transform;
+    -webkit-transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
+    -webkit-backdrop-filter: invert(1);
+    backdrop-filter: invert(1);
+    border-top: 0px transparent;
+}
+
+.options > *{
+    margin: 0;  
+}
+
+.options img{
+    height: 20px;
+    width: 20px;
+    object-fit: contain;
+    position: relative;
+    top: 2px;
+}
+
 /* page project */
 
 .contain-emphase{
@@ -371,7 +420,7 @@ section{
  
 .home-film .content .text{
      text-transform: uppercase;
-    font: 500 20px Libre Franklin;
+    font: 500 16px Libre Franklin;
     color: #fff;
  }
 
@@ -465,15 +514,25 @@ section{
     display: flex;
     align-items: center;
     padding: 60px 60px 60px 0;
+    justify-content: space-evenly;
+}
+
+.about-people .presentation{
+    display: flex;
+    align-items: center;
+    gap: 40px;
 }
 
 .about-people .content{
     display: flex;
-    align-items: center;
+    width: 70%;
+    margin-left: 60px;
 }
 
 .about-people .content img{
-    width: 30%;
+    width: 200px;
+    height: 250px;
+    object-fit: cover;
 }
 
 .about-people .info{
@@ -495,17 +554,24 @@ section{
 .about-nav img{
     height: 80px;
     width: 80px;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 .about-nav li{
     opacity: .7;
     cursor: pointer;
+    transition: .3s;
+}
+
+.about-nav li:hover{
+    opacity: 1;
 }
 
 .about-nav li.active{
     opacity: 1;
 }
+
+
 
 /*contact */
 .social-media{
@@ -607,6 +673,26 @@ section{
     padding: 8px 16px;
 }
 
+select{
+    border: 1px solid #151515;
+    padding: 8px 50px 8px 15px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    background-image:
+      linear-gradient(45deg, transparent 50%, gray 50%),
+      linear-gradient(135deg, gray 50%, transparent 50%),
+      linear-gradient(to right, #ccc, #ccc);
+    background-position:
+      calc(100% - 20px) calc(1em + 2px),
+      calc(100% - 15px) calc(1em + 2px),
+      calc(100% - 2.5em) 0.5em;
+    background-size:
+      5px 5px,
+      5px 5px,
+      1px 1.5em;
+    background-repeat: no-repeat;
+}
+
 textarea{
     resize: vertical;
 }
@@ -623,10 +709,10 @@ footer{
 .contain-footer{
     display: flex;
     gap: 20px;
-    padding: 20px;
+    padding: 40px 20px 20px 20px;
     align-items: center;
     justify-content: space-between;
-    font-size: 12px;
+    font-size: 14px;
     max-width: 1200px;
     margin: auto;
 }
@@ -708,6 +794,23 @@ footer a:hover{
     max-height: 100%;
 }
 
+footer .name{
+    color: #aaa;
+    text-transform: uppercase;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.footer{
+    display: flex;
+    justify-content: center;
+}
+
+.footer > *{
+    margin:  10px auto 0;
+}
+
+
 
 @media screen and (max-width: 767px){
 
@@ -759,7 +862,7 @@ footer a:hover{
         width: 50%;
     }
 
-    .about-people .content{
+    .about-people .presentation{
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -830,6 +933,13 @@ footer a:hover{
     }
 
     .contain-footer > div:nth-child(2){
+        order: -1;
+    }
+    .contain-footer{
+        flex-direction: column;
+    }
+
+    .contain-footer .logo{
         order: -1;
     }
 }

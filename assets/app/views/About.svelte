@@ -14,6 +14,8 @@
 
     let partners = [];
 
+    let peopleShow = 0;
+
     onMount(async () => {
 
         axios.get('/api/projects').then( (response) => {
@@ -57,25 +59,73 @@
 
     <section class="about-people">
 
-      <ul class="about-nav">
-        <li class="active"><img src="/assets/images/avatar.png" alt=""></li>
-        <li><img src="/assets/images/avatar.png" alt=""></li>
-        <li><img src="/assets/images/avatar.png" alt=""></li>
-        <li><img src="/assets/images/avatar.png" alt=""></li>
-        <li><img src="/assets/images/avatar.png" alt=""></li>
-        <li><img src="/assets/images/avatar.png" alt=""></li>
-      </ul>
-
-      <div class="content">
-        <img src="/assets/images/model3d.png" alt="">
-        <div class="info">
-            <h3 class="title">Nom prenom</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam dignissimos dolor officiis in iure libero nam ab omnis earum commodi.</p> 
-            <div class="btn btn-orange"><span class="text">En savoir plus</span></div>
+        <ul class="about-nav">
+          <li 
+              class="{peopleShow === 0 ? 'active' : ''}"
+              on:click={ () => {peopleShow = 0; }} >
+              <img src="/assets/images/gaetan.png" alt="geatan">
+          </li>
+          <li 
+              class="{peopleShow === 1 ? 'active' : ''}"
+              on:click={ () => {peopleShow = 1 }}>
+              <img src="/assets/images/annie.jpg" alt="annie">
+          </li>
+          <li 
+              class="{peopleShow === 2 ? 'active' : ''}"
+              on:click={ () => {peopleShow = 2; }}>
+              <img src="/assets/images/hakim.png" alt="hakim">
+          </li>
+          <li     
+              class="{peopleShow === 3 ? 'active' : ''}"
+              on:click={ () => {peopleShow = 3; }}>
+              <img src="/assets/images/walid.png" alt="walid">
+          </li>
+        </ul>
+  
+        <div class="content">
+          {#if peopleShow === 0 }
+          <div class="presentation">
+              <img src="/assets/images/gaetan.png" alt="">
+              <div class="info">
+                  <h3 class="title">gaetan</h3>
+                  <p>{$t('About.Gaetan')}</p> 
+                  <div class="btn btn-orange"><span class="text">{$t('About.Presentation.Button')}</span></div>
+              </div>
+          </div>
+          {/if}
+          {#if peopleShow ===  1 }
+          <div class="presentation">
+              <img src="/assets/images/annie.jpg" alt="">
+              <div class="info">
+                  <h3 class="title">Annie</h3>
+                  <p>{$t('About.Annie')}</p> 
+                  <div class="btn btn-orange"><span class="text">{$t('About.Presentation.Button')}</span></div>
+              </div>
+          </div>
+          {/if}
+          {#if peopleShow ===  2}
+          <div class="presentation">
+              <img src="/assets/images/hakim.png" alt="">
+              <div class="info">
+                  <h3 class="title">Hakim</h3>
+                  <p>{$t('About.Hakim')}</p>
+                  <div class="btn btn-orange"><span class="text">{$t('About.Presentation.Button')}</span></div>
+              </div>
+          </div>
+          {/if}
+          {#if peopleShow === 3 }
+          <div class="presentation">
+              <img src="/assets/images/walid.png" alt="">
+              <div class="info">
+                  <h3 class="title">Walid</h3>
+                  <p>{$t('About.Walid')}</p>
+                  <div class="btn btn-orange"><span class="text">{$t('About.Presentation.Button')}</span></div>
+              </div>
+          </div>
+          {/if}
         </div>
-      </div>
-
-    </section>
+      </section>
+  
 
     {#if partners[0]}
     <section class="about-partners">

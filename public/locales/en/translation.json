@@ -1,4 +1,5 @@
 {
+    "Hello" : "Hello i18next",
     "ListNews.Title" : "News room",
     "ListNews.Subtitle" : "B2Z Production",
 
@@ -13,8 +14,15 @@
     "About.Content.Text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates repellendus ipsam minima quo ea sint corporis itaque esse, provident beatae?",
     "About.Content.Button": "See our films",
 
+    "About.Annie": "Annie Morot is the secretary",
+    "About.Gaetan": "Gaetan is an actor",
+    "About.Hakim": "Hakim is an actor",
+    "About.Walid": "Walid is an actor",
+    "About.Presentation.Button" : "Read more",
+
     "Presse.Title": "Catalogue",
     "Presse.Button": "Press kit",
+
 
     "Project.Script.Title": "script",
     "Project.Casting.Title": "Casting",
@@ -57,5 +65,10 @@
     "Talent.Form.Pitch": "Present your scenario",
     "Talent.Form.Pitch.Placeholder": "Summarize your project in a few sentences...",
     "Talent.Form.Message": "Message",
-    "Talent.Form.Message.Placeholder": "Something to add..."
+    "Talent.Form.Message.Placeholder": "Something to add...",
+
+    "Projects.Title" : "Films playing",
+    "Trophee.Title" : "Trophy Room",
+    "Legales.Title" : "Legales Informations",
+    "Site.Map" : "Site Map"
 }
