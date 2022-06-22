@@ -251,7 +251,9 @@ const setCarouselVisibility = (willBeShown) => {
 {#each projects as project, i}
     <div class="project-item {i == selectedCarouselItem ? "selected" : ""}" bind:this={project.element}>
         <div class="contain-iframe">
+            {#if i == selectedCarouselItem}
             <iframe title="Youtube Movie {project.id}" src="{project.trailer}?autoplay=1&mute=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+            {/if}
         </div>
         <div class="content">
             <h2>{getCurrentTrad(project.translations, 'title')}</h2>
