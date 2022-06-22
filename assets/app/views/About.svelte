@@ -3,6 +3,9 @@
     import Header from '../components/Header.svelte';
     import Footer from '../components/Footer.svelte';
 
+    import { fade, fly } from 'svelte/transition';
+    import {gsapInit} from '../helpers/GsapHelper.js';
+
     import axios from 'axios';
     import { onMount } from 'svelte';
     import { getLocalization } from '../i18n';
@@ -32,6 +35,8 @@
             console.log("error");
         });
 
+        gsapInit();    
+
     });
 
 </script>
@@ -40,9 +45,9 @@
 
 <main class="bg-texture">
 
-    <Header title="{$t('About.Title')}" subtitle=""/>
+    <Header title="{$t('About.Title')}" subtitle="B2Z Production" image="../assets/images/popcorn.png"/>
 
-    <section class="about-emphase">
+    <section class="about-emphase gs_reveal gs_reveal_fromRight">
         <div class="contain-image">
             <img class="image" src="./assets/images/icon-b2z.svg" alt="logo">
             <img class="image" src="./assets/images/text-b2z.svg" alt="logo">
@@ -83,52 +88,54 @@
         </ul>
   
         <div class="content">
-          {#if peopleShow === 0 }
-          <div class="presentation">
-              <img src="/assets/images/gaetan.png" alt="">
-              <div class="info">
-                  <h3 class="title">gaetan</h3>
-                  <p>{$t('About.Gaetan')}</p> 
-                  <div class="btn btn-orange"><span class="text">{$t('About.Presentation.Button')}</span></div>
-              </div>
-          </div>
-          {/if}
-          {#if peopleShow ===  1 }
-          <div class="presentation">
-              <img src="/assets/images/annie.jpg" alt="">
-              <div class="info">
-                  <h3 class="title">Annie</h3>
-                  <p>{$t('About.Annie')}</p> 
-                  <div class="btn btn-orange"><span class="text">{$t('About.Presentation.Button')}</span></div>
-              </div>
-          </div>
-          {/if}
-          {#if peopleShow ===  2}
-          <div class="presentation">
-              <img src="/assets/images/hakim.png" alt="">
-              <div class="info">
-                  <h3 class="title">Hakim</h3>
-                  <p>{$t('About.Hakim')}</p>
-                  <div class="btn btn-orange"><span class="text">{$t('About.Presentation.Button')}</span></div>
-              </div>
-          </div>
-          {/if}
-          {#if peopleShow === 3 }
-          <div class="presentation">
-              <img src="/assets/images/walid.png" alt="">
-              <div class="info">
-                  <h3 class="title">Walid</h3>
-                  <p>{$t('About.Walid')}</p>
-                  <div class="btn btn-orange"><span class="text">{$t('About.Presentation.Button')}</span></div>
-              </div>
-          </div>
-          {/if}
+            <div class="presention-container">
+                {#if peopleShow === 0 }
+                <div class="presentation gs_reveal gs_reveal_fromBottom" in:fade="{{ duration: 1000 }}">
+                    <img src="/assets/images/gaetan.png" alt="">
+                    <div class="info">
+                        <h3 class="title">gaetan</h3>
+                        <p>{$t('About.Gaetan')}</p> 
+                        <div class="btn btn-orange"><span class="text">{$t('About.Presentation.Button')}</span></div>
+                    </div>
+                </div>
+                {/if}
+                {#if peopleShow ===  1 }
+                <div class="presentation gs_reveal_fromBottom gs_reveal" in:fade="{{ duration: 1000 }}">
+                    <img src="/assets/images/annie.jpg" alt="">
+                    <div class="info">
+                        <h3 class="title">Annie</h3>
+                        <p>{$t('About.Annie')}</p> 
+                        <div class="btn btn-orange"><span class="text">{$t('About.Presentation.Button')}</span></div>
+                    </div>
+                </div>
+                {/if}
+                {#if peopleShow ===  2}
+                <div class="presentation gs_reveal_fromBottom gs_reveal" in:fade="{{ duration: 1000 }}">
+                    <img src="/assets/images/hakim.png" alt="">
+                    <div class="info">
+                        <h3 class="title">Hakim</h3>
+                        <p>{$t('About.Hakim')}</p>
+                        <div class="btn btn-orange"><span class="text">{$t('About.Presentation.Button')}</span></div>
+                    </div>
+                </div>
+                {/if}
+                {#if peopleShow === 3 }
+                <div class="presentation gs_reveal_fromBottom gs_reveal" in:fade="{{ duration: 1000 }}">
+                    <img src="/assets/images/walid.png" alt="">
+                    <div class="info">
+                        <h3 class="title">Walid</h3>
+                        <p>{$t('About.Walid')}</p>
+                        <div class="btn btn-orange"><span class="text">{$t('About.Presentation.Button')}</span></div>
+                    </div>
+                </div>
+                {/if}
+            </div>
         </div>
       </section>
   
 
     {#if partners[0]}
-    <section class="about-partners">
+    <section class="about-partners gs_reveal gs_reveal_fromRight">
         <h2 class="title">{$t('Partners.Title')}</h2>
         <ul class="grid-4">
             {#each partners as {image, name}}
@@ -145,7 +152,7 @@
     {/if }
 
     {#if projects[0]}
-    <section class="contain">
+    <section class="contain gs_reveal gs_reveal_fromLeft">
         <h2 class="title">{$t('Presse.Title')}</h2>
         <ul class="grid-3">
             {#each projects as {title, pressKit, image, id}}

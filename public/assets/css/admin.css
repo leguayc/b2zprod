@@ -350,11 +350,13 @@ form > a{
 }
 
 #project_date select{
-    padding: 5px;
+    padding: 5px 50px 5px 5px;
     border: 1px solid #000;
     border-radius: 5px;
     text-align: center;
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
 form > button{
