@@ -32,15 +32,12 @@ class BlogPostType extends AbstractType
                 ],
             ))
             ->add('title', TextType::class, array(
-                'mapped' => false,
                 'label' => 'Titre'
             ))
             ->add('text', TextType::class, array(
-                'mapped' => false,
                 'label' => 'Texte'
             ))
             ->add('formLink', TextType::class, array(
-                'mapped' => false,
                 'label' => 'Lien du Google Form'
             ))
         ;

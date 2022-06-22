@@ -33,7 +33,8 @@ class ProjectType extends AbstractType
                 ],
             ))
             ->add('trailer', TextType::class, array(
-                'label' => 'Lien vidéo'
+                'label' => 'Lien vidéo',
+                'required' => true
             ))
             ->add('pressKit', FileType::class, array(
                 'mapped' => false,
@@ -51,15 +52,12 @@ class ProjectType extends AbstractType
                 ],
             ))
             ->add('distributorLink', TextType::class, array(
-                'mapped' => false,
                 'label' => 'Lien ditributeur'
             ))
             ->add('date', DateType::class, array(
-                'mapped' => false,
                 'label' => 'Date'
             ))
             ->add('filmmakerFullName', TextType::class, array(
-                'mapped' => false,
                 'label' => 'Réalisateur'
             ))
             ->add('title', TextType::class, array(
