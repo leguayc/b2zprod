@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { gsap } from "gsap";
+import { navigate } from "svelte-routing";
 
 const raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2();
@@ -30,7 +31,8 @@ function cameraMove(x, y, z, target){
 }
 
 function movePage(link){
-    window.location.href = link;
+    // window.location.href = link;
+    navigate(link);
 }
 
 export function cameraMoveReturn() {

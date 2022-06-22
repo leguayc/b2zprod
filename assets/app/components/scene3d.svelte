@@ -13,11 +13,9 @@ import { VRButton } from 'three/examples/jsm/webxr/VRButton.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { BoxLineGeometry } from 'three/examples/jsm/geometries/BoxLineGeometry.js';
 
-
-// import { log } from 'console';
-
 // Canvas
 let canvas;
+let popup;
 
 onMount(() => {
 
@@ -31,18 +29,42 @@ onMount(() => {
 
     function cameraMoveNewsT(){
         onclick="document.location.href='/news';'"
-    // $("a#news").click(function(){})
     }
 
-    makeTextPanel();
+    /**
+     * Sizes of mobile screen
+     */
+    // Mobile orientation
+    if( navigator.userAgent.match(/iPhone/i)
+    || navigator.userAgent.match(/webOS/i)
+    || navigator.userAgent.match(/Android/i)
+    || navigator.userAgent.match(/iPad/i)
+    || navigator.userAgent.match(/iPod/i)
+    || navigator.userAgent.match(/BlackBerry/i)
+    || navigator.userAgent.match(/Windows Phone/i)
+    ){
+        if (window.innerWidth < window.innerHeight){
+            popup.style.display = 'flex';
+            popup.style.zIndex = 99999;
 
+            window.onclick = function(event) {
+                    popup.style.display = "none";
+            } 
+        } 
+    }
+
+    makeTextPanel({width: 5, height: 0.4}, {x: -4.77, y: -0.4, z:-1.64}, 1.53, 'Click on the posters to move through the rooms', 0.15 )
+    makeTextPanel({width: 1, height: 2.2}, {x: -2.6, y: -2.5, z:-7.9}, 0, '1', 1 )
+    makeTextPanel({width: 0.8, height: 0.2}, {x: -2.6, y: -1.6, z:-7.9}, 0, 'Salle', 0.2 )
+
+    // Posters - Choix des salles 
     ModelHelper.createPoster(scene, '../posters/affiche.png', {x: -5.6, y: -2.08, z: 2.41}, 1.59, "posterAffiche", cameraMoveCine);
     ModelHelper.createPoster(scene, '../posters/infos.png', {x: -5.6, y: -2.08, z: 0.11}, 1.59, "posterInfos", cameraMoveAbout);
     ModelHelper.createPoster(scene, '../posters/talents.png', {x: -5.6, y: -2.08, z: -2.16}, 1.59, "posterTalent", cameraMoveTalent);
     ModelHelper.createPoster(scene, '../posters/actus1.png', {x: -5.6, y: -2.08, z: -4.41}, 1.59, "posterActus", cameraMoveNews);
     ModelHelper.createPoster(scene, '../posters/contact.png', {x: -5.6, y: -2.08, z: -6.63}, 1.59, "posterContact", cameraMoveContact);
 
-    
+    // Posters equipe
     ModelHelper.createPoster(scene, '../posters/contactRoom/annie.jpg', {x: 13.2, y: -1.4, z: -5.74}, -1.575, "posterContact", cameraMoveContact, {width: 1.18, height: 3.35});
     ModelHelper.createPoster(scene, '../posters/contactRoom/hakim.png', {x: 13.2, y: -1.96, z: -1.96}, -1.575, "posterContact", cameraMoveContact, {width: 1.18, height: 3.2});
     ModelHelper.createPoster(scene, '../posters/contactRoom/gaetan.png', {x: 13.2, y: -0.04, z: -4.05}, -1.575, "posterContact", cameraMoveContact, {width: 1.18, height: 3.35});
@@ -62,21 +84,13 @@ onMount(() => {
     poster4.rotation.x = 1.58
     posterTalent.rotation.x = 1.58;
 
-    // const cubeTestRotation = SceneHelper.gui.addFolder('poster3 ')
-    //     cubeTestRotation.add(poster3.position, 'x').min(-60).max(60).step(0.01).name('position X')
-    //     cubeTestRotation.add(poster3.position, 'y').min(-60).max(60).step(0.01).name('position Y')
-    //     cubeTestRotation.add(poster3.position, 'z').min(-60).max(60).step(0.01).name('position Z')
-    //     cubeTestRotation.add(poster3.rotation, 'x').min(-60).max(60).step(0.01).name('rotation X')
-    //     cubeTestRotation.add(poster3.rotation, 'y').min(-60).max(60).step(0.01).name('rotation Y')
-    //     cubeTestRotation.add(poster3.rotation, 'z').min(-60).max(60).step(0.01).name('rotation Z')
-
     /**
      * Click function
      */
     window.addEventListener('click', onDocumentMouseDown, false);
 
     // Return buttons 
-    const returnButton1 = ModelHelper.createButton(scene, "../assets/images/menu.png", 0, {x: 0, y: -2.4, z: 26.5}, "enterMenu", cameraMoveReturn, {width: 0.68, height: 2.85});
+    const returnButton1 = ModelHelper.createButton(scene, "../assets/images/cinema.png", 0, {x: 0, y: -2.4, z: 26.5}, "enterMenu", cameraMoveReturn, {width: 0.68, height: 2.85});
     ModelHelper.createButton(scene, "../assets/images/menu.png", 0, {x: -2.7, y: -0.5, z: -12.5}, "return", cameraMoveReturn, {width: 0.68, height: 2.85});
     ModelHelper.createButton(scene, "../assets/images/menu.png", -1.5, {x: 11.1, y: -0.07, z: -5.55}, "return1", cameraMoveReturn, {width: 0.68, height: 2.85});
 
@@ -123,15 +137,6 @@ onMount(() => {
         // test disposition1 
         text.position.set(-3.2, 1.55, 7.75)
 
-        // const textPos = SceneHelper.gui.addFolder('return (position)')
-        // textPos.add(returnButton1.position, 'x').min(-60).max(60).step(0.01).name('position X')
-        // textPos.add(returnButton1.position, 'y').min(-60).max(60).step(0.01).name('position Y')
-        // textPos.add(returnButton1.position, 'z').min(-60).max(60).step(0.01).name('position Z')
-
-        // const cubeTestRotation = SceneHelper.gui.addFolder('return (rotation)')
-        // cubeTestRotation.add(returnButton1.rotation, 'x').min(-60).max(60).step(0.01).name('position X')
-        // cubeTestRotation.add(returnButton1.rotation, 'y').min(-60).max(60).step(0.01).name('position Y')
-        // cubeTestRotation.add(returnButton1.rotation, 'z').min(-60).max(60).step(0.01).name('position Z')
     });
 
     /**
@@ -142,38 +147,33 @@ onMount(() => {
     /**
      * Text onn 3D scene
      */
-     function makeTextPanel() {
+    function makeTextPanel(size = {width: 5, height: 0.4}, position, rotationY, text, fontSize ) {
         const container = new ThreeMeshUI.Block( {
-            width: 5,
-            height: 0.4,
+            width: size.width,
+            height: size.height,
             padding: 0.05,
             justifyContent: 'center',
             textAlign: 'left',
             fontFamily: FontJson,
             fontTexture: FontImage
         } );
-        container.position.set( -4.77, -0.4, -1.64 );
-        container.rotation.y = 1.53;
+        container.position.set(position.x, position.y, position.z);
+        container.rotation.y = rotationY;
         scene.add( container );
 
-        //     // GUI panel 
-        // const planeTest = SceneHelper.gui.addFolder('camera');
-        // planeTest.add(container.rotation, 'x').min(-60).max(60).step(0.01).name('position X');
-        // planeTest.add(container.rotation, 'y').min(-60).max(60).step(0.01).name('position Y');
-        // planeTest.add(container.rotation, 'z').min(-60).max(60).step(0.01).name('position Z');
-        // planeTest.add(container.position, 'x').min(-60).max(60).step(0.01).name('position x');
-        // planeTest.add(container.position, 'y').min(-60).max(60).step(0.01).name('position y');
-        // planeTest.add(container.position, 'z').min(-60).max(60).step(0.01).name('position z');
-        //
+        // const cubeTestRotation = SceneHelper.gui.addFolder('poster3 ')
+        // cubeTestRotation.add(container.position, 'x').min(-60).max(60).step(0.01).name('position X')
+        // cubeTestRotation.add(container.position, 'y').min(-60).max(60).step(0.01).name('position Y')
+        // cubeTestRotation.add(container.position, 'z').min(-60).max(60).step(0.01).name('position Z')
+        // cubeTestRotation.add(container.rotation, 'x').min(-60).max(60).step(0.01).name('rotation X')
+        // cubeTestRotation.add(container.rotation, 'y').min(-60).max(60).step(0.01).name('rotation Y')
+        // cubeTestRotation.add(container.rotation, 'z').min(-60).max(60).step(0.01).name('rotation Z')
+
         container.add(
             new ThreeMeshUI.Text( {
-                content: 'Click on the posters to move through the rooms',
-                fontSize: 0.15
+                content: text,
+                fontSize: fontSize
             }),
-            // new ThreeMeshUI.Text( {
-            //     content: '\nCliquez sur menu pour revenir en arriere',
-            //     fontSize: 0.09
-            // })
         );
     }
 
@@ -210,16 +210,29 @@ onMount(() => {
 
 </script>
 <style>
-
     .webgl{
         position: fixed;
         top: 0;
         left: 0;
         outline: none; 
     }
+
+    .modal{
+        background-color: #00000077;
+        color: #fff;
+        margin: 5em 3em 0 3em;
+        z-index: 9999;
+        padding: 30px;
+        font-size: x-large;
+        text-align: justify;
+    }
+
+
 </style>
-<!-- <button bind:this={button1} style="position:relative;" id="button1" class="camera-button" >Position 1</button> -->
-<!-- <button bind:this={cameraMove} style="position:relative;">Camera</button> -->
+
+<div bind:this={popup}>
+    <p class="modal">Pour profiter pleinement de notre site merci de tourner votre mobile en mode paysage</p>
+</div>
 <video id="video" playsinline webkit-playsinline muted loop autoplay width="2000" height="500"src="../posters/testFilm/test.mov" style="display: none;"></video>
 <canvas bind:this={canvas} class="webgl"></canvas>
 

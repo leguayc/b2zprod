@@ -6,9 +6,10 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { gsap } from 'gsap';
 
-export const gui = new dat.GUI({
-    width: 400
-});
+// Gui helper 
+// export const gui = new dat.GUI({
+//     width: 400
+// });
 
 export const overlayT = overlay();
 
@@ -43,29 +44,31 @@ function overlay(){
     return {mesh, overlayMaterial}
 }
 
-let div = document.createElement('div');
-div.classList.add('loading-bar');
-document.body.appendChild(div)
-const loadingBarElement = document.querySelector('.loading-bar')
-console.log(loadingBarElement);
-loadingBarElement.style.position = "absolute"
-loadingBarElement.style.zIndex = "9999999"
-loadingBarElement.style.top = '50%'
-loadingBarElement.style.width = "100%"
-loadingBarElement.style.height = "2px"
-loadingBarElement.style.background = "#fff"
-// loadingBarElement.style.transform = `scaleX(${progressBar})`
-// loadingBarElement.style.transform = 'scaleX(0.5)'
-loadingBarElement.style.transformOrigin = "top left"
-loadingBarElement.style.transition = "transform 0.5s"
-loadingBarElement.style.willChange = "transform"
+let loadingBarElement;
+
+function initLoadingBar(){
+    let div = document.createElement('div');
+    div.classList.add('loading-bar');
+    document.body.appendChild(div)
+    loadingBarElement = document.querySelector('.loading-bar')
+    loadingBarElement.style.position = "absolute"
+    loadingBarElement.style.zIndex = "9999999"
+    loadingBarElement.style.top = '50%'
+    loadingBarElement.style.width = "100%"
+    loadingBarElement.style.height = "2px"
+    loadingBarElement.style.background = "#fff"
+    loadingBarElement.style.transformOrigin = "top left"
+    loadingBarElement.style.transition = "transform 0.5s"
+    loadingBarElement.style.willChange = "transform"
+}
+
+
 
 
 export const loadingManager = new THREE.LoadingManager(
 
     //loaded
     () => {
-        console.log('loaded');
         gsap.delayedCall(0.5, ()=>{
             gsap.to(overlayT.overlayMaterial.uniforms.uAlpha, {duration: 4, value: 0})
             sceneT.remove(overlayT.mesh)
@@ -74,9 +77,7 @@ export const loadingManager = new THREE.LoadingManager(
     }, 
 
     (itemUrl, itemsLoaded, itemsTotal) => {
-        console.log('progress');
         const progressRatio = itemsLoaded / itemsTotal;
-        console.log(progressRatio);
         loadingBarElement.style.transform = `scaleX(0)`
         loadingBarElement.style.transformOrigin = "top right"
         loadingBarElement.style.transition = "transform 1.5s  ease-in-out"
@@ -105,6 +106,7 @@ export let camera;
 let sceneT; 
 
 export function createSceneBase() {
+    initLoadingBar();
     // Scene
     const scene = new THREE.Scene();
     scene.background = new THREE.Color( "#03224c" );
@@ -155,10 +157,7 @@ export function createSceneBase() {
     particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
 
     const particlesMaterial = new THREE.PointsMaterial({
-        // color: parameters.materialColor, 
-        // color: 0x000000,
         sizeAttenuation: true, 
-        // size: 0.04
         map: createCircleTexture('#ffffff', 256),
         size: 0.2,
         transparent: true,
@@ -221,6 +220,7 @@ export function setResize()
         height: window.innerHeight
     };
 
+
     window.addEventListener('resize', () =>
     {
         // Update sizes
@@ -265,14 +265,7 @@ export function createRenderer(canvas, sizes)
 export function createControls(canvas)
 {
     const controls = new OrbitControls(camera, canvas);
-    // controls.enableDamping = true
     controls.enabled = false
     controls.enableRotate = false
-    // controls.dampingFactor = 0.05
-    // controls.screenSpacePanning = false
-    // controls.minDistance = 2
-    // controls.maxDistance = 30
-    // controls.maxPolarAngle = (Math.PI / 2) - 0.1;
-
     return controls;
 }

@@ -23,6 +23,8 @@
     function handleClick() {
         count += 1;
     }
+
+    
 </script>
 
 {#if isI18nLoaded }
@@ -40,6 +42,7 @@
       </Router>
 
 {/if}
+
 
 
 
