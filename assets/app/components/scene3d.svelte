@@ -246,15 +246,18 @@ const setCarouselVisibility = (willBeShown) => {
 <!-- <button bind:this={cameraMove} style="position:relative;">Camera</button> -->
 <video id="video" playsinline webkit-playsinline muted loop autoplay width="2000" height="500"src="../posters/testFilm/test.mov" style="display: none;"></video>
 <canvas bind:this={canvas} class="webgl" style="z-index: -1"></canvas>
+
 <div class="projects-carousel" bind:this={carousel} style="display: none">
 {#each projects as project, i}
     <div class="project-item {i == selectedCarouselItem ? "selected" : ""}" bind:this={project.element}>
+        <div class="contain-iframe">
+            <iframe title="Youtube Movie {project.id}" src="{project.trailer}?autoplay=1&mute=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+        </div>
         <div class="content">
             <h2>{getCurrentTrad(project.translations, 'title')}</h2>
             <p>{$t('Project.Producer')} {project.filmmakerFullName}</p>
             <a href="/project/{project.id}" class="btn btn-orange">{$t('Project.External.Button')}</a>
         </div>
-        <iframe title="Youtube Movie {project.id}" src="{project.trailer}?autoplay=1&mute=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
     </div>
 {/each}
     <div class="image prev" on:click={carouselPreviousItem}><img src="/assets/images/popcorn_prev.png" alt="Prev"/></div>
