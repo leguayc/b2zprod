@@ -31,7 +31,6 @@ class PartnerType extends AbstractType
                 ],
             ))
             ->add('name', TextType::class, array(
-                'mapped' => false,
                 'label' => 'Nom'
             ))
         ;

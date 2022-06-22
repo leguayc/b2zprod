@@ -4,8 +4,10 @@ import { onMount } from 'svelte';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 import * as SceneHelper from "../helpers/Scene3DHelper.js";
 import * as ModelHelper from "../helpers/Model3DHelper.js";
+import { fadeIn } from '../helpers/VisibilityHelper.js';
 import { onDocumentMouseDown, cameraMoveReturn, cameraMoveCine, cameraMoveContact, setupNavigation } from "../helpers/Navigation3DHelper.js";
 import axios from 'axios';
+import { gsap } from "gsap";
 import { getLocalization } from '../i18n';
 const { t, currentLanguage } = getLocalization();
 // import { log } from 'console';
@@ -14,6 +16,18 @@ const { t, currentLanguage } = getLocalization();
 let canvas;
 let projects = [];
 let scene;
+
+const moveToCine = () => {
+    cameraMoveCine();
+    gsap.delayedCall(9.5, () => {
+        setCarouselVisibility(true);
+    })
+}
+
+const moveBackFromCine = () => {
+    cameraMoveReturn();
+    setCarouselVisibility(false);
+}
 
 onMount(() => {
 
@@ -25,7 +39,7 @@ onMount(() => {
     const camera = SceneHelper.addCamera(scene);
     SceneHelper.addLights(scene);
 
-    ModelHelper.createPoster(scene, '../posters/affiche.png', {x: -5.6, y: -2.08, z: 2.41}, 1.59, "posterAffiche", cameraMoveCine);
+    ModelHelper.createPoster(scene, '../posters/affiche.png', {x: -5.6, y: -2.08, z: 2.41}, 1.59, "posterAffiche", moveToCine);
     ModelHelper.createPoster(scene, '../posters/infos.png', {x: -5.6, y: -2.08, z: 0.11}, 1.59, "posterInfos", cameraMoveCine);
     ModelHelper.createPoster(scene, '../posters/talents.png', {x: -5.6, y: -2.08, z: -2.16}, 1.59, "posterTalent", cameraMoveCine);
     ModelHelper.createPoster(scene, '../posters/actus1.png', {x: -5.6, y: -2.08, z: -4.41}, 1.59, "posterActus", cameraMoveCine);
@@ -65,7 +79,7 @@ onMount(() => {
 
     // Return buttons 
     const returnButton1 = ModelHelper.createButton(scene, "../assets/images/menu.png", 0, {x: 0, y: -2.4, z: 26.5}, "enterMenu", cameraMoveReturn, {width: 0.68, height: 2.85});
-    ModelHelper.createButton(scene, "../assets/images/menu.png", 0, {x: -2.7, y: -0.5, z: -12.5}, "return", cameraMoveReturn, {width: 0.68, height: 2.85});
+    ModelHelper.createButton(scene, "../assets/images/menu.png", 0, {x: -2.7, y: -0.5, z: -12.5}, "return", moveBackFromCine, {width: 0.68, height: 2.85});
     ModelHelper.createButton(scene, "../assets/images/menu.png", -1.5, {x: 11.1, y: -0.07, z: -5.55}, "return1", cameraMoveReturn, {width: 0.68, height: 2.85});
 
     /**
@@ -152,6 +166,7 @@ onMount(() => {
         case 'projects':
             camera.position.set(0, -1.5, -7.85);
             controls.target.set(0.71, -3.2, -29.02);
+            setCarouselVisibility(true);
             break;
         case 'trophy':
             camera.position.set(5.4, -2, -3.2);
@@ -194,6 +209,7 @@ onMount(() => {
     });
 });
 
+let carousel;
 let selectedCarouselItem = 0;
 
 const getCurrentTrad = (translations, propertyName) => {
@@ -206,6 +222,14 @@ const carouselNextItem = () => {
 
 const carouselPreviousItem = () => {
     selectedCarouselItem = selectedCarouselItem - 1 >= 0 ? selectedCarouselItem - 1 : projects.length - 1;
+}
+
+const setCarouselVisibility = (willBeShown) => {
+    if (willBeShown) {
+        fadeIn(carousel, 400);
+    } else {
+        carousel.style.display = 'none';
+    }
 }
 
 </script>
@@ -222,7 +246,7 @@ const carouselPreviousItem = () => {
 <!-- <button bind:this={cameraMove} style="position:relative;">Camera</button> -->
 <video id="video" playsinline webkit-playsinline muted loop autoplay width="2000" height="500"src="../posters/testFilm/test.mov" style="display: none;"></video>
 <canvas bind:this={canvas} class="webgl" style="z-index: -1"></canvas>
-<div class="projects-carousel">
+<div class="projects-carousel" bind:this={carousel} style="display: none">
 {#each projects as project, i}
     <div class="project-item {i == selectedCarouselItem ? "selected" : ""}" bind:this={project.element}>
         <div class="content">
@@ -230,9 +254,9 @@ const carouselPreviousItem = () => {
             <p>{$t('Project.Producer')} {project.filmmakerFullName}</p>
             <a href="/project/{project.id}" class="btn btn-orange">{$t('Project.External.Button')}</a>
         </div>
-        <iframe title="Youtube Movie {project.id}" src="{project.trailer}?autoplay=1&controls=0&disablekb=1&loop=1&modestbranding=1"></iframe>
+        <iframe title="Youtube Movie {project.id}" src="{project.trailer}?autoplay=1&mute=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
     </div>
 {/each}
-<div class="image prev" on:click={carouselPreviousItem}><img src="/assets/images/popcorn_prev.png" alt="Prev"/></div>
-<div class="image next" on:click={carouselNextItem}><img src="/assets/images/popcorn_next.png" alt="Next"/></div>
+    <div class="image prev" on:click={carouselPreviousItem}><img src="/assets/images/popcorn_prev.png" alt="Prev"/></div>
+    <div class="image next" on:click={carouselNextItem}><img src="/assets/images/popcorn_next.png" alt="Next"/></div>
 </div>

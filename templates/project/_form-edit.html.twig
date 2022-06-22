@@ -1,0 +1,15 @@
+{{ form_start(form) }}
+    {{ form_row(form.image, {required: false}) }}
+    {{ form_row(form.trailer, {required: false}) }}
+    {{ form_row(form.pressKit) }}
+    {{ form_row(form.distributorLink) }}
+    {{ form_row(form.date) }}
+    {{ form_row(form.filmmakerFullName) }}
+    {{ form_row(form.title, {value: project.translations['fr'].title}) }}
+    {{ form_row(form.description, {value: project.translations['fr'].description}) }}
+    {{ form_row(form.section1title, {value: project.translations['fr'].section1Title}) }}
+    {{ form_row(form.section1text, {value: project.translations['fr'].section1Text}) }}
+    {{ form_row(form.section2title, {value: project.translations['fr'].section2Title}) }}
+    {{ form_row(form.section2text, {value: project.translations['fr'].section2Text}) }}
+    <button class="btn">{{ button_label|default('Sauvegarder') }}</button>
+{{ form_end(form) }}
