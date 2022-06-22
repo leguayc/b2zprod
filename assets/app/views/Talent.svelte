@@ -74,7 +74,7 @@
                 <input type="text" name="prenom" placeholder="{$t('Talent.Form.Firstname')}*" required>
             </div>
             <div class="form-item">
-                <label for="email">{$t('Talent.Form.LastName')}</label>
+                <label for="email">{$t('Talent.Form.Lastname')}</label>
                 <input type="text" name="email" placeholder="{$t('Talent.Form.Lastname')}*" required>
             </div>
             <div class="form-item">

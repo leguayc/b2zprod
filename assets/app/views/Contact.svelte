@@ -2,6 +2,7 @@
     import Nav from '../components/Nav.svelte';
     import Header from '../components/Header.svelte';
     import SocialMedia from '../components/SocialMedia.svelte';
+    import Footer from '../components/Footer.svelte';
     
     import { onMount } from 'svelte';
     import {gsapInit} from '../helpers/GsapHelper.js';
@@ -43,3 +44,5 @@
   <SocialMedia/>
 
 </main>
+
+<Footer/>
