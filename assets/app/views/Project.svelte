@@ -2,9 +2,7 @@
     import Nav from '../components/Nav.svelte';
     import Header from '../components/Header.svelte';
     import Footer from '../components/Footer.svelte';
-    
-    import { gsap } from "gsap";
-    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    import {gsapInit} from '../helpers/GsapHelper.js';
 
     import axios from 'axios';
     import { onMount } from 'svelte';
@@ -47,6 +45,9 @@
                 translateProject(translation);
             }
         });
+
+        gsapInit();
+
     });
 
 
@@ -63,72 +64,21 @@
         return translations[$currentLanguage] ? translations[$currentLanguage][propertyName] : translations['fr'][propertyName]
     }
 
-    function animateFrom(elem, direction) {
-        direction = direction || 1;
-        var x = 0,
-            y = direction * 100;
-        if(elem.classList.contains("gs_reveal_fromLeft")) {
-            x = -100;
-            y = 0;
-        } else if (elem.classList.contains("gs_reveal_fromRight")) {
-            x = 100;
-            y = 0;
-        }
-        elem.style.transform = "translate(" + x + "px, " + y + "px)";
-        elem.style.opacity = "0";
-        gsap.fromTo(elem, {x: x, y: y, autoAlpha: 0}, {
-            duration: 1.25, 
-            x: 0,
-            y: 0, 
-            autoAlpha: 1, 
-            ease: "expo", 
-            overwrite: "auto"
-        });
-        }
-
-        function hide(elem) {
-        gsap.set(elem, {autoAlpha: 0});
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
-
-            console.log("here");
-            gsap.registerPlugin(ScrollTrigger);
-
-            console.log(gsap.utils.toArray(".gs_reveal"));
-        
-            gsap.utils.toArray(".gs_reveal").forEach(function(elem) {
-                hide(elem); // assure that the element is hidden when scrolled into view
-                
-                ScrollTrigger.create({
-                    trigger: elem,
-                    onEnter: function() { animateFrom(elem) }, 
-                    onEnterBack: function() { animateFrom(elem, -1) },
-                    onLeave: function() { hide(elem) } // assure that the element is hidden when scrolled into view
-                });
-            });
-
-        });
-
-
-    
-    
-
 </script>
 
 <Nav/>
 
 <main class="bg-texture">
 
-    <section class="contain-video">
+    <section class="contain-video gs_video">
         <iframe class="video" width="560" height="315" src={projects.trailer} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </section>
 
     <Header title={projects.title} subtitle="{projects.date} - {$t('Project.Producer')} {projects.filmmakerFullName}"/>
 
-    <section class="contain-emphase gsap-reveal">
-        <img class="image" src="/uploads/projects/{projects.image}" alt="a fleur de peau">
-        <div class="content bg-black">
+    <section class="contain-emphase">
+        <img class="image gsap-reveal gs_reveal gs_reveal_fromLeft" src="/uploads/projects/{projects.image}" alt="a fleur de peau">
+        <div class="content bg-black gsap-reveal gs_reveal gs_reveal_fromRight">
             <div>
                 {#if projects.section1Title && projects.section1Text}
                 <p class="title">{projects.section1Title}</p>
@@ -151,7 +101,7 @@
         </div>
     </section>
 
-    <section class="contain">
+    <section class="contain gsap-reveal gs_reveal gs_reveal_fromRight">
         <div class="contain-text">
              <h3 class="title">{projects.title}</h3>
              <p class="text">{projects.description}</p>        
@@ -159,6 +109,9 @@
      </section>
   
     <section class="bg-movie">
+        <div class="bg-pelicule gs_pelicule">
+            <img src="/assets/images/pelicule.png" alt="pelicule">
+        </div>
         <div class="contain-xs bg-black">
             <h3 class="title">{$t('Project.Distributor.Title')}</h3>
             <div class="btn btn-orange"><a href={projects.distributorLink}><span class="text">{$t('Project.Distributor.Text')}</span></a></div>
@@ -166,7 +119,7 @@
     </section>
 
     {#if projects.projectThanks && projects.projectThanks.length > 0}
-    <section class="contain-partners">
+    <section class="contain-partners gsap-reveal gs_reveal gs_reveal_fromRight">
 
         <h2 class="title">{$t('Project.Thanks')} :</h2>
 
@@ -178,14 +131,14 @@
     </section>
     {/if}
 
-    <section class="contain">
+    <section class="contain gsap-reveal gs_reveal gs_reveal_fromLeft">
         <div class="contain-xs bg-black">
             <h3 class="title">{$t('Contact.External.Title')}</h3>
             <a href="mailto:test@gmail.com" class="btn btn-orange"><span class="text">{$t('Contact.External.Text')}</span></a>
         </div>
     </section>
 
-    <section class="contain-films">
+    <section class="contain-films gsap-reveal gs_reveal gs_reveal_fromLeft">
         <h2 class="title">{$t('Project.OtherMovies')} :</h2>
         <ul class="grid-3">
             {#each otherProjects as {id, image, translations}}

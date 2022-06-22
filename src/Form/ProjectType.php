@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Validator\Constraints\File;
 
 class ProjectType extends AbstractType
@@ -53,7 +54,7 @@ class ProjectType extends AbstractType
                 'mapped' => false,
                 'label' => 'Lien ditributeur'
             ))
-            ->add('date', TextType::class, array(
+            ->add('date', DateType::class, array(
                 'mapped' => false,
                 'label' => 'Date'
             ))

@@ -2,6 +2,8 @@
     import Nav from '../components/Nav.svelte';
     import Header from '../components/Header.svelte';
     import Footer from '../components/Footer.svelte';
+    import {gsapInit} from '../helpers/GsapHelper.js';
+
     import axios from 'axios';
     import { onMount } from 'svelte';
 
@@ -39,6 +41,8 @@
         }).catch((error) => {
             console.log("error");
         });
+
+        gsapInit();
     });
 
    
@@ -50,7 +54,7 @@
 
     <Header title="{news.title}" subtitle="{news.creationdate}"/>
 
-    <section class="contain-article">
+    <section class="contain-article gs_reveal gs_reveal_fromRight">
         <h2 class="title">{news.title}</h2>
         <p class="text">{news.text}</p>
         <img src="/uploads/posts/{news.image}" alt="article" class="image" />
@@ -64,6 +68,9 @@
 
 
     <section class="bg-movie">
+        <div class="bg-pelicule gs_pelicule">
+            <img src="/assets/images/pelicule.png" alt="pelicule">
+        </div>
         <div class="contain-xs bg-black">
             <h3 class="title">{$t('Project.External.Title')}</h3>
             <a href="/?r=projects" class="btn btn-orange"><span class="text">{$t('Project.External.Button')}</span></a>
@@ -72,11 +79,11 @@
 
 
     {#if otherNews[0]}
-    <section class="contain-films">
+    <section class="contain-films gs_reveal gs_reveal_fromRight">
         <h2 class="title">{$t('News.More.Title')}</h2>
         <ul class="grid-2">
             {#each otherNews as {id, creationdate, title, text}}
-            <li class="home-news">
+            <li class="home-news gs_reveal gs_reveal_fromBottom">
                 <div>
                     <p class="date">{creationdate.split('T')[0]}</p>
                     <p class="title">{title}</p>

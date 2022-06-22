@@ -4,6 +4,9 @@
     import SocialMedia from '../components/SocialMedia.svelte';
     import Footer from "../components/Footer.svelte";
     
+    import { onMount } from 'svelte';
+    import {gsapInit} from '../helpers/GsapHelper.js';
+    
     import axios from 'axios';
     import { getLocalization } from '../i18n';
     const { t, currentLanguage } = getLocalization();
@@ -44,7 +47,13 @@
             console.log("error");
         }
     }
+
+    onMount(async () => {
+        gsapInit();        
+    });
+
 </script>
+
 
 <Nav/>
 
@@ -52,12 +61,12 @@
 
     <Header title="{$t('Talent.Title')}" subtitle="B2Z Production"/>
 
-    <section class="contain">
+    <section class="contain gsap-reveal gs_reveal gs_reveal_fromRight">
         <h3 class="title">{$t('Talent.Content.Title')}</h3>
         <p class="text">{$t('Talent.Content.Text')}</p>
     </section>
 
-    <section class="form-script">
+    <section class="form-script gsap-reveal gs_reveal gs_reveal_fromLeft">
         <h3 class="title">{$t('Talent.Send')}</h3>
         <form action="#" class="form-group">
             <div class="form-item">

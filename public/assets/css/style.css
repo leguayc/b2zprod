@@ -10,6 +10,7 @@
 body{
     color: var(--grey);
     font-family: 'Libre Franklin', sans-serif;
+    overflow-x: hidden;
 }
 
 h1,.h1{
@@ -118,11 +119,11 @@ main{
     position: relative;
 }
 
-.bg-movie::before{
-    content: url(../images/pelicule.png);
-    transform: rotate(-13deg);
+.bg-pelicule img{
+    transform: rotate(-10deg);
     position: absolute;
-    left: -10%;
+    right: -5%;
+    top: 0;
     z-index: 0;
 }
 
@@ -149,6 +150,9 @@ section{
     padding: 20px;
 }
 
+.contain-video + .contain-title{
+    margin-top: -100px;
+}
 .contain-title{
     text-align: center;
 }
@@ -158,8 +162,8 @@ section{
 }
 
 .options{
-    border-radius: 20px;
-    padding: 20px;
+    border-radius: 13px;
+    padding: 10px 15px;
     border: 1px solid var(--orange);
     position: fixed;
     left: 20px;
@@ -941,5 +945,13 @@ footer .name{
 
     .contain-footer .logo{
         order: -1;
+    }
+    
+    .bg-pelicule img{
+        transform: rotate(-10deg);
+        position: absolute;
+        right: -5%;
+        top: 0;
+        z-index: 0;
     }
 }

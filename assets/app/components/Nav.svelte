@@ -8,9 +8,7 @@
 
     let m = { x: 0, y: 0 };
 
-    window.addEventListener("mousemove", handleMousemove);
-
-	function handleMousemove(event) {
+	const handleMousemove = (event) => {
 		m.x = event.pageX;
 		m.y = event.pageY;
 	}
@@ -36,6 +34,7 @@
     </div>
 </div>
 
+<svelte:window on:mousemove={handleMousemove}/>
 
 <div id="cursor" style="left: {m.x}px; top: {m.y}px;" ></div>
 
