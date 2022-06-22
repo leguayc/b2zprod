@@ -172,8 +172,30 @@ section{
     background-color: #fff;
 }
 
+#cursor{
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    position: absolute;
+    z-index: 15;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    -webkit-transition-property: width, height, -webkit-transform;
+    transition-property: width, height, -webkit-transform;
+    transition-property: transform, width, height;
+    transition-property: transform, width, height, -webkit-transform;
+    -webkit-transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
+    -webkit-backdrop-filter: invert(1);
+    backdrop-filter: invert(1);
+    border-top: 0px transparent;
+}
+
 .options > *{
-    margin: 0;
+    margin: 0;  
 }
 
 .options img{

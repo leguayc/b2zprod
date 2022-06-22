@@ -6,6 +6,15 @@
     let allLangs = langs.allLangs;
     let selectedLang = currentLanguage;
 
+    let m = { x: 0, y: 0 };
+
+    window.addEventListener("mousemove", handleMousemove);
+
+	function handleMousemove(event) {
+		m.x = event.pageX;
+		m.y = event.pageY;
+	}
+
 </script>
 
 <nav>
@@ -26,3 +35,6 @@
         <a href="/contact" class="text"><img src="/assets/images/message.png" alt="trophee"></a>
     </div>
 </div>
+
+
+<div id="cursor" style="left: {m.x}px; top: {m.y}px;" ></div>
