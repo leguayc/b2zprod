@@ -5,14 +5,19 @@ import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 import * as SceneHelper from "../helpers/Scene3DHelper.js";
 import * as ModelHelper from "../helpers/Model3DHelper.js";
 import { onDocumentMouseDown, cameraMoveReturn, cameraMoveCine, cameraMoveContact, setupNavigation } from "../helpers/Navigation3DHelper.js";
+import axios from 'axios';
+import { getLocalization } from '../i18n';
+const { t, currentLanguage } = getLocalization();
 // import { log } from 'console';
 
 // Canvas
 let canvas;
+let projects = [];
+let scene;
 
 onMount(() => {
 
-    const scene = SceneHelper.createSceneBase();
+    scene = SceneHelper.createSceneBase();
 
     scene.add(SceneHelper.overlayT.mesh)
 
@@ -26,20 +31,20 @@ onMount(() => {
     ModelHelper.createPoster(scene, '../posters/actus1.png', {x: -5.6, y: -2.08, z: -4.41}, 1.59, "posterActus", cameraMoveCine);
     ModelHelper.createPoster(scene, '../posters/contact.png', {x: -5.6, y: -2.08, z: -6.63}, 1.59, "posterContact", cameraMoveContact);
 
-    ModelHelper.createPoster(scene, '../posters/contact.png', {x: 13.2, y: -1.4, z: -5.74}, -1.575, "posterContact", cameraMoveContact, {width: 1.18, height: 3.35});
-    ModelHelper.createPoster(scene, '../posters/contactRoom/hakim.png', {x: 13.2, y: -1.96, z: -1.96}, -1.575, "posterContact", cameraMoveContact, {width: 1.18, height: 3.2});
-    ModelHelper.createPoster(scene, '../posters/contactRoom/gaetan.png', {x: 13.2, y: -0.04, z: -4.05}, -1.575, "posterContact", cameraMoveContact, {width: 1.18, height: 3.35});
-    const poster3 = ModelHelper.createPoster(scene, '../posters/contactRoom/walid.png', {x: 13.2, y: -0.26, z: -2.28}, -1.58, "posterContact", cameraMoveContact, {width: 1.6, height: 2.3});
-    const grandPoster = ModelHelper.createPoster(scene, '../posters/contactRoom/poster1.jpg', {x: 11.5, y: -1.3, z: -6.9}, 0, "posterContact", cameraMoveContact, {width: 1.93, height: 5.32});
-    const grandPosterEntree = ModelHelper.createPoster(scene, '../posters/contactRoom/poster2.jpg', {x: 4.8, y: -1.64, z: -7.95}, 0, "posterContact", cameraMoveContact, {width: 1.38, height: 3.8});
-    const posterTalent = ModelHelper.createPoster(scene, '../posters/affiche.png', {x: 13.2, y: -1.9, z: -3.78}, -1.58, "posterContact", cameraMoveContact, {width: 1.18, height: 3.35});
-    const poster4 = ModelHelper.createPoster(scene, '../posters/affiche.png', {x: 13.2, y: -1.25, z: -0.25}, -1.58, "posterContact", cameraMoveContact, {width: 1.18, height: 3.35});
+    ModelHelper.createPoster(scene, '../posters/contact.png', {x: 13.2, y: -1.4, z: -5.74}, -1.575, "posterContact", null, {width: 1.18, height: 3.35});
+    ModelHelper.createPoster(scene, '../posters/contactRoom/hakim.png', {x: 13.2, y: -1.96, z: -1.96}, -1.575, "posterContact", null, {width: 1.18, height: 3.2});
+    ModelHelper.createPoster(scene, '../posters/contactRoom/gaetan.png', {x: 13.2, y: -0.04, z: -4.05}, -1.575, "posterContact", null, {width: 1.18, height: 3.35});
+    const poster3 = ModelHelper.createPoster(scene, '../posters/contactRoom/walid.png', {x: 13.2, y: -0.26, z: -2.28}, -1.58, "posterContact", null, {width: 1.6, height: 2.3});
+    const grandPoster = ModelHelper.createPoster(scene, '../posters/contactRoom/poster1.jpg', {x: 11.5, y: -1.3, z: -6.9}, 0, "posterContact", null, {width: 1.93, height: 5.32});
+    const grandPosterEntree = ModelHelper.createPoster(scene, '../posters/contactRoom/poster2.jpg', {x: 4.8, y: -1.64, z: -7.95}, 0, "posterContact", null, {width: 1.38, height: 3.8});
+    const posterTalent = ModelHelper.createPoster(scene, '../posters/affiche.png', {x: 13.2, y: -1.9, z: -3.78}, -1.58, "posterContact", null, {width: 1.18, height: 3.35});
+    const poster4 = ModelHelper.createPoster(scene, '../posters/affiche.png', {x: 13.2, y: -1.25, z: -0.25}, -1.58, "posterContact", null, {width: 1.18, height: 3.35});
 
     // Posters front wall entrance
-    ModelHelper.createPoster(scene, '../posters/contactRoom/poster1.jpg', {x: 5.15, y: -2.34, z: 4.45}, 0.1, "posterContact", cameraMoveContact, {width: 1.38, height: 3.8});
-    ModelHelper.createPoster(scene, '../posters/contactRoom/poster2.jpg', {x: 9.25, y: -2.33, z: 4.3}, 0, "posterContact", cameraMoveContact, {width: 1.38, height: 3.85});
-    const grandPosterEntree2 = ModelHelper.createPoster(scene, '../posters/contactRoom/poster2.jpg', {x: -9.02, y: -2.34, z: 4.2}, 0, "posterContact", cameraMoveContact, {width: 1.38, height: 3.85});
-    ModelHelper.createPoster(scene, '../posters/contactRoom/poster1.jpg', {x: -5.14, y: -2.33, z: 4.45}, -0.07, "posterContact", cameraMoveContact, {width: 1.38, height: 3.85});
+    ModelHelper.createPoster(scene, '../posters/contactRoom/poster1.jpg', {x: 5.15, y: -2.34, z: 4.45}, 0.1, "posterContact", null, {width: 1.38, height: 3.8});
+    ModelHelper.createPoster(scene, '../posters/contactRoom/poster2.jpg', {x: 9.25, y: -2.33, z: 4.3}, 0, "posterContact", null, {width: 1.38, height: 3.85});
+    const grandPosterEntree2 = ModelHelper.createPoster(scene, '../posters/contactRoom/poster2.jpg', {x: -9.02, y: -2.34, z: 4.2}, 0, "posterContact", null, {width: 1.38, height: 3.85});
+    ModelHelper.createPoster(scene, '../posters/contactRoom/poster1.jpg', {x: -5.14, y: -2.33, z: 4.45}, -0.07, "posterContact", null, {width: 1.38, height: 3.85});
     
     // poster3.rotation.x = 1.58
     poster4.rotation.x = 1.58
@@ -66,18 +71,18 @@ onMount(() => {
     /**
      * Movie screen (test with local video)
      */
-    const video = document.getElementById('video');
-    const videoTexture = new THREE.VideoTexture(video);
-    const videoMaterial =  new THREE.MeshBasicMaterial( {map: videoTexture, side: THREE.FrontSide, toneMapped: false} );
+    // const video = document.getElementById('iframe-4');
+    // const videoTexture = new THREE.VideoTexture(video);
+    // const videoMaterial =  new THREE.MeshBasicMaterial( {map: videoTexture, side: THREE.FrontSide, toneMapped: false} );
 
-    const screen = new THREE.PlaneGeometry(10.1, 14.05*0.51);
-    const videoScreen = new THREE.Mesh(screen, videoMaterial);
-    video.play()
+    // const screen = new THREE.PlaneGeometry(10.1, 14.05*0.51);
+    // const videoScreen = new THREE.Mesh(screen, videoMaterial);
+    // video.play()
 
-    videoScreen.position.set(0, -2.6, -22)
-    videoScreen.name = "movieScreen"
+    // videoScreen.position.set(0, -2.6, -22)
+    // videoScreen.name = "movieScreen"
 
-    scene.add(videoScreen);
+    // scene.add(videoScreen);
 
     // GUI panel 
     // const planeTest = SceneHelper.gui.addFolder('camera');
@@ -136,6 +141,25 @@ onMount(() => {
     
     setupNavigation(scene, renderer, camera, controls);
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const route = urlParams.get('r');
+    
+    switch (route) {
+        case 'menu':
+            camera.position.set(1.2, -1.5, -1.8);
+            controls.target.set(-12, -2, -2);
+            break;
+        case 'projects':
+            camera.position.set(0, -1.5, -7.85);
+            controls.target.set(0.71, -3.2, -29.02);
+            break;
+        case 'trophy':
+            camera.position.set(5.4, -2, -3.2);
+            controls.target.set(8.5, -2, -3.2);
+            break;
+        default:
+    }
+
     /**
      * Animate
      */
@@ -156,7 +180,33 @@ onMount(() => {
     };
 
     tick();
+
+    axios.get('/api/projects').then( (response) => {
+        for(let i = 0; i < response.data['hydra:member'].length; i++) {
+            projects[i] = response.data['hydra:member'][i];
+            
+            if(projects[i].trailer.includes('watch')) {
+                projects[i].trailer = "https://www.youtube.com/embed/" + projects[i].trailer.split("?v=")[1].split('&')[0];
+            }
+        }
+    }).catch((error) => {
+        console.log("error");
+    });
 });
+
+let selectedCarouselItem = 0;
+
+const getCurrentTrad = (translations, propertyName) => {
+    return translations[$currentLanguage] ? translations[$currentLanguage][propertyName] : translations['fr'][propertyName]
+}
+
+const carouselNextItem = () => {
+    selectedCarouselItem = selectedCarouselItem + 1 < projects.length ? selectedCarouselItem + 1 : 0;
+}
+
+const carouselPreviousItem = () => {
+    selectedCarouselItem = selectedCarouselItem - 1 >= 0 ? selectedCarouselItem - 1 : projects.length - 1;
+}
 
 </script>
 <style>
@@ -171,6 +221,18 @@ onMount(() => {
 <!-- <button bind:this={button1} style="position:relative;" id="button1" class="camera-button" >Position 1</button> -->
 <!-- <button bind:this={cameraMove} style="position:relative;">Camera</button> -->
 <video id="video" playsinline webkit-playsinline muted loop autoplay width="2000" height="500"src="../posters/testFilm/test.mov" style="display: none;"></video>
-<canvas bind:this={canvas} class="webgl"></canvas>
-
-
+<canvas bind:this={canvas} class="webgl" style="z-index: -1"></canvas>
+<div class="projects-carousel">
+{#each projects as project, i}
+    <div class="project-item {i == selectedCarouselItem ? "selected" : ""}" bind:this={project.element}>
+        <div class="content">
+            <h2>{getCurrentTrad(project.translations, 'title')}</h2>
+            <p>{$t('Project.Producer')} {project.filmmakerFullName}</p>
+            <a href="/project/{project.id}" class="btn btn-orange">{$t('Project.External.Button')}</a>
+        </div>
+        <iframe title="Youtube Movie {project.id}" src="{project.trailer}?autoplay=1&controls=0&disablekb=1&loop=1&modestbranding=1"></iframe>
+    </div>
+{/each}
+<div class="image prev" on:click={carouselPreviousItem}><img src="/assets/images/popcorn_prev.png" alt="Prev"/></div>
+<div class="image next" on:click={carouselNextItem}><img src="/assets/images/popcorn_next.png" alt="Next"/></div>
+</div>

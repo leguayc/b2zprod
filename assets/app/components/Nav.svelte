@@ -19,7 +19,7 @@
 
 <nav>
     <a href="/"><img src="/assets/images/logo.svg" alt="b2z production logo" class="logo"></a>
-    <a href="/" class="contain-menu"><img src="/assets/images/menu.png" alt="menu" class="menu"></a>
+     <a href="/?r=menu" class="contain-menu"><img src="/assets/images/menu.png" alt="menu" class="menu"></a>
 </nav>
 
 <div class="options">
@@ -38,3 +38,5 @@
 
 
 <div id="cursor" style="left: {m.x}px; top: {m.y}px;" ></div>
+
+

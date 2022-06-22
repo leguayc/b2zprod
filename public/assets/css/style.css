@@ -725,6 +725,74 @@ footer a:hover{
     color: var(--orange);
 }
 
+.projects-carousel{
+    pointer-events: none;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.projects-carousel .project-item {
+    z-index: 998;
+    width: 80%;
+    height: 60%;
+    pointer-events: auto;
+    display: none;
+    position: relative;
+}
+
+.projects-carousel .project-item.selected {
+    display: flex;
+}
+
+.projects-carousel .project-item iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.projects-carousel .project-item .content {
+    z-index: 2;
+    width: 35%;
+    background: rgba(0, 0, 0, .8);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.projects-carousel .image {
+    position: absolute;
+    z-index: 999;
+    pointer-events: auto;
+    max-width: 10%;
+    max-height: 10%;
+    bottom: 15%;
+}
+
+.projects-carousel .image.prev {
+    left: 7%;
+}
+
+.projects-carousel .image.next {
+    right: 7%;
+}
+
+.projects-carousel .image img {
+    max-width: 100%;
+    max-height: 100%;
+}
 
 footer .name{
     color: #aaa;
