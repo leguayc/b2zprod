@@ -153,8 +153,22 @@ section{
 .contain-video + .contain-title{
     margin-top: -100px;
 }
+
 .contain-title{
     text-align: center;
+    position: relative;
+}
+
+.contain-title img{
+    position: absolute;
+    height: 150%;
+    width: 50%;
+    max-width: 200px;
+    object-fit: contain;
+    top: -25%;
+    left: calc(50% - 100px);
+    z-index: -1;
+    opacity: .3;
 }
 
 .contain .title{
@@ -575,8 +589,6 @@ section{
     opacity: 1;
 }
 
-
-
 /*contact */
 .social-media{
     display: flex;
@@ -946,7 +958,7 @@ footer .name{
     .contain-footer .logo{
         order: -1;
     }
-    
+
     .bg-pelicule img{
         transform: rotate(-10deg);
         position: absolute;

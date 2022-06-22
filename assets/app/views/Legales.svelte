@@ -9,7 +9,7 @@
 
 <main class="bg-texture">
 
-    <Header title="Mentions Légales" subtitle="B2Z Production"/>
+    <Header title="Mentions Légales" subtitle="B2Z Production" image="../assets/images/popcorn.png"/>
 
     <section class="contain">
         <div class="contain-text">

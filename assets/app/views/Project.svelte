@@ -74,7 +74,7 @@
         <iframe class="video" width="560" height="315" src={projects.trailer} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </section>
 
-    <Header title={projects.title} subtitle="{projects.date} - {$t('Project.Producer')} {projects.filmmakerFullName}"/>
+    <Header title={projects.title} subtitle="{projects.date} - {$t('Project.Producer')} {projects.filmmakerFullName}" image="../assets/images/ticket.png"/>
 
     <section class="contain-emphase">
         <img class="image gsap-reveal gs_reveal gs_reveal_fromLeft" src="/uploads/projects/{projects.image}" alt="a fleur de peau">

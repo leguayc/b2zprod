@@ -3,7 +3,7 @@
     import Header from '../components/Header.svelte';
     import SocialMedia from '../components/SocialMedia.svelte';
     import Footer from "../components/Footer.svelte";
-    
+
     import { onMount } from 'svelte';
     import {gsapInit} from '../helpers/GsapHelper.js';
     
@@ -59,7 +59,7 @@
 
 <main class="bg-texture">
 
-    <Header title="{$t('Talent.Title')}" subtitle="B2Z Production"/>
+    <Header title="{$t('Talent.Title')}" subtitle="B2Z Production" image="../assets/images/clap.png"/>
 
     <section class="contain gsap-reveal gs_reveal gs_reveal_fromRight">
         <h3 class="title">{$t('Talent.Content.Title')}</h3>

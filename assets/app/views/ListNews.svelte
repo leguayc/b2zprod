@@ -29,7 +29,7 @@
 
 <main class="bg-texture">
 
-    <Header title={$t('ListNews.Title')} subtitle={$t('ListNews.Subtitle')}/>
+    <Header title={$t('ListNews.Title')} subtitle={$t('ListNews.Subtitle')} image="../assets/images/ticket.png"/>
 
     <section class="contain-films">
         

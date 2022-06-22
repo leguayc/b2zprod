@@ -19,7 +19,7 @@
 
 <main class="bg-texture">
 
-    <Header title="{$t('Contact.Title')}" subtitle="{$t('Contact.SubTitle')}"/>
+    <Header title="{$t('Contact.Title')}" subtitle="{$t('Contact.SubTitle')}"  image="../assets/images/clap.png"/>
 
     <section class="contain gs_reveal gs_reveal_fromRight">
         <h3 class="title">{$t('Contact.Content.Title')}</h3>

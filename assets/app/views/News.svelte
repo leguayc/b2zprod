@@ -52,7 +52,7 @@
 
 <main class="bg-texture">
 
-    <Header title="{news.title}" subtitle="{news.creationdate}"/>
+    <Header title="{news.title}" subtitle="{news.creationdate}" image="../assets/images/popcorn.png"/>
 
     <section class="contain-article gs_reveal gs_reveal_fromRight">
         <h2 class="title">{news.title}</h2>
