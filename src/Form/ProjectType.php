@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Validator\Constraints\File;
 
 class ProjectType extends AbstractType
@@ -32,7 +33,8 @@ class ProjectType extends AbstractType
                 ],
             ))
             ->add('trailer', TextType::class, array(
-                'label' => 'Lien vidéo'
+                'label' => 'Lien vidéo',
+                'required' => true
             ))
             ->add('pressKit', FileType::class, array(
                 'mapped' => false,
@@ -50,15 +52,12 @@ class ProjectType extends AbstractType
                 ],
             ))
             ->add('distributorLink', TextType::class, array(
-                'mapped' => false,
                 'label' => 'Lien ditributeur'
             ))
-            ->add('date', TextType::class, array(
-                'mapped' => false,
+            ->add('date', DateType::class, array(
                 'label' => 'Date'
             ))
             ->add('filmmakerFullName', TextType::class, array(
-                'mapped' => false,
                 'label' => 'Réalisateur'
             ))
             ->add('title', TextType::class, array(

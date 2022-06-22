@@ -17,19 +17,15 @@ class ScenarioType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, array(
-                'mapped' => false,
                 'label' => 'Mail'
             ))
             ->add('phoneNumber', TextType::class, array(
-                'mapped' => false,
                 'label' => 'Téléphone'
             ))
             ->add('firstname', TextType::class, array(
-                'mapped' => false,
                 'label' => 'Prénom'
             ))
             ->add('lastname', TextType::class, array(
-                'mapped' => false,
                 'label' => 'Nom'
             ))
             ->add('file', FileType::class, array(
@@ -37,7 +33,6 @@ class ScenarioType extends AbstractType
                 'label' => 'Fichier'
             ))
             ->add('summary', TextType::class, array(
-                'mapped' => false,
                 'label' => 'Résumé'
             ))   
         ;

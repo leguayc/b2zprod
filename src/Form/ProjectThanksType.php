@@ -7,6 +7,7 @@ use App\Entity\ProjectThanks;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ProjectThanksType extends AbstractType
 {
@@ -14,7 +15,6 @@ class ProjectThanksType extends AbstractType
     {
         $builder
         ->add('name', TextType::class, array(
-            'mapped' => false,
             'label' => 'Nom'
         ))
         ;

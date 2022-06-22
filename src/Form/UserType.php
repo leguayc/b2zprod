@@ -13,23 +13,18 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email', TextType::class, array(
-                'mapped' => false,
                 'label' => 'Mail'
             ))
             ->add('roles', TextType::class, array(
-                'mapped' => false,
                 'label' => 'Rôles'
             ))
             ->add('password', TextType::class, array(
-                'mapped' => false,
                 'label' => 'Mot de passe'
             ))
             ->add('firstname', TextType::class, array(
-                'mapped' => false,
                 'label' => 'Prénom'
             ))
             ->add('lastname', TextType::class, array(
-                'mapped' => false,
                 'label' => 'Nom'
             ))
         ;
