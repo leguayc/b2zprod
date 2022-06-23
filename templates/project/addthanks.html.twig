@@ -1,16 +1,16 @@
 {% extends 'backoffice.html.twig' %}
 
-{% block title %}Add Project Thanks{% endblock %}
+{% block title %}Ajouter Remerciement{% endblock %}
 
 {% block page %}
-    <h1>Add Project Thanks</h1>
+    <h1>Ajouter Remerciement</h1>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <button class="btn">{{ button_label|default('Save') }}</button>
+        <button class="btn">{{ button_label|default('Sauvegarder') }}</button>
     {{ form_end(form) }}
 
     <div class="contain-button">
-        <a href="{{ path('app_project_index') }}">back to list</a>
+        <a href="{{ path('app_project_index') }}">Retour</a>
     </div>
 {% endblock %}

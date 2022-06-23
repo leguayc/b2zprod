@@ -1,9 +1,9 @@
 {% extends 'backoffice.html.twig' %}
 
-{% block title %}BlogPost index{% endblock %}
+{% block title %}Les actualités{% endblock %}
 
 {% block page %}
-    <h1>BlogPost index</h1>
+    <h1>Les actualités</h1>
 
     <div class="table-contain">
         <div class="table-scroll">
@@ -11,12 +11,12 @@
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Title</th>
-                        <th>Text</th>
-                        <th>Creation Date</th>
-                        <th>Form Link</th>
-                        <th>Locale</th>
-                        <th>actions</th>
+                        <th>Titres</th>
+                        <th>Texte</th>
+                        <th>Date de création</th>
+                        <th>Lien du Google Form</th>
+                        <th>Langue</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,13 +29,13 @@
                         <td>{{ blog_post.formLink }}</td>
                         <td>{{ blog_post.locale }}</td>
                         <td>
-                            <a href="{{ path('app_blog_post_show', {'id': blog_post.id}) }}">show</a>
-                            <a href="{{ path('app_blog_post_edit', {'id': blog_post.id}) }}">edit</a>
+                            <a href="{{ path('app_blog_post_show', {'id': blog_post.id}) }}">Afficher</a>
+                            <a href="{{ path('app_blog_post_edit', {'id': blog_post.id}) }}">Modifier</a>
                         </td>
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="7">no records found</td>
+                        <td colspan="7">Pas de resultats</td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -44,7 +44,7 @@
     </div>
 
     <div class="contain-button">
-        <a href="{{ path('app_blog_post_new') }}">Create new</a>
+        <a href="{{ path('app_blog_post_new') }}">Ajouter une actualité</a>
     </div>
     
 {% endblock %}

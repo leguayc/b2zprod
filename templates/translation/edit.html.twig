@@ -3,13 +3,13 @@
 {% block title %}Manage Translations{% endblock %}
 
 {% block page %}
-    <h1>Edit {{ locale|upper }} Translation</h1>
+    <h1>Edit {{ locale|upper }}Traductions</h1>
 
     <form method="POST">
         <table class="table">
             <thead>
                 <tr>
-                    <th>Keys</th>
+                    <th>Langue</th>
                     {% for key, translation in translations %}
                         <th>{{ key|upper }}</th>
                     {% endfor %}
@@ -30,8 +30,8 @@
             {% endfor %}
             </tbody>
         </table>
-        <button class="btn">Edit {{ locale|upper }}</button>
+        <button class="btn">Modifier {{ locale|upper }}</button>
     </form>
 
-    <a href="{{ path('app_translation_index') }}">back to list</a>
+    <a href="{{ path('app_translation_index') }}">Retour</a>
 {% endblock %}

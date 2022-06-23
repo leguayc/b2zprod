@@ -1,6 +1,8 @@
 <script>
     import Nav from '../components/Nav.svelte';
     import Header from '../components/Header.svelte';
+    import Footer from '../components/Footer.svelte';
+    import {gsapInit} from '../helpers/GsapHelper.js';
 
     import axios from 'axios';
     import { onMount } from 'svelte';
@@ -10,20 +12,24 @@
     let news, i18n;
 
     onMount(async () => {
+        
         axios.get('/api/blog_posts/').then( (response) => {
             news = response.data['hydra:member'];
         }).catch((error) => {
             console.log("error");
         });
+
+        gsapInit();
     });
 
 </script>
+
 
 <Nav/>
 
 <main class="bg-texture">
 
-    <Header title={$t('ListNews.Title')} subtitle={$t('ListNews.Subtitle')}/>
+    <Header title={$t('ListNews.Title')} subtitle={$t('ListNews.Subtitle')} image="../assets/images/ticket.png"/>
 
     <section class="contain-films">
         
@@ -31,7 +37,7 @@
         {#if news}
             {#each news as { id, title, text, creationdate, image}, i} 
                 {#if i === 0}
-                    <li class="news-emphase">
+                    <li class="news-emphase gs_reveal gs_reveal_fromRight">
                         <img src="./uploads/posts/{image}" alt="article" class="image" />
                         <div class="home-news">
                             <p class="date">{creationdate.split('T')[0]}</p>
@@ -41,7 +47,7 @@
                         </div>
                     </li> 
                 {:else}
-                    <li class="home-news">
+                    <li class="home-news gs_reveal gs_reveal_fromBottom">
                         <p class="date">{creationdate.split('T')[0]}</p>
                         <p class="title">{title}</p>
                         <p>{text.substring(0,250)}</p>
@@ -53,11 +59,17 @@
     </ul>
     </section>
 
+
     <section class="bg-movie">
+        <div class="bg-pelicule gs_pelicule">
+            <img src="/assets/images/pelicule.png" alt="pelicule">
+        </div>
         <div class="contain-xs bg-black">
             <h3 class="title">{$t('About.External.Title')}</h3>
-            <div class="btn btn-orange"><span class="text">{$t('About.External.Button')}</span></div>
+            <a href="/about" class="btn btn-orange"><span class="text">{$t('About.External.Button')}</span></a>
         </div>
     </section>
 
 </main>
+
+<Footer/>

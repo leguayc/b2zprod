@@ -1,9 +1,9 @@
 {% extends 'backoffice.html.twig' %}
 
-{% block title %}BlogPost{% endblock %}
+{% block title %}Actualité{% endblock %}
 
 {% block page %}
-    <h1>BlogPost</h1>
+    <h1>Actualité</h1>
 
     <div class="table-contain">
         <div class="table-scroll">
@@ -18,19 +18,19 @@
                         <td><img src="/uploads/posts/{{ blog_post.image }}" alt="News image" width="300" /></td>
                     </tr>
                     <tr>
-                        <th>Title</th>
+                        <th>Titre</th>
                         <td>{{ blog_post.title }}</td>
                     </tr>
                     <tr>
-                        <th>Text</th>
+                        <th>Texte</th>
                         <td>{{ blog_post.text }}</td>
                     </tr>
                     <tr>
-                        <th>Creationdate</th>
+                        <th>Date de création</th>
                         <td>{{ blog_post.creationdate ? blog_post.creationdate|date('Y-m-d') : '' }}</td>
                     </tr>
                     <tr>
-                        <th>Locale</th>
+                        <th>Langue</th>
                         <td>{{ blog_post.locale }}</td>
                     </tr>
                 </tbody>
@@ -40,9 +40,9 @@
 
     <div class="contain-button">
 
-        <a href="{{ path('app_blog_post_index') }}">back to list</a>
+        <a href="{{ path('app_blog_post_index') }}">Retour</a>
 
-        <a href="{{ path('app_blog_post_edit', {'id': blog_post.id}) }}">edit</a>
+        <a href="{{ path('app_blog_post_edit', {'id': blog_post.id}) }}">Modifier</a>
 
         {{ include('blog_post/_delete_form.html.twig') }}
         

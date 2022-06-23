@@ -7,7 +7,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints\File;
+
 
 class BlogPostType extends AbstractType
 {
@@ -25,13 +27,19 @@ class BlogPostType extends AbstractType
                             'image/jpg',
                             'image/jpeg'
                         ],
-                        'mimeTypesMessage' => 'Please upload a valid image (max 5MB, .png, .jpg, .jpeg)',
+                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (5 Mo maximum, .png, .jpg, .jpeg).',
                     ])
                 ],
             ))
-            ->add('title')
-            ->add('text')
-            ->add('formLink')
+            ->add('title', TextType::class, array(
+                'label' => 'Titre'
+            ))
+            ->add('text', TextType::class, array(
+                'label' => 'Texte'
+            ))
+            ->add('formLink', TextType::class, array(
+                'label' => 'Lien du Google Form'
+            ))
         ;
     }
 

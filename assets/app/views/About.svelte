@@ -1,6 +1,10 @@
 <script>
     import Nav from '../components/Nav.svelte';
     import Header from '../components/Header.svelte';
+    import Footer from '../components/Footer.svelte';
+
+    import { fade, fly } from 'svelte/transition';
+    import {gsapInit} from '../helpers/GsapHelper.js';
 
     import axios from 'axios';
     import { onMount } from 'svelte';
@@ -12,6 +16,8 @@
     }
 
     let partners = [];
+
+    let peopleShow = 0;
 
     onMount(async () => {
 
@@ -29,6 +35,8 @@
             console.log("error");
         });
 
+        gsapInit();    
+
     });
 
 </script>
@@ -37,9 +45,9 @@
 
 <main class="bg-texture">
 
-    <Header title="{$t('About.Title')}" subtitle=""/>
+    <Header title="{$t('About.Title')}" subtitle="B2Z Production" image="../assets/images/popcorn.png"/>
 
-    <section class="about-emphase">
+    <section class="about-emphase gs_reveal gs_reveal_fromRight">
         <div class="contain-image">
             <img class="image" src="./assets/images/icon-b2z.svg" alt="logo">
             <img class="image" src="./assets/images/text-b2z.svg" alt="logo">
@@ -50,34 +58,84 @@
                 <h3 class="title">{$t('About.Content.Title')}</h3>
                 <p class="text">{$t('About.Content.Text')}</p>
             </div>
-            <a href="/" class="btn btn-orange"><span class="text">{$t('About.Content.Button')}</span></a>
+            <a href="/?r=projects" class="btn btn-orange"><span class="text">{$t('About.Content.Button')}</span></a>
         </div>
     </section>
 
     <section class="about-people">
 
-      <ul class="about-nav">
-        <li class="active"><img src="/assets/images/avatar.png" alt=""></li>
-        <li><img src="/assets/images/avatar.png" alt=""></li>
-        <li><img src="/assets/images/avatar.png" alt=""></li>
-        <li><img src="/assets/images/avatar.png" alt=""></li>
-        <li><img src="/assets/images/avatar.png" alt=""></li>
-        <li><img src="/assets/images/avatar.png" alt=""></li>
-      </ul>
-
-      <div class="content">
-        <img src="/assets/images/model3d.png" alt="">
-        <div class="info">
-            <h3 class="title">Nom prenom</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam dignissimos dolor officiis in iure libero nam ab omnis earum commodi.</p> 
-            <div class="btn btn-orange"><span class="text">En savoir plus</span></div>
+        <ul class="about-nav">
+          <li 
+              class="{peopleShow === 0 ? 'active' : ''}"
+              on:click={ () => {peopleShow = 0; }} >
+              <img src="/assets/images/gaetan.png" alt="geatan">
+          </li>
+          <li 
+              class="{peopleShow === 1 ? 'active' : ''}"
+              on:click={ () => {peopleShow = 1 }}>
+              <img src="/assets/images/annie.jpg" alt="annie">
+          </li>
+          <li 
+              class="{peopleShow === 2 ? 'active' : ''}"
+              on:click={ () => {peopleShow = 2; }}>
+              <img src="/assets/images/hakim.png" alt="hakim">
+          </li>
+          <li     
+              class="{peopleShow === 3 ? 'active' : ''}"
+              on:click={ () => {peopleShow = 3; }}>
+              <img src="/assets/images/walid.png" alt="walid">
+          </li>
+        </ul>
+  
+        <div class="content">
+            <div class="presention-container">
+                {#if peopleShow === 0 }
+                <div class="presentation gs_reveal gs_reveal_fromBottom" in:fade="{{ duration: 1000 }}">
+                    <img src="/assets/images/gaetan.png" alt="">
+                    <div class="info">
+                        <h3 class="title">gaetan</h3>
+                        <p>{$t('About.Gaetan')}</p> 
+                        <div class="btn btn-orange"><span class="text">{$t('About.Presentation.Button')}</span></div>
+                    </div>
+                </div>
+                {/if}
+                {#if peopleShow ===  1 }
+                <div class="presentation gs_reveal_fromBottom gs_reveal" in:fade="{{ duration: 1000 }}">
+                    <img src="/assets/images/annie.jpg" alt="">
+                    <div class="info">
+                        <h3 class="title">Annie</h3>
+                        <p>{$t('About.Annie')}</p> 
+                        <div class="btn btn-orange"><span class="text">{$t('About.Presentation.Button')}</span></div>
+                    </div>
+                </div>
+                {/if}
+                {#if peopleShow ===  2}
+                <div class="presentation gs_reveal_fromBottom gs_reveal" in:fade="{{ duration: 1000 }}">
+                    <img src="/assets/images/hakim.png" alt="">
+                    <div class="info">
+                        <h3 class="title">Hakim</h3>
+                        <p>{$t('About.Hakim')}</p>
+                        <div class="btn btn-orange"><span class="text">{$t('About.Presentation.Button')}</span></div>
+                    </div>
+                </div>
+                {/if}
+                {#if peopleShow === 3 }
+                <div class="presentation gs_reveal_fromBottom gs_reveal" in:fade="{{ duration: 1000 }}">
+                    <img src="/assets/images/walid.png" alt="">
+                    <div class="info">
+                        <h3 class="title">Walid</h3>
+                        <p>{$t('About.Walid')}</p>
+                        <div class="btn btn-orange"><span class="text">{$t('About.Presentation.Button')}</span></div>
+                    </div>
+                </div>
+                {/if}
+            </div>
         </div>
-      </div>
-
-    </section>
+      </section>
+  
 
     {#if partners[0]}
-    <section class="about-partners">
+    <section class="about-partners gs_reveal gs_reveal_fromRight">
         <h2 class="title">{$t('Partners.Title')}</h2>
         <ul class="grid-4">
             {#each partners as {image, name}}
@@ -94,7 +152,7 @@
     {/if }
 
     {#if projects[0]}
-    <section class="contain">
+    <section class="contain gs_reveal gs_reveal_fromLeft">
         <h2 class="title">{$t('Presse.Title')}</h2>
         <ul class="grid-3">
             {#each projects as {title, pressKit, image, id}}
@@ -114,3 +172,5 @@
 
 
 </main>
+
+<Footer/>

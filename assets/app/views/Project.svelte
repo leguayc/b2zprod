@@ -1,13 +1,14 @@
 <script>
     import Nav from '../components/Nav.svelte';
     import Header from '../components/Header.svelte';
-   
+    import Footer from '../components/Footer.svelte';
+    import {gsapInit} from '../helpers/GsapHelper.js';
+
     import axios from 'axios';
     import { onMount } from 'svelte';
 
     import { getLocalization } from '../i18n';
     const { t, currentLanguage } = getLocalization();
-
     let projects = { };
 
     let otherProjects = [];
@@ -44,7 +45,11 @@
                 translateProject(translation);
             }
         });
+
+        gsapInit();
+
     });
+
 
     const translateProject = (translation) => {
         projects.title = translation.title;
@@ -65,15 +70,15 @@
 
 <main class="bg-texture">
 
-    <section class="contain-video">
+    <section class="contain-video gs_video">
         <iframe class="video" width="560" height="315" src={projects.trailer} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </section>
 
-    <Header title={projects.title} subtitle="{projects.date} - {$t('Project.Producer')} {projects.filmmakerFullName}"/>
+    <Header title={projects.title} subtitle="{projects.date} - {$t('Project.Producer')} {projects.filmmakerFullName}" image="../assets/images/ticket.png"/>
 
     <section class="contain-emphase">
-        <img class="image" src="/uploads/projects/{projects.image}" alt="a fleur de peau">
-        <div class="content bg-black">
+        <img class="image gsap-reveal gs_reveal gs_reveal_fromLeft" src="/uploads/projects/{projects.image}" alt="a fleur de peau">
+        <div class="content bg-black gsap-reveal gs_reveal gs_reveal_fromRight">
             <div>
                 {#if projects.section1Title && projects.section1Text}
                 <p class="title">{projects.section1Title}</p>
@@ -92,18 +97,21 @@
                 </ul>
                 {/if}
             </div>
-            <div class="btn btn-orange"><span class="text">{$t('Presse.Title')}</span></div>
+            <a href="/?r=projects" class="btn btn-orange"><span class="text">{$t('Presse.Title')}</span></a>
         </div>
     </section>
 
-    <section class="contain">
+    <section class="contain gsap-reveal gs_reveal gs_reveal_fromRight">
         <div class="contain-text">
              <h3 class="title">{projects.title}</h3>
              <p class="text">{projects.description}</p>        
         </div>
      </section>
-
+  
     <section class="bg-movie">
+        <div class="bg-pelicule gs_pelicule">
+            <img src="/assets/images/pelicule.png" alt="pelicule">
+        </div>
         <div class="contain-xs bg-black">
             <h3 class="title">{$t('Project.Distributor.Title')}</h3>
             <div class="btn btn-orange"><a href={projects.distributorLink}><span class="text">{$t('Project.Distributor.Text')}</span></a></div>
@@ -111,8 +119,10 @@
     </section>
 
     {#if projects.projectThanks && projects.projectThanks.length > 0}
-    <section class="contain-partners">
+    <section class="contain-partners gsap-reveal gs_reveal gs_reveal_fromRight">
+
         <h2 class="title">{$t('Project.Thanks')} :</h2>
+
         <ul class="partners">
             {#each projects.projectThanks as {name}}
             <li>{name}</li>
@@ -121,14 +131,14 @@
     </section>
     {/if}
 
-    <section class="contain">
+    <section class="contain gsap-reveal gs_reveal gs_reveal_fromLeft">
         <div class="contain-xs bg-black">
             <h3 class="title">{$t('Contact.External.Title')}</h3>
             <a href="mailto:test@gmail.com" class="btn btn-orange"><span class="text">{$t('Contact.External.Text')}</span></a>
         </div>
     </section>
 
-    <section class="contain-films">
+    <section class="contain-films gsap-reveal gs_reveal gs_reveal_fromLeft">
         <h2 class="title">{$t('Project.OtherMovies')} :</h2>
         <ul class="grid-3">
             {#each otherProjects as {id, image, translations}}
@@ -151,3 +161,5 @@
 
 
 </main>
+
+<Footer/>

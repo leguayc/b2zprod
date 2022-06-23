@@ -17,14 +17,6 @@
         }
     });
 
-    let count = 0;
-    $: doubled = count * 2;
-
-    function handleClick() {
-        count += 1;
-    }
-
-    
 </script>
 
 {#if isI18nLoaded }
@@ -42,7 +34,3 @@
       </Router>
 
 {/if}
-
-
-
-

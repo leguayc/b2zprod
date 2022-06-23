@@ -1,9 +1,9 @@
 {% extends 'backoffice.html.twig' %}
 
-{% block title %}Scenario index{% endblock %}
+{% block title %}Les scénarios{% endblock %}
 
 {% block page %}
-    <h1>Scenario index</h1>
+    <h1>Les scénarios</h1>
 
     <div class="table-contain">
         <div class="table-scroll">
@@ -13,13 +13,13 @@
                     <tr>
                         <th>Id</th>
                         <th>Email</th>
-                        <th>PhoneNumber</th>
-                        <th>Firstname</th>
-                        <th>Lastname</th>
-                        <th>File</th>
-                        <th>Summary</th>
-                        <th>StuffToAdd</th>
-                        <th>actions</th>
+                        <th>Téléphone</th>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                        <th>Fichier</th>
+                        <th>Résumé</th>
+                        <th>Message</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,16 +30,16 @@
                         <td>{{ scenario.phoneNumber }}</td>
                         <td>{{ scenario.firstname }}</td>
                         <td>{{ scenario.lastname }}</td>
-                        <td><a href="/uploads/scenarios/{{ scenario.file }}" download>Download</a></td>
+                        <td><a href="/uploads/scenarios/{{ scenario.file }}" download>Télécharger</a></td>
                         <td>{{ scenario.summary }}</td>
                         <td>{{ scenario.stuffToAdd }}</td>
                         <td>
-                            <a href="{{ path('app_scenario_show', {'id': scenario.id}) }}">show</a>
+                            <a href="{{ path('app_scenario_show', {'id': scenario.id}) }}">Afficher</a>
                         </td>
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="9">no records found</td>
+                        <td colspan="9">Pas de résultat</td>
                     </tr>
                 {% endfor %}
                 </tbody>

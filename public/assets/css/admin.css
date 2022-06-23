@@ -204,6 +204,51 @@ form textarea{
     resize: vertical;
 }
 
+form select{
+    border: 1px solid #151515;
+    padding: 8px 50px 8px 15px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+}
+
+select {
+    background-image:
+      linear-gradient(45deg, transparent 50%, gray 50%),
+      linear-gradient(135deg, gray 50%, transparent 50%),
+      linear-gradient(to right, #ccc, #ccc);
+    background-position:
+      calc(100% - 20px) calc(1em + 2px),
+      calc(100% - 15px) calc(1em + 2px),
+      calc(100% - 2.5em) 0.5em;
+    background-size:
+      5px 5px,
+      5px 5px,
+      1px 1.5em;
+    background-repeat: no-repeat;
+}
+  
+select:focus {
+    background-image:
+      linear-gradient(45deg, green 50%, transparent 50%),
+      linear-gradient(135deg, transparent 50%, green 50%),
+      linear-gradient(to right, #ccc, #ccc);
+    background-position:
+      calc(100% - 15px) 1em,
+      calc(100% - 20px) 1em,
+      calc(100% - 2.5em) 0.5em;
+    background-size:
+      5px 5px,
+      5px 5px,
+      1px 1.5em;
+    background-repeat: no-repeat;
+    border-color: green;
+    outline: 0;
+  }
+
+select option{
+    color: #151515;
+}
+
 .section-register .title,
 .form-group .title{
     text-align: center;
@@ -305,11 +350,13 @@ form > a{
 }
 
 #project_date select{
-    padding: 5px;
+    padding: 5px 50px 5px 5px;
     border: 1px solid #000;
     border-radius: 5px;
     text-align: center;
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
 form > button{

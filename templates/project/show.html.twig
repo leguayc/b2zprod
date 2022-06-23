@@ -1,9 +1,9 @@
 {% extends 'backoffice.html.twig' %}
 
-{% block title %}Project{% endblock %}
+{% block title %}Film{% endblock %}
 
 {% block page %}
-    <h1>Project</h1>
+    <h1>Film</h1>
 
     <div class="table-contain">
         <div class="table-scroll">
@@ -15,7 +15,7 @@
                         <td>{{ project.id }}</td>
                     </tr>
                     <tr>
-                        <th>Title</th>
+                        <th>Titre</th>
                         <td>{{ project.translations['fr'].title }}</td>
                     </tr>
                     <tr>
@@ -39,11 +39,11 @@
                         <td>{{ project.trailer }}</td>
                     </tr>
                     <tr>
-                        <th>PressKit</th>
+                        <th>Dossier de presse</th>
                         <td><a href="/uploads/projects/{{ project.pressKit }}" download>Download</a></td>
                     </tr>
                     <tr>
-                        <th>DistributorLink</th>
+                        <th>Lien du distributeur</th>
                         <td>{{ project.distributorLink }}</td>
                     </tr>
                     <tr>
@@ -51,12 +51,12 @@
                         <td>{{ project.date ? project.date|date('Y-m-d') : '' }}</td>
                     </tr>
                     <tr>
-                        <th>FilmmakerFullName</th>
+                        <th>Réalisateur</th>
                         <td>{{ project.filmmakerFullName }}</td>
                     </tr>
                     {% if project.projectThanks|length > 0 %}
                     <tr>
-                        <th>Thanks list</th>
+                        <th>Remerciements</th>
                         <td>
                             <ul>
                             {% for thanks in project.projectThanks %}
@@ -73,13 +73,13 @@
 
     <div class="contain-button">
 
-        <a href="{{ path('app_project_index') }}">back to list</a>
+        <a href="{{ path('app_project_index') }}">Retour</a>
 
-        <a href="{{ path('app_project_edit', {'id': project.id}) }}">edit</a>
+        <a href="{{ path('app_project_edit', {'id': project.id}) }}">Modifier</a>
         
-        <a href="{{ path('app_project_addthanks', {'id': project.id}) }}">add thanks</a>
+        <a href="{{ path('app_project_addthanks', {'id': project.id}) }}">Ajouter remerciement</a>
         
-        <a href="{{ path('app_project_managetranslation', {'id': project.id}) }}">manage translation</a>
+        <a href="{{ path('app_project_managetranslation', {'id': project.id}) }}">Traductions</a>
 
         {{ include('project/_delete_form.html.twig') }}
 

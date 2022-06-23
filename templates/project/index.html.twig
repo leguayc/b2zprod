@@ -1,9 +1,9 @@
 {% extends 'backoffice.html.twig' %}
 
-{% block title %}Project index{% endblock %}
+{% block title %}Les Films{% endblock %}
 
 {% block page %}
-    <h1>Project index</h1>
+    <h1>Les Films</h1>
 
     <div class="table-contain">
         <div class="table-scroll">
@@ -14,9 +14,9 @@
                         <th>Id</th>
                         <th>Title</th>
                         <th>Date</th>
-                        <th>FilmmakerFullName</th>
-                        <th>DistributorLink</th>
-                        <th>actions</th>
+                        <th>Réalisateur</th>
+                        <th>Lien du distributeur</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,15 +28,15 @@
                         <td>{{ project.filmmakerFullName }}</td>
                         <td>{{ project.distributorLink }}</td>
                         <td>
-                            <a href="{{ path('app_project_show', {'id': project.id}) }}">show</a>
-                            <a href="{{ path('app_project_edit', {'id': project.id}) }}">edit</a>
-                            <a href="{{ path('app_project_addthanks', {'id': project.id}) }}">add thanks</a>
-                            <a href="{{ path('app_project_managetranslation', {'id': project.id}) }}">manage translation</a>
+                            <a href="{{ path('app_project_show', {'id': project.id}) }}">Afficher</a>
+                            <a href="{{ path('app_project_edit', {'id': project.id}) }}">Modifier</a>
+                            <a href="{{ path('app_project_addthanks', {'id': project.id}) }}">Ajouter Remerciement</a>
+                            <a href="{{ path('app_project_managetranslation', {'id': project.id}) }}">Ajouter une traduction</a>
                         </td>
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="8">no records found</td>
+                        <td colspan="8">Pas de résultat</td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -46,6 +46,6 @@
 
     <div class="contain-button">
 
-    <a href="{{ path('app_project_new') }}">Create new</a>
+    <a href="{{ path('app_project_new') }}">Ajouter un film</a>
     </div>
 {% endblock %}
