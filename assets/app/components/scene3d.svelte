@@ -14,7 +14,6 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { BoxLineGeometry } from 'three/examples/jsm/geometries/BoxLineGeometry.js';
 
 import { fadeIn } from '../helpers/VisibilityHelper.js';
-import { onDocumentMouseDown, cameraMoveReturn, cameraMoveCine, cameraMoveContact, setupNavigation } from "../helpers/Navigation3DHelper.js";
 import axios from 'axios';
 import { gsap } from "gsap";
 import { getLocalization } from '../i18n';
@@ -69,7 +68,7 @@ onMount(() => {
             popup.style.zIndex = 99999;
 
             window.onclick = function(event) {
-                    popup.style.display = "none";
+                popup.style.display = "none";
             } 
         } 
     }
@@ -301,6 +300,7 @@ const setCarouselVisibility = (willBeShown) => {
         padding: 30px;
         font-size: x-large;
         text-align: justify;
+        display: none;
     }
 
 

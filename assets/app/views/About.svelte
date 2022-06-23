@@ -23,14 +23,12 @@
 
         axios.get('/api/projects').then( (response) => {
             projects = response.data['hydra:member'];
-            console.log("projects", projects);
         }).catch((error) => {
             console.log("error");
         });
 
         axios.get('/api/partners').then( (response) => {
             partners = response.data['hydra:member'];
-            console.log("parters", partners)
         }).catch((error) => {
             console.log("error");
         });

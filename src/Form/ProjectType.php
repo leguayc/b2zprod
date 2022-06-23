@@ -70,19 +70,19 @@ class ProjectType extends AbstractType
             ))
             ->add('section1title', TextType::class, array(
                 'mapped' => false,
-                'label' => 'Section 1 - Titre'
+                'label' => 'Section 1 - Titre (Ex: Scénario)'
             ))
             ->add('section1text', TextareaType::class, array(
                 'mapped' => false,
-                'label' => 'Section 1 - Texte'
+                'label' => 'Section 1 - Texte (Liste) : Faites un retour à la ligne pour un nouvel élément de la liste'
             ))
             ->add('section2title', TextType::class, array(
                 'mapped' => false,
-                'label' => 'Section 2 - Titre'
+                'label' => 'Section 2 - Titre (Ex: Acteurs)'
             ))
             ->add('section2text', TextareaType::class, array(
                 'mapped' => false,
-                'label' => 'Section 2 - Texte'
+                'label' => 'Section 2 - Texte (Liste) : Faites un retour à la ligne pour un nouvel élément de la liste'
             ))
         ;
     }

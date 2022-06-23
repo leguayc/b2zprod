@@ -30,7 +30,7 @@ class ProjectTranslationType extends AbstractType
             ))
             ->add('section1text', TextareaType::class, array(
                 'mapped' => false,
-                'label' => 'Section 1 - Texte (Liste de noms)'
+                'label' => 'Section 1 - Texte (Liste de noms) : Faites un retour à la ligne pour un nouvel élément de la liste'
             ))
             ->add('section2title', TextType::class, array(
                 'mapped' => false,
@@ -38,7 +38,7 @@ class ProjectTranslationType extends AbstractType
             ))
             ->add('section2text', TextareaType::class, array(
                 'mapped' => false,
-                'label' => 'Section 2 - Texte (Liste)'
+                'label' => 'Section 2 - Texte (Liste) : Faites un retour à la ligne pour un nouvel élément de la liste'
             ))
         ;
     }

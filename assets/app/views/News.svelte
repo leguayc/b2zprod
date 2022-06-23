@@ -30,8 +30,6 @@
         axios.get('/api/blog_posts/' + id).then( (response) => {
             news = response.data;
             news.creationdate = news.creationdate.split('T')[0];
-
-            console.log(news);
         }).catch((error) => {
             console.log("error");
         });

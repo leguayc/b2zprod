@@ -12,14 +12,18 @@
     let news, i18n;
 
     onMount(async () => {
-        
         axios.get('/api/blog_posts/').then( (response) => {
-            news = response.data['hydra:member'];
+            news = [];
+            let data = response.data['hydra:member'];
+
+            for(let i = 0; i < data.length; i++) {
+                if (data[i].locale == $currentLanguage) {
+                    news.push(data[i]);
+                }
+            }
         }).catch((error) => {
             console.log("error");
         });
-
-        gsapInit();
     });
 
 </script>
