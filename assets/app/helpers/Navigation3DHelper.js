@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { gsap } from "gsap";
+import { navigate } from "svelte-routing";
 
 const raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2();
@@ -29,6 +30,11 @@ function cameraMove(x, y, z, target){
     controls.target.set(target.x, target.y, target.z);
 }
 
+function movePage(link){
+    // window.location.href = link;
+    navigate(link);
+}
+
 export function cameraMoveReturn() {
     cameraMove({x: 1.2, duration: 10}, {y: -1.5, duration: 2}, {z: -1.8, duration: 10}, {x: -12, y: -2, z: -2});
 }
@@ -37,8 +43,27 @@ export function cameraMoveCine() {
     cameraMove({x: 0, duration: 10}, {y: -1.5, duration: 2}, {z: -7.85, duration: 10}, {x: 0.71, y: -3.2, z: -29.02});
 }
 
+export function cameraMoveTalent(){
+    movePage('/talent')
+}
+
+export function cameraMoveAbout(){
+    movePage('/about')
+}
+
+export function cameraMoveContactPage(){
+    movePage('/contact')
+}
+
+export function cameraMoveNews(){
+    movePage('/news')
+}
+
 export function cameraMoveContact() {
     cameraMove({x: 5.4, duration: 10}, {y: -2, duration: 2}, {z: -3.2, duration: 10}, {x: 18.5, y: -2, z: -3.2});
+    gsap.delayedCall(10, ()=>{
+        cameraMoveContactPage()
+    })
 }
 
 export function setupNavigation(_scene, _renderer, _camera, _controls)

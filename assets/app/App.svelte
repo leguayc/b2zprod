@@ -17,7 +17,6 @@
         }
     });
 
-
 </script>
 
 {#if isI18nLoaded }
@@ -35,6 +34,3 @@
       </Router>
 
 {/if}
-
-
-
