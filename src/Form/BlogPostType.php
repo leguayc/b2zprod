@@ -38,7 +38,8 @@ class BlogPostType extends AbstractType
                 'label' => 'Texte'
             ))
             ->add('formLink', TextType::class, array(
-                'label' => 'Lien du Google Form'
+                'label' => 'Lien du Google Form',
+                'required' => false
             ))
         ;
     }
