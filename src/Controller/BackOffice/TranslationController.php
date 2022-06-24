@@ -23,7 +23,6 @@ class TranslationController extends AbstractController
         {
             $json = file_get_contents($this->getParameter('locales_directory') . '/' . $v . '/translation.json');
             $langsTranslation[$v] = json_decode($json, true);
-            var_dump($langsTranslation[$v]);
         }
 
         return $this->render('translation/index.html.twig', [
@@ -44,7 +43,14 @@ class TranslationController extends AbstractController
             $requestArray = $request->request->all();
             $locale = $requestArray['newLang'];
             unset($requestArray['newLang']);
-            $jsonTranslation = json_encode($requestArray);
+            
+            $newArray = [];
+            foreach($requestArray as $k=>$v)
+            {
+                $newArray[str_replace("_", ".", $k)] = $v;
+            }
+
+            $jsonTranslation = json_encode($newArray);
 
             $filePathTranslation = $this->getParameter('locales_directory') . '/' . $locale . '/translation.json';
             $filesystem->dumpFile($filePathTranslation, $jsonTranslation);
@@ -99,8 +105,14 @@ class TranslationController extends AbstractController
         if ($request->isMethod('post')) {
             $filesystem = new Filesystem();
 
+            $array = $request->request->all();
+            $newArray = [];
+            foreach($array as $k=>$v)
+            {
+                $newArray[str_replace("_", ".", $k)] = $v;
+            }
             // Save to file
-            $json = json_encode($request->request->all());
+            $json = json_encode($newArray);
             $filePath = $this->getParameter('locales_directory') . '/' . $locale . '/translation.json';
             $filesystem->dumpFile($filePath, $json);
 
