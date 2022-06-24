@@ -33,7 +33,9 @@
         
         axios.get('/api/projects').then( (response) => {
             for(let i = 0; i < 3; i++) {
-                otherProjects[i] = response.data['hydra:member'][i];
+                if(response.data['hydra:member'][i]) {
+                    otherProjects[i] = response.data['hydra:member'][i];
+                }
             }
         }).catch((error) => {
             console.log("error");
@@ -53,7 +55,7 @@
 
     const translateProject = (translation) => {
         projects.title = translation.title;
-        projects.text = translation.description;
+        projects.description = translation.description;
         projects.section1Text = translation.section1Text;
         projects.section1Title = translation.section1Title;
         projects.section2Text = translation.section2Text;
@@ -141,13 +143,13 @@
     <section class="contain-films gsap-reveal gs_reveal gs_reveal_fromLeft">
         <h2 class="title">{$t('Project.OtherMovies')} :</h2>
         <ul class="grid-3">
-            {#each otherProjects as {id, image, translations}}
+            {#each otherProjects as otherProject}
             <li class="home-film">
                 <div class="image-contain">
-                    <img class="image" src="/uploads/projects/{image}" alt="{getCurrentTrad(translations, 'title')}">
+                    <img class="image" src="/uploads/projects/{otherProject.image}" alt="{getCurrentTrad(otherProject.translations, 'title')}">
                 </div>
                 <div class="content">
-                    <span class="text">{getCurrentTrad(translations, 'title')}</span>
+                    <span class="text">{getCurrentTrad(otherProject.translations, 'title')}</span>
                     <a href="/project/{id}" class="btn-xs btn-orange">
                         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" class="icon">
                             <path id="add2" d="M11,4.976H6.024V0H4.976V4.976H0V6.024H4.976V11H6.024V6.024H11Z" transform="translate(0.5 0.5)" stroke-width="1"/>
