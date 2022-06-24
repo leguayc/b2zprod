@@ -11,12 +11,12 @@
                 <li class="name">{$t('Site.Map')} :</li>
                 <li><a href="/">{$t('ListNews.Title')}</a></li>
                 <li><a href="/about">{$t('About.Title')}</a></li>
-                <li><a href="/projects">{$t('Projects.Title')}</a></li>
+                <li><a href="/?r=projects">{$t('Projects.Title')}</a></li>
                 <li><a href="/news">{$t('ListNews.Title')}</a></li>
                 <li><a href="/about#presse">{$t('Presse.Title')}</a></li>
                 <li><a href="/talent">{$t('Talent.Title')}</a></li>
                 <li><a href="/contact">{$t('Contact.Title')}</a></li>
-                <li><a href="/trophee">{$t('Trophee.Title')}</a></li>
+                <li><a href="/?r=trophy">{$t('Trophee.Title')}</a></li>
             </ul>
         </div>
         <div><img src="./assets/images/logo.svg" alt="b2z production logo" class="logo"></div>

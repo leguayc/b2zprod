@@ -23,6 +23,7 @@ class TranslationController extends AbstractController
         {
             $json = file_get_contents($this->getParameter('locales_directory') . '/' . $v . '/translation.json');
             $langsTranslation[$v] = json_decode($json, true);
+            var_dump($langsTranslation[$v]);
         }
 
         return $this->render('translation/index.html.twig', [

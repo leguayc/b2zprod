@@ -30,7 +30,7 @@
 	</select>
 
     <div class="btn-xs btn-orange trophy">
-        <a href="/contact" class="text"><img src="/assets/images/trophy.png" alt="trophee"></a>
+        <a href="/?r=trophy" class="text"><img src="/assets/images/trophy.png" alt="trophee"></a>
     </div>
 </div>
 

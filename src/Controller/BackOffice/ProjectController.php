@@ -118,9 +118,14 @@ class ProjectController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_project_delete', methods: ['POST'])]
-    public function delete(Request $request, Project $project, ProjectRepository $projectRepository): Response
+    public function delete(Request $request, Project $project, ProjectRepository $projectRepository, ProjectThanksRepository $projectThanksRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$project->getId(), $request->request->get('_token'))) {
+            $projectThanks = $project->getProjectThanks();
+            foreach ($projectThanks as $key => $value) {
+                $projectThanksRepository->remove($value);
+            }
+
             $projectRepository->remove($project, true);
         }
 
